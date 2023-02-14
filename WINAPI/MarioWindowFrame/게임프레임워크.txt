@@ -1,0 +1,20 @@
+1. 오브젝트 구조. (게임세계에 있는 것을 어떻게 표현할것이냐에 대한 구조.)
+   Level => 장면
+   Actor => 장면의 요소.
+
+2. Release 구조
+   가장 핵심 오브젝트들이 어떻게 만들어져서 어떻게 지워지나?
+   GameEngineCore
+   GameEngineLevel
+   GameEngineActor
+   GameEngineRender
+   GameEngineCollision
+   Image 리소스
+
+3. 랜더링 구조.
+   게임내 자원을 관리하는 구조를 짜볼겁니다.
+   리소스 구조를 보통 포함합니다.
+   화면에 어떻게 어떤 순서로 그려질거냐. 구조를 짜야 합니다.
+
+4. 상호작용구조(충돌)
+   각 오브젝트들은 서로간에 어떻게 관계를 가지게 될것이냐
