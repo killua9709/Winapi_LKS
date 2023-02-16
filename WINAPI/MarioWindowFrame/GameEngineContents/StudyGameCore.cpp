@@ -27,7 +27,7 @@ void StudyGameCore::Start()
 
 	CreateLevel<TitleLevel>("TitleLevel");
 	CreateLevel<PlayLevel>("PlayLevel");
-	ChangeLevel("TitleLevel");
+	ChangeLevel("PlayLevel");
 }
 
 void StudyGameCore::Update()

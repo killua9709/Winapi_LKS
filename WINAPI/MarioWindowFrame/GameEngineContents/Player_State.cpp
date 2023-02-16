@@ -100,16 +100,12 @@ void Player::MoveUpdate(float _Time)
 	}
 
 	// float4 MoveDir = float4::Zero;
-	if ((true == GameEngineInput::IsPress("LeftMove"))&& (true == GameEngineInput::IsPress("RightMove")))
-	{
-		ChangeState(PlayerState::IDLE);
-		return;
-	}
-	else if (true == GameEngineInput::IsPress("LeftMove"))
+	if (true == GameEngineInput::IsPress("LeftMove"))
 	{
 		MoveDir += float4::Left * MoveSpeed;
 	} 
-	else if (true == GameEngineInput::IsPress("RightMove"))
+
+	if (true == GameEngineInput::IsPress("RightMove"))
 	{
 		MoveDir += float4::Right * MoveSpeed;
 	}
