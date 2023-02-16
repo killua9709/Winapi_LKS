@@ -66,10 +66,17 @@ void Player::IdleStart()
 }
 void Player::IdleUpdate(float _Time) 
 {
-	if (GameEngineInput::IsPress("LeftMove") || GameEngineInput::IsPress("RightMove"))
+	//만약 오른쪽하고 왼쪽이 둘다 눌린다면
+	bool both = (true == GameEngineInput::IsPress("LeftMove")) && (true == GameEngineInput::IsPress("RightMove"));
+
+	if (both)
 	{
-		ChangeState(PlayerState::MOVE);
 		return; // 보통 스테이트를 체인지하면 아래 코드를 실행되면 
+	}
+	else if((false == both) && ((true == GameEngineInput::IsPress("LeftMove")) || (true == GameEngineInput::IsPress("RightMove"))))
+	{	//둘다 눌리지 않았고 왼쪽 또는 오른쪽을 누른다면 
+
+		ChangeState(PlayerState::MOVE);
 	}
 }
 void Player::IdleEnd() {
@@ -93,11 +100,16 @@ void Player::MoveUpdate(float _Time)
 	}
 
 	// float4 MoveDir = float4::Zero;
-
-	if (true == GameEngineInput::IsPress("LeftMove"))
+	if ((true == GameEngineInput::IsPress("LeftMove"))&& (true == GameEngineInput::IsPress("RightMove")))
+	{
+		ChangeState(PlayerState::IDLE);
+		return;
+	}
+	else if (true == GameEngineInput::IsPress("LeftMove"))
 	{
 		MoveDir += float4::Left * MoveSpeed;
-	} else if (true == GameEngineInput::IsPress("RightMove"))
+	} 
+	else if (true == GameEngineInput::IsPress("RightMove"))
 	{
 		MoveDir += float4::Right * MoveSpeed;
 	}

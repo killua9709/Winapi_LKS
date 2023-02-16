@@ -32,7 +32,7 @@ void PlayLevel::SoundLoad()
 	Dir.Move("Sound");
 
 	{
-		GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("BGMTest.mp3"));
+		//GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("BGMTest.mp3"));
 	}
 
 	// GameEngineResources::GetInst().SoundPlay("Appear.wav");
@@ -133,9 +133,11 @@ void PlayLevel::Update(float _DeltaTime)
 
 void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-
+	int screenWidth = GetSystemMetrics(SM_CXSCREEN);
+	int screenHeight = GetSystemMetrics(SM_CYSCREEN);
 	//BGMPlayer = GameEngineResources::GetInst().SoundPlayToControl("BGMTest.mp3");
 	//BGMPlayer.LoopCount(100);
 	//// BGMPlayer.Volume(0.2f);
 	GameEngineWindow::SettingWindowSize({ 1280,960 });
+	GameEngineWindow::WindowExpand();
 }

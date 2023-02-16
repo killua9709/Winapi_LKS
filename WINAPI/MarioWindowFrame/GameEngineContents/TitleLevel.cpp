@@ -10,47 +10,47 @@
 #include "MouseObject.h"
 #include "ContentsValue.h"
 
-TitleLevel::TitleLevel() 
+TitleLevel::TitleLevel()
 {
 }
 
-TitleLevel::~TitleLevel() 
+TitleLevel::~TitleLevel()
 {
 }
 
 void TitleLevel::Loading()
 {
-	GameEngineDirectory Dir;
-	Dir.MoveParentToDirectory("ContentsResources");
-	Dir.Move("ContentsResources");
-	Dir.Move("Image");
-	Dir.Move("Title");
-
-	// 이미지 로드
 	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("로고.BMP"));
+		GameEngineDirectory Dir;
+		Dir.MoveParentToDirectory("ContentsResources");
+		Dir.Move("ContentsResources");
+		Dir.Move("Sound");
+		GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("blockhit.wav"));
+		GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("Coin.wav"));
 	}
 
 	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("키좌판.BMP"));
+		GameEngineDirectory Dir;
+		Dir.MoveParentToDirectory("ContentsResources");
+		Dir.Move("ContentsResources");
+		Dir.Move("Image");
+		Dir.Move("Title");
+
+		// 이미지 로드
+		{
+			GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("로고.BMP"));
+		}
+
+		{
+			GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("키좌판.BMP"));
+		}
+
+		{
+			GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("title.BMP"));
+		}
 	}
 
-	if (false == GameEngineInput::IsKey("LevelChange"))
-	{
-		GameEngineInput::CreateKey("LevelChange", 'P');
-		GameEngineInput::CreateKey("TitleScrollLeft", 'A');
-		GameEngineInput::CreateKey("TitleScrollRight", 'D');
-		GameEngineInput::CreateKey("TitleScrollUp", 'W');
-		GameEngineInput::CreateKey("TitleScrollDown", 'S');
-	}
-
-	
 	CreateActor<TitleBack>();
-
-	
-	Start = float4::Zero;
-	End = float4(0.0f, GameEngineWindow::GetScreenSize().half().y);
-
 }
 
 bool ScrollStart = false;
@@ -58,56 +58,22 @@ float4 DownPosTitle = float4::Zero;
 
 void TitleLevel::Update(float _DeltaTime)
 {
-	// if (true == GameEngineInput::IsDown("LevelChange"))
-	if (true == GameEngineInput::IsDown("LevelChange"))
+	if ((true == TitleBack::GetSceneClear()) && WM_LBUTTONDOWN)
 	{
+		GameEngineWindow::WindowContract();
 		GameEngineCore::GetInst()->ChangeLevel("PlayLevel");
 	}
-
-	if (false == ScrollStart)
-	{
-		if (true == GameEngineInput::IsDown("TitleScrollLeft"))
-		{
-			End = Start + float4(-GameEngineWindow::GetScreenSize().half().x, 0.0f);
-			ScrollStart = true;
-		}
-		else if (true == GameEngineInput::IsDown("TitleScrollRight"))
-		{
-			End = Start + float4(GameEngineWindow::GetScreenSize().half().x, 0.0f);
-			ScrollStart = true;
-		}
-		else if (true == GameEngineInput::IsDown("TitleScrollUp"))
-		{
-			End = Start + float4(0.0f, GameEngineWindow::GetScreenSize().half().y);
-			ScrollStart = true;
-		}
-		else if (true == GameEngineInput::IsDown("TitleScrollDown"))
-		{
-			End = Start + float4(0.0f, -GameEngineWindow::GetScreenSize().half().y);
-			ScrollStart = true;
-		}
-	}
-
-
-	if (true == ScrollStart)
-	{
-		// 시작에서 끝까지 이동하는데 1초가 걸리는 함수
-		Time += _DeltaTime * 0.5f;
-		float4 Pos = float4::LerpClamp(Start, End, Time);
-		SetCameraPos(Pos);
-
-		if (Time >= 1.0f)
-		{
-			ScrollStart = false;
-			Time = 0.0f;
-			Start = Pos;
-		}
-	}
-
 }
 
 
 void TitleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	int screenWidth = GetSystemMetrics(SM_CXSCREEN);
+	int screenHeight = GetSystemMetrics(SM_CYSCREEN);
 	GameEngineWindow::SettingWindowSize({ 205,205 });
+	int screenSizex = GameEngineWindow::GetScreenSize().x;
+	int screenSizey = GameEngineWindow::GetScreenSize().y;
+	//GameEngineWindow::SettingWindowPos({ (float)screenWidth/2 - (screenSizex/2) ,(float)screenHeight/2 - (screenSizey /2)});
+	GameEngineWindow::WindowExpand();
+
 }

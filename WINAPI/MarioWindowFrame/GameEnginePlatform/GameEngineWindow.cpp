@@ -69,6 +69,85 @@ GameEngineWindow::~GameEngineWindow()
     
 }
 
+void GameEngineWindow::WindowContract()
+{
+    bool xcheck = false;
+    bool ycheck = false;
+    int a = 0;
+    int b = 1;
+    int c = 1;
+    
+
+    while ((true != xcheck) || (true != ycheck))
+    {
+        float sizex = ScreenSize.x - b;
+        float sizey = ScreenSize.y - c;
+
+        if (sizex <= 1)
+        {
+            sizex = 1;
+            xcheck = true;
+        }
+        else if (false == xcheck)
+        {
+            b++;
+        }
+
+        if (sizey <= 1)
+        {
+            sizey = 1;
+            ycheck = true;
+        }
+        else if (false == ycheck)
+        {
+            c++;
+        }
+
+        SettingWindowSize({ sizex ,sizey});
+
+        Sleep(0.025);
+    }
+    
+}
+
+void GameEngineWindow::WindowExpand()
+{
+    bool xcheck = false;
+    bool ycheck = false;
+    float b = 1.0f;
+    float c = 1.0f;
+    int screensizex = ScreenSize.x;
+    int screensizey = ScreenSize.y;
+
+    while ((true != xcheck) || (true != ycheck))
+    {
+        if ((b >= screensizex) && (false == xcheck))
+        {
+            b = screensizex;
+            xcheck = true;
+        }
+        else if (false == xcheck)
+        {
+            b++;
+        }
+
+        if ((c >= screensizey) && (false == ycheck))
+        {
+            c = screensizey;
+            ycheck = true;
+        }
+        else if(false == ycheck)
+        {
+            c++;
+        }
+
+        SettingWindowSize({ b , c });
+
+        Sleep(0.025);
+    }
+
+}
+
 void GameEngineWindow::WindowCreate(HINSTANCE _hInstance, const std::string_view& _TitleName, float4 _Size, float4 _Pos)
 {
     // 윈도우를 찍어낼수 있는 class를 만들어내는 것이다.
@@ -257,6 +336,13 @@ void GameEngineWindow::SettingWindowPos(float4 _Pos)
 {
     WindowPos = _Pos;
     SetWindowPos(HWnd, nullptr, WindowPos.ix(), WindowPos.iy(), WindowSize.ix(), WindowSize.iy(), SWP_NOZORDER);
+}
+
+void GameEngineWindow::SettingWindowGamePos(float4 _Pos)
+{
+    int screenWidth = GetSystemMetrics(SM_CXSCREEN);
+    int screenHeight = GetSystemMetrics(SM_CYSCREEN);
+
 }
 
 float4 GameEngineWindow::GetMousePosition()

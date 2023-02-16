@@ -116,7 +116,6 @@ void Player::Movecalculation(float _DeltaTime)
 void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	MainPlayer = this;
-	int a = 0;
 }
 
 bool FreeMove = false;
@@ -193,7 +192,8 @@ void Player::DirCheck(const std::string_view& _AnimationName)
 {
 	std::string PrevDirString = DirString;
 	AnimationRender->ChangeAnimation(DirString + _AnimationName.data());
-
+	
+	
 	if (GameEngineInput::IsPress("LeftMove"))
 	{
 		DirString = "Left_";

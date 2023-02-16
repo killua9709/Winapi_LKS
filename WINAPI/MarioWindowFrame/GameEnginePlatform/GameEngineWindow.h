@@ -19,6 +19,7 @@ public:
 
 	static void SettingWindowSize(float4 _Size);
 	static void SettingWindowPos(float4 _Pos);
+	static void SettingWindowGamePos(float4 _Pos);
 
 	static float4 GetScreenSize()
 	{
@@ -65,6 +66,10 @@ public:
 	GameEngineWindow(GameEngineWindow&& _Other) noexcept = delete;
 	GameEngineWindow& operator=(const GameEngineWindow& _Other) = delete;
 	GameEngineWindow& operator=(GameEngineWindow&& _Other) noexcept = delete;
+
+	static void WindowContract();
+
+	static void WindowExpand();
 
 	
 

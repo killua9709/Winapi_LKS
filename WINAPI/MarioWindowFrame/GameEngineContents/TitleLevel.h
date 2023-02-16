@@ -24,9 +24,5 @@ protected:
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 
 private:
-	// float4 MoveY;
-	float Time = 0.0f;
-	float4 Start = float4::Zero;
-	float4 End = float4::Zero;
 };
 
