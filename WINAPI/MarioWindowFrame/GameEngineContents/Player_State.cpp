@@ -59,6 +59,7 @@ void Player::UpdateState(float _Time)
 
 }
 
+
 // FSM 내가 어떤일을 할때 이동하면서 가만히 있을수 없다.
 void Player::IdleStart() 
 {
@@ -91,9 +92,9 @@ void Player::MoveUpdate(float _Time)
 {
 	if (
 		(false == GameEngineInput::IsPress("LeftMove") && 
-		false == GameEngineInput::IsPress("RightMove")) ||
+		 false == GameEngineInput::IsPress("RightMove")) ||
 		(true == GameEngineInput::IsPress("LeftMove") &&
-			true == GameEngineInput::IsPress("RightMove"))
+		 true == GameEngineInput::IsPress("RightMove"))
 		)
 	{
 		// 
@@ -104,12 +105,11 @@ void Player::MoveUpdate(float _Time)
 	// float4 MoveDir = float4::Zero;
 	if (true == GameEngineInput::IsPress("LeftMove"))
 	{
-		MoveDir += float4::Left * MoveSpeed;
+		SetMove(float4::Left * MoveSpeed);
 	} 
-
-	if (true == GameEngineInput::IsPress("RightMove"))
+	else if (true == GameEngineInput::IsPress("RightMove"))
 	{
-		MoveDir += float4::Right * MoveSpeed;
+		SetMove(float4::Right * MoveSpeed);
 	}
 
 

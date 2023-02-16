@@ -193,6 +193,10 @@ void Player::DirCheck(const std::string_view& _AnimationName)
 	std::string PrevDirString = DirString;
 	AnimationRender->ChangeAnimation(DirString + _AnimationName.data());
 	
+	if (GameEngineInput::IsPress("LeftMove") && (GameEngineInput::IsPress("RightMove")))
+	{
+		return;
+	}
 	
 	if (GameEngineInput::IsPress("LeftMove"))
 	{
@@ -228,8 +232,12 @@ void Player::Render(float _DeltaTime)
 	std::string CameraMouseText = "MousePositionCamera : ";
 	CameraMouseText += GetLevel()->GetMousePosToCamera().ToString();
 
+	std::string dir = "MousePosition : ";
+	dir += DirString;
+
 	GameEngineLevel::DebugTextPush(MouseText);
 	GameEngineLevel::DebugTextPush(CameraMouseText);
+	GameEngineLevel::DebugTextPush(dir);
 
 	//std::string Text = "Ãâ·Â";
 	//SetBkMode(DoubleDC, TRANSPARENT);
