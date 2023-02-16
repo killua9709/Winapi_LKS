@@ -90,8 +90,10 @@ void Player::MoveStart()
 void Player::MoveUpdate(float _Time) 
 {
 	if (
-		false == GameEngineInput::IsPress("LeftMove") && 
-		false == GameEngineInput::IsPress("RightMove")
+		(false == GameEngineInput::IsPress("LeftMove") && 
+		false == GameEngineInput::IsPress("RightMove")) ||
+		(true == GameEngineInput::IsPress("LeftMove") &&
+			true == GameEngineInput::IsPress("RightMove"))
 		)
 	{
 		// 
