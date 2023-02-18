@@ -6,6 +6,8 @@ enum class PlayerState
 {
 	IDLE,
 	MOVE,
+	JUMP,
+	Attack
 };
 
 // 설명 :
@@ -39,6 +41,7 @@ private:
 	float AccTime = 0.0f;
 	int StartFrame = 0;
 	float MoveSpeed = 1.0f;
+	float JumpPower = 5.0f;
 
 	std::string DirString = "Right_";
 	PlayerState StateValue = PlayerState::IDLE;
@@ -56,7 +59,9 @@ private:
 	bool FreeMoveState(float _DeltaTime);
 
 	void ChangeState(PlayerState _State);
+	void ChangeUpdateState(PlayerState _State, float _Time);
 	void UpdateState(float _Time);
+
 
 	// FSM 내가 어떤일을 할때 이동하면서 가만히 있을수 없다.
 	void IdleStart();
@@ -66,6 +71,10 @@ private:
 	void MoveStart();
 	void MoveUpdate(float _Time);
 	void MoveEnd();
+
+	void JumpStart();
+	void JumpUpdate(float _Time);
+	void JumpEnd();
 
 	void Movecalculation(float _DeltaTime);
 

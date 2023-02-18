@@ -24,20 +24,19 @@ void Map::Start()
 			BackGroundRender = CreateRender(BubbleRenderOrder::BackGround);
 			BackGroundRender->SetPosition(GameEngineWindow::GetScreenSize().half());
 			BackGroundRender->SetScale(GameEngineWindow::GetScreenSize());
-			BackGroundRender->CreateAnimation({ .AnimationName = "Loop",  .ImageName = "BackGround.bmp", .Start = 0, .End = 2, .InterTime = 0.5f });
-			BackGroundRender->ChangeAnimation("Loop");
+			BackGroundRender->SetImage("¹è°æ.Bmp");
 		}
 
 		{
 			MapRender0 = CreateRender(BubbleRenderOrder::Map);
-			MapRender0->SetImage("Map.Bmp");
+			MapRender0->SetImage("½ÃÀÛ¸Ê.Bmp");
 			MapRender0->SetPosition(MapRender0->GetImage()->GetImageScale().half());
 			MapRender0->SetScaleToImage();
 		}
 
 		{
 			MapRender1 = CreateRender(BubbleRenderOrder::Map);
-			MapRender1->SetImage("Map.Bmp");
+			MapRender1->SetImage("½ÃÀÛ¸Ê.Bmp");
 
 			float4 StartPos = MapRender0->GetImage()->GetImageScale().half();
 			StartPos.x += GameEngineWindow::GetScreenSize().x;

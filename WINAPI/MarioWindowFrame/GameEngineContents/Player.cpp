@@ -38,13 +38,16 @@ void Player::Start()
 
 	{
 		AnimationRender = CreateRender(BubbleRenderOrder::Player);
-		AnimationRender->SetScale({ 200, 200 });
+		AnimationRender->SetScale({ 100, 100 });
 
 		AnimationRender->CreateAnimation({ .AnimationName = "Right_Idle",  .ImageName = "Right_Mario.bmp", .Start = 0, .End = 0, .InterTime = 0.3f});
 		AnimationRender->CreateAnimation({ .AnimationName = "Right_Move",  .ImageName = "Right_Mario.bmp", .Start = 1, .End = 3 });
+		AnimationRender->CreateAnimation({ .AnimationName = "Right_Jump",  .ImageName = "Right_Mario.bmp", .Start = 4, .End = 4 });
 
+		
 		AnimationRender->CreateAnimation({ .AnimationName = "Left_Idle",  .ImageName = "Left_Mario.bmp", .Start = 0, .End = 0, .InterTime = 0.3f });
 		AnimationRender->CreateAnimation({ .AnimationName = "Left_Move",  .ImageName = "Left_Mario.bmp", .Start = 1, .End = 3 });
+		AnimationRender->CreateAnimation({ .AnimationName = "Left_Jump",  .ImageName = "Left_Mario.bmp", .Start = 4, .End = 4 });
 	}
 
 	{
@@ -57,7 +60,7 @@ void Player::Start()
 
 void Player::Movecalculation(float _DeltaTime)
 {
-	MoveDir += float4::Down * 200.0f * _DeltaTime;
+	//MoveDir += float4::Down * 200.0f * _DeltaTime;
 
 	if (100.0f <= abs(MoveDir.x))
 	{
@@ -75,6 +78,7 @@ void Player::Movecalculation(float _DeltaTime)
 		MoveDir.x *= 0.01f;
 	}
 
+	///// 땅과의 충돌
 	// ColMap.BMP 이걸 변수로하면 
 	GameEngineImage* ColImage = GameEngineResources::GetInst().ImageFind("ColMap.BMP");
 	if (nullptr == ColImage)
@@ -92,6 +96,7 @@ void Player::Movecalculation(float _DeltaTime)
 	{
 		Check = false;
 	}
+
 
 	if (false == Check)
 	{
@@ -161,7 +166,7 @@ bool Player::FreeMoveState(float _DeltaTime)
 
 void Player::Update(float _DeltaTime) 
 {
-	if (nullptr != BodyCollision)
+	if (nullptr != BodyCollision)	//몬스터 오더를 들고 있는 충돌체와 플레이어의 충돌체 처리
 	{
 		std::vector<GameEngineCollision*> Collision;
 		if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(BubbleCollisionOrder::Monster), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision))
@@ -197,7 +202,7 @@ void Player::DirCheck(const std::string_view& _AnimationName)
 	{
 		return;
 	}
-	
+		
 	if (GameEngineInput::IsPress("LeftMove"))
 	{
 		DirString = "Left_";

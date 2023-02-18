@@ -3,6 +3,8 @@
 #include <GameEngineCore/GameEngineRender.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEnginePlatform/GameEngineInput.h>
+#include <GameEngineCore/GameEngineLevel.h>
+
 
 
 TitleBack::TitleBack()
@@ -28,12 +30,6 @@ void TitleBack::Start()
 		Render->SetPosition(GameEngineWindow::GetScreenSize().half());
 		Render->SetScale(GameEngineWindow::GetScreenSize());
 	}
-
-	if (false == GameEngineInput::IsKey("EnginemouseLeft"))
-	{
-		GameEngineInput::CreateKey("EnginemouseLeft", VK_LBUTTON);
-	}
-
 }
 
 bool page2 = false;
@@ -41,7 +37,11 @@ bool page3 = false;
 
 void TitleBack::Update(float _DeltaTime)
 {
-	if (GameEngineInput::IsPress("EnginemouseLeft"))
+	if ((GameEngineInput::IsPress("EnginemouseLeft")) &&
+		(0 < GetLevel()->GetMousePosToCamera().x)&&
+		(GameEngineWindow::GetMousePosition().x < GameEngineWindow::GetScreenSize().x)&&
+		(0 < GetLevel()->GetMousePosToCamera().y)&&
+		GameEngineWindow::GetMousePosition().y < GameEngineWindow::GetScreenSize().y)
 	{
 		ScreenNumber += 1;
 	}

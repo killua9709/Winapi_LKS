@@ -6,6 +6,7 @@ enum class BubbleRenderOrder
 	Map,
 	Player,
 	Monster,
+	Cursor
 };
 
 enum class BubbleCollisionOrder

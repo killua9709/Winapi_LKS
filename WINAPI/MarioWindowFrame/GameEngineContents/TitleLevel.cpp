@@ -20,6 +20,17 @@ TitleLevel::~TitleLevel()
 
 void TitleLevel::Loading()
 {
+
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToDirectory("ContentsResources");
+		Dir.Move("ContentsResources");
+		Dir.Move("Image");
+		Dir.Move("Cursor");
+
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Ä¿¼­.BMP"));
+
+	}
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToDirectory("ContentsResources");
@@ -51,6 +62,7 @@ void TitleLevel::Loading()
 	}
 
 	CreateActor<TitleBack>();
+	CreateActor<MouseObject>();
 }
 
 bool ScrollStart = false;
@@ -71,9 +83,9 @@ void TitleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	int screenWidth = GetSystemMetrics(SM_CXSCREEN);
 	int screenHeight = GetSystemMetrics(SM_CYSCREEN);
 	GameEngineWindow::SettingWindowSize({ 205,205 });
-	int screenSizex = GameEngineWindow::GetScreenSize().x;
+	int screenSizex = GameEngineWindow::GetScreenSize().x; // floatÀÌ¶û intÀÓ
 	int screenSizey = GameEngineWindow::GetScreenSize().y;
-	//GameEngineWindow::SettingWindowPos({ (float)screenWidth/2 - (screenSizex/2) ,(float)screenHeight/2 - (screenSizey /2)});
+	GameEngineWindow::SettingWindowPos({ (float)screenWidth/2 - (screenSizex/2) ,(float)screenHeight/2 - (screenSizey /2)});
 	GameEngineWindow::WindowExpand();
 
 }

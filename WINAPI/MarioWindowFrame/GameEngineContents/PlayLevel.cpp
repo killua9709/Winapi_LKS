@@ -8,12 +8,15 @@
 #include <GameEngineCore/GameEngineResources.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
 
+
 // 나랑 같은 등급의 헤더들
 #include "Player.h"
 #include "Monster.h"
 #include "Map.h"
 #include "ContentsEnums.h"
 #include "ContentsValue.h"
+#include "MouseObject.h"
+
 
 PlayLevel::PlayLevel()
 {
@@ -58,11 +61,11 @@ void PlayLevel::ImageLoad()
 		Image->Cut(5, 4);
 	}
 	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("BackGround.BMP"));
-		Image->Cut(3, 1);
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("시작맵.BMP"));
+		Image->Cut(1, 1);
 	}
 	{
-		GameEngineImage* Image2 = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Map.BMP"));
+		GameEngineImage* Image2 = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("배경.BMP"));
 		GameEngineImage* Image3 = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("ColMap.BMP"));
 	}
 }
@@ -75,13 +78,14 @@ void PlayLevel::Loading()
 	SetCameraScale({1000, 100});
 
 
+	CreateActor<MouseObject>();
+
 	{
 		Map* Actor = CreateActor<Map>();
 	}
 	{
 		Player* Actor = CreateActor<Player>(BubbleRenderOrder::Player);
 		Actor->SetMove(GameEngineWindow::GetScreenSize().half());
-		Actor->SetMove({100, 0});
 	}
 	{
 		srand(static_cast<unsigned int>(time(nullptr)));
@@ -138,6 +142,6 @@ void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	//BGMPlayer = GameEngineResources::GetInst().SoundPlayToControl("BGMTest.mp3");
 	//BGMPlayer.LoopCount(100);
 	//// BGMPlayer.Volume(0.2f);
-	GameEngineWindow::SettingWindowSize({ 1280,960 });
+	GameEngineWindow::SettingWindowSize({ 1280,720 });
 	GameEngineWindow::WindowExpand();
 }

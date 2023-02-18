@@ -62,6 +62,7 @@ LRESULT CALLBACK GameEngineWindow::MessageFunction(HWND _hWnd, UINT _message, WP
 
 GameEngineWindow::GameEngineWindow() 
 {
+   
 }
 
 GameEngineWindow::~GameEngineWindow() 
