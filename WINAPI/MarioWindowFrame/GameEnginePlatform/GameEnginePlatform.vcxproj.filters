@@ -35,6 +35,7 @@
     <ClInclude Include="ThirdParty\FMOD\inc\fmod_output.h">
       <Filter>ThirdParty\FMOD\Header</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineWindow.cpp" />
@@ -100,5 +101,11 @@
     <CopyFileToFolders Include="ThirdParty\FMOD\lib\x64\fmodL.dll">
       <Filter>ThirdParty\FMOD\bin</Filter>
     </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GameEnginePlatform.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\아이콘.ico" />
   </ItemGroup>
 </Project>

@@ -28,6 +28,17 @@
 // int ArrBitMap[1380][1062] <= 우리는 이걸 보지 못해요.
 // 배열에 대한 뭔가를 할수 있는 권한을 주는데 그게 HDC이다.
 // HDC는 그래서 색깔의 배열과 연결되어 있고. 그걸 제어할수 있게 도와주는 통로이다.
+union ColorCheck
+{
+	int Color;
+	struct
+	{
+		char r;
+		char g;
+		char b;
+		char a;
+	};
+};
 
 struct ImageCutData
 {

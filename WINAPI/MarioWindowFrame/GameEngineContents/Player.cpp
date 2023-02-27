@@ -6,11 +6,13 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineLevel.h>
+#include <GameEngineBase/GameEngineTime.h>
+
 
 #include "ContentsEnums.h"
 #include "ContentsValue.h"
 
-#include "Map.h"
+#include "TutorialMap.h"
 #include "STLevel.h"
 
 Player* Player::MainPlayer;
@@ -38,7 +40,7 @@ void Player::Start()
 
 	{
 		AnimationRender = CreateRender(BubbleRenderOrder::Player);
-		AnimationRender->SetScale({ 100, 100 });
+		AnimationRender->SetScale({ 80, 80 });
 
 		AnimationRender->CreateAnimation({ .AnimationName = "Right_Idle",  .ImageName = "Right_Mario.bmp", .Start = 0, .End = 0, .InterTime = 0.3f});
 		AnimationRender->CreateAnimation({ .AnimationName = "Right_Move",  .ImageName = "Right_Mario.bmp", .Start = 1, .End = 3 });
@@ -52,15 +54,22 @@ void Player::Start()
 
 	{
 		BodyCollision = CreateCollision(BubbleCollisionOrder::Player);
-		BodyCollision->SetScale({ 50, 50 });
+		BodyCollision->SetScale({ 25, 35 });
+		BodyCollision->SetPosition({ 0,-17 });
 	}
 
 	ChangeState(PlayerState::IDLE);
 }
 
+
+bool Player::IsGround(bool _isground)
+{
+	return true;
+}
+
 void Player::Movecalculation(float _DeltaTime)
 {
-	//MoveDir += float4::Down * 200.0f * _DeltaTime;
+	MoveDir += float4::Down * 200.0f * _DeltaTime;
 
 	if (100.0f <= abs(MoveDir.x))
 	{
@@ -79,9 +88,8 @@ void Player::Movecalculation(float _DeltaTime)
 	}
 
 	///// 땅과의 충돌
-	// ColMap.BMP 이걸 변수로하면 
-	GameEngineImage* ColImage = GameEngineResources::GetInst().ImageFind("ColMap.BMP");
-	if (nullptr == ColImage)
+	// ColTutorialTutorialMap.BMP 이걸 변수로하면 
+	if (nullptr == Collimage)
 	{
 		MsgAssert("충돌용 맵 이미지가 없습니다.");
 	}
@@ -92,7 +100,7 @@ void Player::Movecalculation(float _DeltaTime)
 	bool Check = true;
 	float4 NextPos = GetPos() + MoveDir * _DeltaTime;
 
-	if (RGB(0, 0, 0) == ColImage->GetPixelColor(NextPos, RGB(0, 0, 0)))
+	if (RGB(0, 0, 0) == Collimage->GetPixelColor(NextPos, RGB(0, 0, 0)))
 	{
 		Check = false;
 	}
@@ -104,9 +112,9 @@ void Player::Movecalculation(float _DeltaTime)
 		{
 			MoveDir.y -= 1;
 
-			float4 NextPos = GetPos() + MoveDir * _DeltaTime;
+			NextPos = GetPos() + MoveDir * _DeltaTime;
 
-			if (RGB(0, 0, 0) == ColImage->GetPixelColor(NextPos, RGB(0, 0, 0)))
+			if (RGB(0, 0, 0) == Collimage->GetPixelColor(NextPos, RGB(0, 0, 0))) // 계속 충돌이 되면 위로
 			{
 				continue;
 			}
@@ -116,6 +124,12 @@ void Player::Movecalculation(float _DeltaTime)
 	}
 
 	SetMove(MoveDir * _DeltaTime);
+}
+
+bool Player::IsGround()
+{
+	std::vector<GameEngineCollision*> Collision;
+	return (BodyCollision->Collision({ .TargetGroup = static_cast<int>(BubbleCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision));
 }
 
 void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
@@ -179,6 +193,19 @@ void Player::Update(float _DeltaTime)
 		}
 	}
 
+	if (nullptr != BodyCollision)	//벽과 부딪히면 처리하기
+	{
+		std::vector<GameEngineCollision*> Collision;
+		if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(BubbleCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision))
+		{
+			for (size_t i = 0; i < Collision.size(); i++)
+			{
+				GameEngineActor* ColActor = Collision[i]->GetActor();
+				SetPos({GetPos().x,Collision[i]->GetCollisionData().Top()});
+			}
+		}
+	}
+
 	if (true == FreeMoveState(_DeltaTime))
 	{
 		return;
@@ -186,11 +213,11 @@ void Player::Update(float _DeltaTime)
 
 	if (GameEngineInput::IsDown("StageClear"))
 	{
-		Map::MainMap->StageClearOn();
+		TutorialMap::MainMap->StageClearOn();
 	}
 
 	UpdateState(_DeltaTime);
-	Movecalculation(_DeltaTime);
+	//Movecalculation(_DeltaTime);
 }
 
 void Player::DirCheck(const std::string_view& _AnimationName)
@@ -220,16 +247,17 @@ void Player::DirCheck(const std::string_view& _AnimationName)
 
 void Player::Render(float _DeltaTime)
 {
-	HDC DoubleDC = GameEngineWindow::GetDoubleBufferImage()->GetImageDC();
-	float4 ActorPos = GetPos() - GetLevel()->GetCameraPos();;
+	/*HDC DoubleDC = GameEngineWindow::GetDoubleBufferImage()->GetImageDC();
+	float4 ActorPos = GetPos() - GetLevel()->GetCameraPos();*/
 
-	Rectangle(DoubleDC, 
-		ActorPos.ix() - 5,
-		ActorPos.iy() - 5,
-		ActorPos.ix() + 5,
-		ActorPos.iy() + 5
-		);
+	/*Rectangle(DoubleDC, 
+		ActorPos.ix() - GetBodyCollision()->GetScale().hix(),
+		ActorPos.iy() - GetBodyCollision()->GetScale().hiy(),
+		ActorPos.ix() + GetBodyCollision()->GetScale().hix(),
+		ActorPos.iy() + GetBodyCollision()->GetScale().hix()
+		);*/
 
+	//BodyCollision->DebugRender();
 
 	std::string MouseText = "MousePosition : ";
 	MouseText += GetLevel()->GetMousePos().ToString();
@@ -237,7 +265,7 @@ void Player::Render(float _DeltaTime)
 	std::string CameraMouseText = "MousePositionCamera : ";
 	CameraMouseText += GetLevel()->GetMousePosToCamera().ToString();
 
-	std::string dir = "MousePosition : ";
+	std::string dir = "direction : ";
 	dir += DirString;
 
 	GameEngineLevel::DebugTextPush(MouseText);

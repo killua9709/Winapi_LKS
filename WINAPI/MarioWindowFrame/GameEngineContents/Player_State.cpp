@@ -10,7 +10,7 @@
 
 
 // State
-void Player::ChangeState(PlayerState _State) 
+void Player::ChangeState(PlayerState _State)
 {
 	PlayerState NextState = _State;
 	PlayerState PrevState = StateValue;
@@ -28,6 +28,9 @@ void Player::ChangeState(PlayerState _State)
 	case PlayerState::JUMP:
 		JumpStart();
 		break;
+	case PlayerState::Fall:
+		FallStart();
+		break;
 	default:
 		break;
 	}
@@ -43,48 +46,54 @@ void Player::ChangeState(PlayerState _State)
 	case PlayerState::JUMP:
 		JumpEnd();
 		break;
+	case PlayerState::Fall:
+		FallEnd();
 	default:
 		break;
 	}
 
 }
 
-void Player::ChangeUpdateState(PlayerState _State, float _Time)
+void Player::ChangeUpdateState(PlayerState _State, float _DeltaTime)
 {
 	StateValue = _State;
 
 	switch (StateValue)
 	{
 	case PlayerState::IDLE:
-		IdleUpdate(_Time);
+		IdleUpdate(_DeltaTime);
 		break;
 	case PlayerState::MOVE:
-		MoveUpdate(_Time);
+		MoveUpdate(_DeltaTime);
 		break;
 	case PlayerState::JUMP:
-		JumpUpdate(_Time);
+		JumpUpdate(_DeltaTime);
 		break;
 	case PlayerState::Attack:
-		//AttackUpdate(_Time);
+		//AttackUpdate(_DeltaTime);
 		break;
+	case PlayerState::Fall:
+		FallUpdate(_DeltaTime);
 	default:
 		break;
 	}
 }
 
-void Player::UpdateState(float _Time)
+void Player::UpdateState(float _DeltaTime)
 {
 	switch (StateValue)
 	{
 	case PlayerState::IDLE:
-		IdleUpdate(_Time);
+		IdleUpdate(_DeltaTime);
 		break;
 	case PlayerState::MOVE:
-		MoveUpdate(_Time);
+		MoveUpdate(_DeltaTime);
 		break;
 	case PlayerState::JUMP:
-		JumpUpdate(_Time);
+		JumpUpdate(_DeltaTime);
 		break;
+	case PlayerState::Fall:
+		FallUpdate(_DeltaTime);
 	default:
 		break;
 	}
@@ -93,17 +102,18 @@ void Player::UpdateState(float _Time)
 
 
 // FSM 내가 어떤일을 할때 이동하면서 가만히 있을수 없다.
-void Player::IdleStart() 
+void Player::IdleStart()
 {
 	DirCheck("Idle");
 }
-void Player::IdleUpdate(float _Time) 
+void Player::IdleUpdate(float _DeltaTime)
 {
 	//만약 땅과 닿아 있는 상태에서
-	if (GameEngineInput::IsPress("UpMove"))
+	if (true == IsGround() && (GameEngineInput::IsPress("UpMove")))
 	{
 		ChangeState(PlayerState::JUMP);
 	}
+
 	//만약 오른쪽하고 왼쪽이 둘다 눌린다면
 	bool both = (true == GameEngineInput::IsPress("LeftMove")) && (true == GameEngineInput::IsPress("RightMove"));
 
@@ -111,7 +121,7 @@ void Player::IdleUpdate(float _Time)
 	{
 		return; // 보통 스테이트를 체인지하면 아래 코드를 실행되면 
 	}
-	else if((false == both) && ((true == GameEngineInput::IsPress("LeftMove")) || (true == GameEngineInput::IsPress("RightMove"))))
+	else if ((false == both) && ((true == GameEngineInput::IsPress("LeftMove")) || (true == GameEngineInput::IsPress("RightMove"))))
 	{	//둘다 눌리지 않았고 왼쪽 또는 오른쪽을 누른다면 
 
 		ChangeState(PlayerState::MOVE);
@@ -121,22 +131,23 @@ void Player::IdleUpdate(float _Time)
 	//
 
 }
-void Player::IdleEnd() 
+void Player::IdleEnd()
 {
 
 }
 
-void Player::MoveStart() 
+void Player::MoveStart()
 {
 	DirCheck("Move");
 }
-void Player::MoveUpdate(float _Time) 
+void Player::MoveUpdate(float _DeltaTime)
 {
+	//둘다 안눌리거나 둘다 눌리면 아이들 상태로 돌아간다
 	if (
-		(false == GameEngineInput::IsPress("LeftMove") && 
-		 false == GameEngineInput::IsPress("RightMove")) ||
+		(false == GameEngineInput::IsPress("LeftMove") &&
+			false == GameEngineInput::IsPress("RightMove")) ||
 		(true == GameEngineInput::IsPress("LeftMove") &&
-		 true == GameEngineInput::IsPress("RightMove"))
+			true == GameEngineInput::IsPress("RightMove"))
 		)
 	{
 		// 
@@ -144,20 +155,26 @@ void Player::MoveUpdate(float _Time)
 		return;
 	}
 
-	// float4 MoveDir = float4::Zero;
+	if (true == IsGround() && (GameEngineInput::IsPress("UpMove")))
+	{
+		ChangeState(PlayerState::JUMP);
+	}
+
+	//왼쪽버튼 눌릴시
 	if (true == GameEngineInput::IsPress("LeftMove"))
 	{
-		SetMove(float4::Left * MoveSpeed);
-	} 
+		SetMove(float4::Left * MoveSpeed * _DeltaTime);
+	}
+	//오른쪽버튼 눌릴시
 	else if (true == GameEngineInput::IsPress("RightMove"))
 	{
-		SetMove(float4::Right * MoveSpeed);
+		SetMove(float4::Right * MoveSpeed * _DeltaTime);
 	}
 
 
 	DirCheck("Move");
 }
-void Player::MoveEnd() 
+void Player::MoveEnd()
 {
 
 }
@@ -165,14 +182,49 @@ void Player::MoveEnd()
 void Player::JumpStart()
 {
 	DirCheck("Jump");
-	SetMove(float4::Up * JumpPower);
+
 }
-void Player::JumpUpdate(float _Time)
+float jumppowercount = 0;
+
+void Player::JumpUpdate(float _DeltaTime)
 {
-	DirCheck("Jump");
+	if (jumppowercount < JumpPowerMax)
+	{
+		SetMove(float4::Up * JumpPower * _DeltaTime);
+		jumppowercount += JumpPower;
+	}
+	else
+	{
+		ChangeState(PlayerState::IDLE);
+		jumppowercount = 0;
+	}
+
+
+
+	/*if (true == IsGround())
+	{
+		ChangeState(PlayerState::IDLE);
+	}*/
 	//만약 땅과 닿았다면...
+
+	DirCheck("Jump");
 }
-void Player::JumpEnd() 
+void Player::JumpEnd()
+{
+
+}
+
+void Player::FallStart()
+{
+
+}
+
+void Player::FallUpdate(float _DeltaTime)
+{
+
+}
+
+void Player::FallEnd()
 {
 
 }

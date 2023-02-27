@@ -23,7 +23,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Map.h">
+    <ClInclude Include="TutorialMap.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -39,7 +39,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="PlayLevel.h">
+    <ClInclude Include="TutorialLevel.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -64,13 +64,17 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="ContentsEnums.h" />
+    <ClInclude Include="Wall.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsValue.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Map.cpp">
+    <ClCompile Include="TutorialMap.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -87,7 +91,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Player_State.cpp" />
-    <ClCompile Include="PlayLevel.cpp">
+    <ClCompile Include="TutorialLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -108,6 +112,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
       <SubType>
       </SubType>
     </ClCompile>

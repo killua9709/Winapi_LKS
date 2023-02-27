@@ -10,14 +10,14 @@ static bool(*ColFunctionPtr[CT_Max][CT_Max])(const CollisionData& _Left, const C
 class CollisionFunctionInit
 {
 public:
-	CollisionFunctionInit() 
+	CollisionFunctionInit()
 	{
 		ColFunctionPtr[CT_CirCle][CT_CirCle] = GameEngineCollision::CollisionCirCleToCirCle;
 		ColFunctionPtr[CT_CirCle][CT_Point] = GameEngineCollision::CollisionCirCleToPoint;
 		ColFunctionPtr[CT_Rect][CT_Rect] = GameEngineCollision::CollisionRectToRect;
 		ColFunctionPtr[CT_Rect][CT_Point] = GameEngineCollision::CollisionRectToPoint;
 	}
-	~CollisionFunctionInit() 
+	~CollisionFunctionInit()
 	{
 
 	}
@@ -25,11 +25,11 @@ public:
 
 CollisionFunctionInit Init = CollisionFunctionInit();
 
-GameEngineCollision::GameEngineCollision() 
+GameEngineCollision::GameEngineCollision()
 {
 }
 
-GameEngineCollision::~GameEngineCollision() 
+GameEngineCollision::~GameEngineCollision()
 {
 }
 
@@ -180,9 +180,11 @@ bool GameEngineCollision::Collision(const CollisionCheckParameter& _Parameter, s
 	return _Collision.size() != 0;
 }
 
+
+
 CollisionData GameEngineCollision::GetCollisionData()
 {
-	return { GetActorPlusPos(), GetScale()};
+	return { GetActorPlusPos(), GetScale() };
 }
 
 void GameEngineCollision::DebugRender()

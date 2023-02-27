@@ -73,7 +73,7 @@ void TitleLevel::Update(float _DeltaTime)
 	if ((true == TitleBack::GetSceneClear()) && WM_LBUTTONDOWN)
 	{
 		GameEngineWindow::WindowContract();
-		GameEngineCore::GetInst()->ChangeLevel("PlayLevel");
+		GameEngineCore::GetInst()->ChangeLevel("TutorialLevel");
 	}
 }
 

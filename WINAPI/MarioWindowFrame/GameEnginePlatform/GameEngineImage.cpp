@@ -6,6 +6,7 @@
 // 다른 lib를 사용하겠다.
 #pragma comment(lib, "msimg32.lib")
 
+
 GameEngineImage::GameEngineImage() 
 {
 }

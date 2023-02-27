@@ -35,5 +35,5 @@ void MouseObject::Start()
 
 void MouseObject::Update(float _DeltaTime) 
 {
-	SetPos(GetLevel()->GetMousePos());
+	SetPos(GetLevel()->GetMousePosToCamera());
 }

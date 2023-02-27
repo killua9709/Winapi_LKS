@@ -13,6 +13,6 @@ enum class BubbleCollisionOrder
 {
 	Player,
 	Monster,
-	PlayerAttack,
-	MonsterAttack,
+	Wall
+
 };

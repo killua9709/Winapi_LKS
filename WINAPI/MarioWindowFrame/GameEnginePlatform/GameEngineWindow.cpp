@@ -2,6 +2,7 @@
 #include <GameEngineBase/GameEngineDebug.h>
 #include <GameEnginePlatform/GameEngineImage.h>
 #include "GameEngineInput.h"
+#include "resource.h"
 
 // LRESULT(CALLBACK* WNDPROC)(HWND, UINT, WPARAM, LPARAM)
 
@@ -163,12 +164,12 @@ void GameEngineWindow::WindowCreate(HINSTANCE _hInstance, const std::string_view
     wcex.cbWndExtra = 0;
     wcex.hInstance = _hInstance;
     // 넣어주지 않으면 윈도우 기본Icon이 됩니다.
-    wcex.hIcon = nullptr;//LoadIcon(_hInstance, MAKEINTRESOURCE(IDI_WINDOWSPROJECT1));
+    wcex.hIcon = LoadIcon(_hInstance, MAKEINTRESOURCE(IDI_ICON1));
     wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1); // 흰색 
     wcex.lpszMenuName = nullptr;//MAKEINTRESOURCEW(IDC_WINDOWSPROJECT1);
     wcex.lpszClassName = "GameEngineWindowDefault";
-    wcex.hIconSm = nullptr;//LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
+    wcex.hIconSm = nullptr;//(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
     // 윈도우에게 이런 내용을 window클래스를 GameEngineWindowDefault라는 이름으로 등록해줘.
     // 나중에 윈도우 만들때 쓸꺼냐.
@@ -184,9 +185,9 @@ void GameEngineWindow::WindowCreate(HINSTANCE _hInstance, const std::string_view
     // 윈도우는 다시 특정 숫자이라는 윈도우가 만들어졌다고 우리에게 알려주는데.
     // 특정 숫자로 인식되는 우리의 윈도우에게 크기변경 떠라
 
-    // (WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX)
+    //(WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX)
 
-    HWnd = CreateWindow("GameEngineWindowDefault", _TitleName.data(), WS_OVERLAPPEDWINDOW,
+    HWnd = CreateWindow("GameEngineWindowDefault", _TitleName.data(), (WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX),
         CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, _hInstance, nullptr);
 
     if (nullptr == HWnd)

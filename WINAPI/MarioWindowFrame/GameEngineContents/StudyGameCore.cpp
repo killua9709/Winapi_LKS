@@ -1,7 +1,7 @@
 #include "StudyGameCore.h"
 #include <GameEnginePlatform/GameEngineWindow.h>
 
-#include "PlayLevel.h"
+#include "TutorialLevel.h"
 #include "TitleLevel.h"
 
 // StudyGameCore StudyGameCore::Core = new StudyGameCore();
@@ -23,8 +23,8 @@ void StudyGameCore::Start()
 	// 정수의 연산 결과값은? 무조건 정수만 나옵니다.
 	// 실수 1.2 원한다면 
 	CreateLevel<TitleLevel>("TitleLevel");
-	CreateLevel<PlayLevel>("PlayLevel");
-	ChangeLevel("TitleLevel");
+	CreateLevel<TutorialLevel>("TutorialLevel");
+	ChangeLevel("TutorialLevel");
 }
 
 void StudyGameCore::Update()
