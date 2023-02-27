@@ -113,28 +113,36 @@ void Player::IdleStart()
 }
 void Player::IdleUpdate(float _DeltaTime)
 {
+	//만약 땅에 닿아 있지 않는 상태라면
+	if (false == IsGround())
+	{
+		ChangeState(PlayerState::Fall);
+		return;
+	}
+
 	//만약 땅과 닿아 있는 상태에서
-	if (true == IsGround() && (GameEngineInput::IsPress("UpMove")))
+	if (true == IsGround())
 	{
-		ChangeState(PlayerState::JUMP);
+		if (GameEngineInput::IsPress("UpMove"))
+		{
+			ChangeState(PlayerState::JUMP);
+			return;
+		}
+
+		//만약 오른쪽하고 왼쪽이 둘다 눌린다면
+		bool both = (true == GameEngineInput::IsPress("LeftMove")) && (true == GameEngineInput::IsPress("RightMove"));
+
+		if (both)
+		{
+			return; // 보통 스테이트를 체인지하면 아래 코드를 실행되면 
+		}
+		else if ((false == both) && ((true == GameEngineInput::IsPress("LeftMove")) || (true == GameEngineInput::IsPress("RightMove"))))
+		{	//둘다 눌리지 않았고 왼쪽 또는 오른쪽을 누른다면 
+
+			ChangeState(PlayerState::MOVE);
+			return;
+		}
 	}
-
-	//만약 오른쪽하고 왼쪽이 둘다 눌린다면
-	bool both = (true == GameEngineInput::IsPress("LeftMove")) && (true == GameEngineInput::IsPress("RightMove"));
-
-	if (both)
-	{
-		return; // 보통 스테이트를 체인지하면 아래 코드를 실행되면 
-	}
-	else if ((false == both) && ((true == GameEngineInput::IsPress("LeftMove")) || (true == GameEngineInput::IsPress("RightMove"))))
-	{	//둘다 눌리지 않았고 왼쪽 또는 오른쪽을 누른다면 
-
-		ChangeState(PlayerState::MOVE);
-	}
-
-	//만약 땅과 닿아 있지 않은 상태라면
-	//
-
 }
 void Player::IdleEnd()
 {
@@ -147,6 +155,11 @@ void Player::MoveStart()
 }
 void Player::MoveUpdate(float _DeltaTime)
 {
+	if (false == IsGround())
+	{
+		ChangeState(PlayerState::Fall);
+		return;
+	}
 	//둘다 안눌리거나 둘다 눌리면 아이들 상태로 돌아간다
 	if (
 		(false == GameEngineInput::IsPress("LeftMove") &&
@@ -190,19 +203,43 @@ void Player::JumpStart()
 	DirCheck("Jump");
 
 }
-float jumppowercount = 0;
 
+float jumppowercount = 0;
+float jumptime = 0;
 void Player::JumpUpdate(float _DeltaTime)
 {
 	if (jumppowercount < JumpPowerMax)
 	{
 		SetMove(float4::Up * JumpPower * _DeltaTime);
 		jumppowercount += JumpPower;
+
+		if (true == GameEngineInput::IsPress("UpMove"))
+		{
+			jumptime += _DeltaTime;
+		}
+
+		if (true == GameEngineInput::IsPress("UpMove") && jumptime > 0.15f)
+		{
+			JumpPowerMax = 12000.0f;
+		}
+
+		//왼쪽버튼 눌릴시
+		if (true == GameEngineInput::IsPress("LeftMove"))
+		{
+			SetMove(float4::Left * MoveSpeed * _DeltaTime);
+		}
+		//오른쪽버튼 눌릴시
+		else if (true == GameEngineInput::IsPress("RightMove"))
+		{
+			SetMove(float4::Right * MoveSpeed * _DeltaTime);
+		}
 	}
 	else
 	{
 		ChangeState(PlayerState::Fall);
 		jumppowercount = 0;
+		JumpPowerMax = 6000.0f;
+		jumptime = 0;
 		return;
 	}
 
@@ -227,6 +264,20 @@ void Player::FallUpdate(float _DeltaTime)
 		ChangeState(PlayerState::IDLE);
 		return;
 	}
+
+	//왼쪽버튼 눌릴시
+	if (true == GameEngineInput::IsPress("LeftMove"))
+	{
+		SetMove(float4::Left * MoveSpeed * _DeltaTime);
+	}
+	//오른쪽버튼 눌릴시
+	else if (true == GameEngineInput::IsPress("RightMove"))
+	{
+		SetMove(float4::Right * MoveSpeed * _DeltaTime);
+	}
+
+	DirCheck("Jump");
+
 }
 
 void Player::FallEnd()
