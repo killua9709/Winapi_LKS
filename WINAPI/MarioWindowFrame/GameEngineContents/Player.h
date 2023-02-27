@@ -53,6 +53,7 @@ private:
 	float MoveSpeed = 200.0f;
 	float JumpPower = 200.0f;
 	float JumpPowerMax = 6000.0f; //6000 //12000
+	float GravityPower = 200.0f;
 
 	std::string DirString = "Right_";
 	PlayerState StateValue = PlayerState::IDLE;
@@ -61,7 +62,6 @@ private:
 	GameEngineRender* AnimationRender = nullptr;
 	GameEngineCollision* BodyCollision = nullptr;
 	GameEngineImage* Collimage = nullptr;
-	bool IsGround();
 
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 
@@ -74,6 +74,7 @@ private:
 	void ChangeState(PlayerState _State);
 	void ChangeUpdateState(PlayerState _State, float _DeltaTime);
 	void UpdateState(float _DeltaTime);
+	void Gravity(float _DeltaTime);
 
 
 	// FSM 내가 어떤일을 할때 이동하면서 가만히 있을수 없다.
@@ -93,8 +94,7 @@ private:
 	void FallUpdate(float _DeltaTime);
 	void FallEnd();
 
-	void Movecalculation(float _DeltaTime);
-	bool IsGround(bool _isground);
+	bool IsGround();
 
 	int Value = 0;
 };

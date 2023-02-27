@@ -109,7 +109,7 @@ void TutorialLevel::Loading()
 	{
 		Wall* Actor = CreateActor<Wall>(BubbleRenderOrder::Map);
 		Actor->SetMove({ GameEngineWindow::GetScreenSize().x / 2 + 50,GameEngineWindow::GetScreenSize().y / 2 - 192 });
-		Actor->GetBodyCollision()->SetScale({ 25, 35 });
+		Actor->GetBodyCollision()->SetScale({ 1000, 35 });
 	}
 
 

@@ -61,71 +61,6 @@ void Player::Start()
 	ChangeState(PlayerState::IDLE);
 }
 
-
-bool Player::IsGround(bool _isground)
-{
-	return true;
-}
-
-void Player::Movecalculation(float _DeltaTime)
-{
-	MoveDir += float4::Down * 200.0f * _DeltaTime;
-
-	if (100.0f <= abs(MoveDir.x))
-	{
-		if (0 > MoveDir.x)
-		{
-			MoveDir.x = -100.0f;
-		}
-		else {
-			MoveDir.x = 100.0f;
-		}
-	}
-
-	if (false == GameEngineInput::IsPress("LeftMove") && false == GameEngineInput::IsPress("RightMove"))
-	{
-		MoveDir.x *= 0.01f;
-	}
-
-	///// 땅과의 충돌
-	// ColTutorialTutorialMap.BMP 이걸 변수로하면 
-	if (nullptr == Collimage)
-	{
-		MsgAssert("충돌용 맵 이미지가 없습니다.");
-	}
-
-
-	// 내 미래의 위치는 여기인데/.
-
-	bool Check = true;
-	float4 NextPos = GetPos() + MoveDir * _DeltaTime;
-
-	if (RGB(0, 0, 0) == Collimage->GetPixelColor(NextPos, RGB(0, 0, 0)))
-	{
-		Check = false;
-	}
-
-
-	if (false == Check)
-	{
-		while (true)
-		{
-			MoveDir.y -= 1;
-
-			NextPos = GetPos() + MoveDir * _DeltaTime;
-
-			if (RGB(0, 0, 0) == Collimage->GetPixelColor(NextPos, RGB(0, 0, 0))) // 계속 충돌이 되면 위로
-			{
-				continue;
-			}
-
-			break;
-		}
-	}
-
-	SetMove(MoveDir * _DeltaTime);
-}
-
 bool Player::IsGround()
 {
 	std::vector<GameEngineCollision*> Collision;
@@ -217,7 +152,6 @@ void Player::Update(float _DeltaTime)
 	}
 
 	UpdateState(_DeltaTime);
-	//Movecalculation(_DeltaTime);
 }
 
 void Player::DirCheck(const std::string_view& _AnimationName)

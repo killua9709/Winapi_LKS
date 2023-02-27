@@ -100,6 +100,11 @@ void Player::UpdateState(float _DeltaTime)
 
 }
 
+void Player::Gravity(float _DeltaTime)
+{
+	SetMove({ 0, GravityPower * _DeltaTime });
+}
+
 
 // FSM 내가 어떤일을 할때 이동하면서 가만히 있을수 없다.
 void Player::IdleStart()
@@ -158,6 +163,7 @@ void Player::MoveUpdate(float _DeltaTime)
 	if (true == IsGround() && (GameEngineInput::IsPress("UpMove")))
 	{
 		ChangeState(PlayerState::JUMP);
+		return;
 	}
 
 	//왼쪽버튼 눌릴시
@@ -195,17 +201,10 @@ void Player::JumpUpdate(float _DeltaTime)
 	}
 	else
 	{
-		ChangeState(PlayerState::IDLE);
+		ChangeState(PlayerState::Fall);
 		jumppowercount = 0;
+		return;
 	}
-
-
-
-	/*if (true == IsGround())
-	{
-		ChangeState(PlayerState::IDLE);
-	}*/
-	//만약 땅과 닿았다면...
 
 	DirCheck("Jump");
 }
@@ -221,7 +220,13 @@ void Player::FallStart()
 
 void Player::FallUpdate(float _DeltaTime)
 {
+	Gravity(_DeltaTime);
 
+	if (true == IsGround())
+	{
+		ChangeState(PlayerState::IDLE);
+		return;
+	}
 }
 
 void Player::FallEnd()
