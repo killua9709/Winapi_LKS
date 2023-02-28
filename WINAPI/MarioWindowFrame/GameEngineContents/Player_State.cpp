@@ -5,6 +5,7 @@
 #include <GameEngineCore/GameEngineResources.h>
 #include <GameEngineCore/GameEngineRender.h>
 #include <GameEngineCore/GameEngineLevel.h>
+#include <GameEngineBase/GameEngineTime.h>
 
 #include "ContentsEnums.h"
 
@@ -218,9 +219,12 @@ void Player::JumpStart()
 
 void Player::JumpUpdate(float _DeltaTime)
 {
+	//점프파워카운트가 지정해둔 점프파워맥스보다 작다면 위로 이동시킨다.
 	if (jumppowercount < JumpPowerMax)
 	{
 		SetMove(float4::Up * JumpPower * _DeltaTime);
+
+		//점프파워를 점프파워 카운트에 더한다 // 어느정도까지 계속 점프가 되야 하기 때문에
 		jumppowercount += JumpPower;
 
 		if (true == GameEngineInput::IsPress("UpMove"))

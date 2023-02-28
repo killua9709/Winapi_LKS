@@ -2,7 +2,6 @@
 #include <GameEngineBase/GameEngineDebug.h>
 #include <GameEnginePlatform/GameEngineImage.h>
 #include "GameEngineInput.h"
-#include "resource.h"
 
 // LRESULT(CALLBACK* WNDPROC)(HWND, UINT, WPARAM, LPARAM)
 
@@ -164,7 +163,7 @@ void GameEngineWindow::WindowCreate(HINSTANCE _hInstance, const std::string_view
     wcex.cbWndExtra = 0;
     wcex.hInstance = _hInstance;
     // 넣어주지 않으면 윈도우 기본Icon이 됩니다.
-    wcex.hIcon = LoadIcon(_hInstance, MAKEINTRESOURCE(IDI_ICON1));
+    wcex.hIcon = LoadIcon(_hInstance, NULL);
     wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1); // 흰색 
     wcex.lpszMenuName = nullptr;//MAKEINTRESOURCEW(IDC_WINDOWSPROJECT1);

@@ -171,7 +171,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="resource.h" />
     <ClInclude Include="ThirdParty\FMOD\inc\fmod.h" />
     <ClInclude Include="ThirdParty\FMOD\inc\fmod.hpp" />
     <ClInclude Include="ThirdParty\FMOD\inc\fmod_codec.h" />
@@ -231,12 +230,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </Library>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="GameEnginePlatform.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\아이콘.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
