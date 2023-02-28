@@ -132,6 +132,7 @@ bool Player::FreeMoveState(float _DeltaTime)
 //플레이어 업데이트
 void Player::Update(float _DeltaTime) 
 {
+
 	if (nullptr != BodyCollision)	//몬스터 오더를 들고 있는 충돌체와 플레이어의 충돌체 처리
 	{
 		std::vector<GameEngineCollision*> Collision;
@@ -146,14 +147,15 @@ void Player::Update(float _DeltaTime)
 	}
 
 	if (nullptr != BodyCollision)	//벽과 부딪히면 처리하기
-	{
+	{								//미래 위치에서 어느 방향에서 벽과 박았다면 그 위치를 기반으로 상태를 정의한다?
 		std::vector<GameEngineCollision*> Collision;
 		if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision))
 		{
 			for (size_t i = 0; i < Collision.size(); i++)
 			{
-				GameEngineActor* ColActor = Collision[i]->GetActor();
+				//부딪힌 벽이 있다면 그 벽의 top으로 y좌표를 옮김
 				SetPos({GetPos().x,Collision[i]->GetCollisionData().Top()});
+
 			}
 		}
 	}

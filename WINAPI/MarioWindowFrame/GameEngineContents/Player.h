@@ -62,7 +62,8 @@ private:
 	float jumptime = 0;
 	bool jumpsoundchange = false;
 
-	//
+	//미래위치
+	float4 CheckPos = { float4::Zero };
 
 	std::string DirString = "Right_";
 	PlayerState StateValue = PlayerState::IDLE;
