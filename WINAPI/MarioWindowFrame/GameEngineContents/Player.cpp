@@ -60,6 +60,22 @@ void Player::Start()
 		BodyCollision = CreateCollision(GameCollisionOrder::Player);
 		BodyCollision->SetScale({ 25, 35 });
 		BodyCollision->SetPosition({ 0,-17 });
+
+		LeftCollision = CreateCollision(GameCollisionOrder::Player);
+		LeftCollision->SetScale({ 10, 30 });
+		LeftCollision->SetPosition({ -10,-17});
+
+		RightCollision = CreateCollision(GameCollisionOrder::Player);
+		RightCollision->SetScale({ 10, 30 });
+		RightCollision->SetPosition({ 10,-17});
+
+		UpCollision = CreateCollision(GameCollisionOrder::Player);
+		UpCollision->SetScale({ 25, 1 });
+		UpCollision->SetPosition({ 0, -36 });
+
+		DownCollision = CreateCollision(GameCollisionOrder::Player);
+		DownCollision->SetScale({ 1, 1 });
+		DownCollision->SetPosition({ 0, 0 });
 	}
 
 	//플레이어 사운드
@@ -78,7 +94,7 @@ void Player::Start()
 bool Player::IsGround()
 {
 	std::vector<GameEngineCollision*> Collision;
-	return (BodyCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision));
+	return (DownCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision));
 }
 
 //똑같은 하나의 플레이어를 위해
@@ -149,7 +165,7 @@ void Player::Update(float _DeltaTime)
 	if (nullptr != BodyCollision)	//벽과 부딪히면 처리하기
 	{								//미래 위치에서 어느 방향에서 벽과 박았다면 그 위치를 기반으로 상태를 정의한다?
 		std::vector<GameEngineCollision*> Collision;
-		if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision))
+		if (true == DownCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision))
 		{
 			for (size_t i = 0; i < Collision.size(); i++)
 			{

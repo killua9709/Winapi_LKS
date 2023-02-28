@@ -68,7 +68,7 @@ public:
 protected:
 
 private:
-	CollisionType DebugRenderType = CollisionType::CT_CirCle;
+	CollisionType DebugRenderType = CollisionType::CT_Rect;
 
 };
 

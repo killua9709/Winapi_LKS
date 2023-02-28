@@ -54,7 +54,7 @@ private:
 	int StartFrame = 0;
 	float MoveSpeed = 200.0f;
 	float JumpPower = 300.0f;
-	float JumpPowerMax = 8000.0f; //8000 //16000
+	float JumpPowerMax = 50.0f; //8000 //16000
 	float GravityPower = 200.0f;
 
 	//점프관련
@@ -70,7 +70,15 @@ private:
 	float4 MoveDir = float4::Zero;
 
 	GameEngineRender* AnimationRender = nullptr;
+
+	/////플레이어 충돌체
 	GameEngineCollision* BodyCollision = nullptr;
+	GameEngineCollision* LeftCollision = nullptr;
+	GameEngineCollision* RightCollision = nullptr;
+	GameEngineCollision* UpCollision = nullptr;
+	GameEngineCollision* DownCollision = nullptr;
+	//////
+
 	GameEngineImage* Collimage = nullptr;
 	GameEngineSoundPlayer JumpSoundPlayer;
 

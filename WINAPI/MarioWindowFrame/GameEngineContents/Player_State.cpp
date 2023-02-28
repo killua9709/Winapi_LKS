@@ -6,6 +6,7 @@
 #include <GameEngineCore/GameEngineRender.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineTime.h>
+#include <GameEngineCore/GameEngineCollision.h>
 
 #include "ContentsEnums.h"
 
@@ -183,12 +184,18 @@ void Player::MoveUpdate(float _DeltaTime)
 	//왼쪽버튼 눌릴시
 	if (true == GameEngineInput::IsPress("LeftMove"))
 	{
-		SetMove(float4::Left * MoveSpeed * _DeltaTime);
+		if (false == LeftCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
+		{
+			 SetMove(float4::Left * MoveSpeed * _DeltaTime);
+		}
 	}
 	//오른쪽버튼 눌릴시
 	else if (true == GameEngineInput::IsPress("RightMove"))
 	{
-		SetMove(float4::Right * MoveSpeed * _DeltaTime);
+		if (false == RightCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
+		{
+			SetMove(float4::Right * MoveSpeed * _DeltaTime);
+		}
 	}
 
 
@@ -225,7 +232,7 @@ void Player::JumpUpdate(float _DeltaTime)
 		SetMove(float4::Up * JumpPower * _DeltaTime);
 
 		//점프파워를 점프파워 카운트에 더한다 // 어느정도까지 계속 점프가 되야 하기 때문에
-		jumppowercount += JumpPower;
+		jumppowercount += JumpPower * _DeltaTime;
 
 		if (true == GameEngineInput::IsPress("UpMove"))
 		{
@@ -234,18 +241,24 @@ void Player::JumpUpdate(float _DeltaTime)
 
 		if (true == GameEngineInput::IsPress("UpMove") && jumptime > 0.12f)
 		{
-			JumpPowerMax = 16000.0f;
+			JumpPowerMax = 80.0f;
 		}
 
 		//왼쪽버튼 눌릴시
 		if (true == GameEngineInput::IsPress("LeftMove"))
 		{
-			SetMove(float4::Left * MoveSpeed * _DeltaTime);
+			if (false == LeftCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
+			{
+				SetMove(float4::Left * MoveSpeed * _DeltaTime);
+			}
 		}
 		//오른쪽버튼 눌릴시
 		else if (true == GameEngineInput::IsPress("RightMove"))
 		{
-			SetMove(float4::Right * MoveSpeed * _DeltaTime);
+			if (false == RightCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
+			{
+				SetMove(float4::Right * MoveSpeed * _DeltaTime);
+			}
 		}
 	}
 	else
@@ -260,7 +273,7 @@ void Player::JumpUpdate(float _DeltaTime)
 void Player::JumpEnd()
 {
 	jumppowercount = 0;
-	JumpPowerMax = 8000.0f;
+	JumpPowerMax = 50.0f;
 	jumptime = 0;
 	jumpsoundchange = !jumpsoundchange;
 }
