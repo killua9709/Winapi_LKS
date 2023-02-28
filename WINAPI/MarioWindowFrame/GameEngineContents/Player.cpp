@@ -155,7 +155,6 @@ void Player::Update(float _DeltaTime)
 			{
 				//ºÎµúÈù º®ÀÌ ÀÖ´Ù¸é ±× º®ÀÇ topÀ¸·Î yÁÂÇ¥¸¦ ¿Å±è
 				SetPos({GetPos().x,Collision[i]->GetCollisionData().Top()});
-
 			}
 		}
 	}

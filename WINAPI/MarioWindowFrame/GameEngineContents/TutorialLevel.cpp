@@ -111,6 +111,10 @@ void TutorialLevel::Loading()
 		Wall* Actor2 = CreateActor<Wall>(GameRenderOrder::Map);
 		Actor2->SetMove({ GameEngineWindow::GetScreenSize().x / 2 + 50,GameEngineWindow::GetScreenSize().y / 2 - 192});
 		Actor2->GetBodyCollision()->SetScale({ 40, 70 });
+
+		Wall* Actor3 = CreateActor<Wall>(GameRenderOrder::Map);
+		Actor3->SetMove({ GameEngineWindow::GetScreenSize().x / 2 - 150 + 50,GameEngineWindow::GetScreenSize().y / 2 - 192 });
+		Actor3->GetBodyCollision()->SetScale({ 40, 140 });
 	}
 
 
