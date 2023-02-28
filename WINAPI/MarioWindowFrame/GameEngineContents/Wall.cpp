@@ -18,7 +18,7 @@ Wall::~Wall()
 
 void Wall::Start()
 {
-	BodyCollision = CreateCollision(BubbleCollisionOrder::Wall);
+	BodyCollision = CreateCollision(GameCollisionOrder::Wall);
 }
 
 void Wall::Render(float _Time)

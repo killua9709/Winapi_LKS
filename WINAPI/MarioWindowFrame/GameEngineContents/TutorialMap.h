@@ -31,9 +31,9 @@ protected:
 private:
 	bool IsStageClear = false;
 
-	GameEngineRender* BackGroundRender;
-	GameEngineRender* TutorialMapRender0;
-	GameEngineRender* TutorialMapRender1;
+	GameEngineRender* BackGroundRender = NULL;
+	GameEngineRender* TutorialMapRender0 = NULL;
+	GameEngineRender* TutorialMapRender1 = NULL;
 
 };
 

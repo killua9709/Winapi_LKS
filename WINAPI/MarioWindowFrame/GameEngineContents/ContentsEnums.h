@@ -1,6 +1,6 @@
 #pragma once
 
-enum class BubbleRenderOrder
+enum class GameRenderOrder
 {
 	BackGround,
 	Map,
@@ -9,7 +9,7 @@ enum class BubbleRenderOrder
 	Cursor
 };
 
-enum class BubbleCollisionOrder
+enum class GameCollisionOrder
 {
 	Player,
 	Monster,

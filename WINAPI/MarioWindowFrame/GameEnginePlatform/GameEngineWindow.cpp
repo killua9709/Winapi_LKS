@@ -107,7 +107,7 @@ void GameEngineWindow::WindowContract()
 
         SettingWindowSize({ sizex ,sizey});
 
-        Sleep(0.025);
+        Sleep((DWORD)0.025);
     }
     
 }
@@ -118,8 +118,8 @@ void GameEngineWindow::WindowExpand()
     bool ycheck = false;
     float b = 1.0f;
     float c = 1.0f;
-    int screensizex = ScreenSize.x;
-    int screensizey = ScreenSize.y;
+    float screensizex = ScreenSize.x;
+    float screensizey = ScreenSize.y;
 
     while ((true != xcheck) || (true != ycheck))
     {
@@ -145,7 +145,7 @@ void GameEngineWindow::WindowExpand()
 
         SettingWindowSize({ b , c });
 
-        Sleep(0.025);
+        Sleep((DWORD)0.025);
     }
 
 }

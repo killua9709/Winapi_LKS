@@ -201,11 +201,21 @@ void Player::MoveEnd()
 void Player::JumpStart()
 {
 	DirCheck("Jump");
-
+	if (false == jumpsoundchange)
+	{
+		JumpSoundPlayer = GameEngineResources::GetInst().SoundPlayToControl("jump1.wav");
+		JumpSoundPlayer.LoopCount(1);
+		JumpSoundPlayer.Volume(0.2f);
+	}
+	else
+	{
+		JumpSoundPlayer = GameEngineResources::GetInst().SoundPlayToControl("jump2.wav");
+		JumpSoundPlayer.LoopCount(1);
+		JumpSoundPlayer.Volume(0.2f);
+	}
 }
 
-float jumppowercount = 0;
-float jumptime = 0;
+
 void Player::JumpUpdate(float _DeltaTime)
 {
 	if (jumppowercount < JumpPowerMax)
@@ -218,9 +228,9 @@ void Player::JumpUpdate(float _DeltaTime)
 			jumptime += _DeltaTime;
 		}
 
-		if (true == GameEngineInput::IsPress("UpMove") && jumptime > 0.15f)
+		if (true == GameEngineInput::IsPress("UpMove") && jumptime > 0.12f)
 		{
-			JumpPowerMax = 12000.0f;
+			JumpPowerMax = 16000.0f;
 		}
 
 		//왼쪽버튼 눌릴시
@@ -237,9 +247,7 @@ void Player::JumpUpdate(float _DeltaTime)
 	else
 	{
 		ChangeState(PlayerState::Fall);
-		jumppowercount = 0;
-		JumpPowerMax = 6000.0f;
-		jumptime = 0;
+		
 		return;
 	}
 
@@ -247,7 +255,10 @@ void Player::JumpUpdate(float _DeltaTime)
 }
 void Player::JumpEnd()
 {
-
+	jumppowercount = 0;
+	JumpPowerMax = 8000.0f;
+	jumptime = 0;
+	jumpsoundchange = !jumpsoundchange;
 }
 
 void Player::FallStart()

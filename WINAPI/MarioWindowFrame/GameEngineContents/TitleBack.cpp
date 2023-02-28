@@ -26,7 +26,7 @@ void TitleBack::Start()
 
 	{
 		GameEngineWindow::SettingWindowSize({ 205,205 });
-		GameEngineRender* Render = CreateRender("·Î°í.bmp", BubbleRenderOrder::BackGround);
+		GameEngineRender* Render = CreateRender("·Î°í.bmp", GameRenderOrder::BackGround);
 		Render->SetPosition(GameEngineWindow::GetScreenSize().half());
 		Render->SetScale(GameEngineWindow::GetScreenSize());
 	}
@@ -57,7 +57,7 @@ void TitleBack::Update(float _DeltaTime)
 		GameEngineWindow::WindowContract();
 		GameEngineWindow::SettingWindowSize({ 262,70 });
 		GameEngineWindow::WindowExpand();
-		GameEngineRender* Render = CreateRender("title.bmp", BubbleRenderOrder::BackGround);
+		GameEngineRender* Render = CreateRender("title.bmp", GameRenderOrder::BackGround);
 		Render->SetPosition(GameEngineWindow::GetScreenSize().half());
 		Render->SetScale(GameEngineWindow::GetScreenSize());
 		page2 = true;
@@ -72,7 +72,7 @@ void TitleBack::Update(float _DeltaTime)
 		GameEngineWindow::WindowContract();
 		GameEngineWindow::SettingWindowSize({ 391,391 });
 		GameEngineWindow::WindowExpand();
-		GameEngineRender* Render = CreateRender("Å°ÁÂÆÇ.bmp", BubbleRenderOrder::BackGround);
+		GameEngineRender* Render = CreateRender("Å°ÁÂÆÇ.bmp", GameRenderOrder::BackGround);
 		Render->SetPosition(GameEngineWindow::GetScreenSize().half());
 		Render->SetScale(GameEngineWindow::GetScreenSize());
 		page3 = true;

@@ -18,7 +18,7 @@ MouseObject::~MouseObject()
 
 void MouseObject::Start() 
 {
-	MouseRender = CreateRender("커서.bmp", BubbleRenderOrder::Cursor);
+	MouseRender = CreateRender("커서.bmp", GameRenderOrder::Cursor);
 	MouseRender->SetScaleToImage();
 	MouseCollision = CreateCollision();
 

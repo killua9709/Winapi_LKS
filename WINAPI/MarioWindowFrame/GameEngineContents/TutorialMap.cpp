@@ -21,14 +21,14 @@ void TutorialMap::Start()
 		// float4 Scree = GameEngineWindow::GetScreenSize();
 
 		{
-			BackGroundRender = CreateRender(BubbleRenderOrder::BackGround);
+			BackGroundRender = CreateRender(GameRenderOrder::BackGround);
 			BackGroundRender->SetPosition(GameEngineWindow::GetScreenSize().half());
 			BackGroundRender->SetScale(GameEngineWindow::GetScreenSize());
 			BackGroundRender->SetImage("¹è°æ.Bmp");
 		}
 
 		{
-			TutorialMapRender0 = CreateRender(BubbleRenderOrder::Map);
+			TutorialMapRender0 = CreateRender(GameRenderOrder::Map);
 			TutorialMapRender0->SetImage("½ÃÀÛ¸Ê.Bmp");
 			TutorialMapRender0->SetPosition(TutorialMapRender0->GetImage()->GetImageScale().half());
 			TutorialMapRender0->SetScaleToImage();

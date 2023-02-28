@@ -1,6 +1,8 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
 #include <GameEngineCore/NumberRenderObject.h>
+#include <GameEngineCore/GameEngineResources.h>
+
 
 enum class PlayerState
 {
@@ -51,9 +53,16 @@ private:
 	float AccTime = 0.0f;
 	int StartFrame = 0;
 	float MoveSpeed = 200.0f;
-	float JumpPower = 200.0f;
-	float JumpPowerMax = 6000.0f; //6000 //12000
+	float JumpPower = 300.0f;
+	float JumpPowerMax = 8000.0f; //8000 //16000
 	float GravityPower = 200.0f;
+
+	//점프관련
+	float jumppowercount = 0;
+	float jumptime = 0;
+	bool jumpsoundchange = false;
+
+	//
 
 	std::string DirString = "Right_";
 	PlayerState StateValue = PlayerState::IDLE;
@@ -62,6 +71,7 @@ private:
 	GameEngineRender* AnimationRender = nullptr;
 	GameEngineCollision* BodyCollision = nullptr;
 	GameEngineImage* Collimage = nullptr;
+	GameEngineSoundPlayer JumpSoundPlayer;
 
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 

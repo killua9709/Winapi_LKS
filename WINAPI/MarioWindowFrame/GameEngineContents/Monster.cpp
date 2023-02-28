@@ -16,7 +16,7 @@ Monster::~Monster()
 
 void Monster::Start() 
 {
-	AnimationRender = CreateRender(BubbleRenderOrder::Monster);
+	AnimationRender = CreateRender(GameCollisionOrder::Monster);
 	AnimationRender->SetScale({ 200, 200 });
 
 	AnimationRender->CreateAnimation({ .AnimationName = "Right_Idle",  .ImageName = "Right_Player.bmp", .Start = 0, .End = 2, .InterTime = 0.3f });
@@ -27,7 +27,7 @@ void Monster::Start()
 	AnimationRender->ChangeAnimation("Right_Idle");
 
 	{
-		BodyCollision = CreateCollision(BubbleCollisionOrder::Monster);
+		BodyCollision = CreateCollision(GameCollisionOrder::Monster);
 		BodyCollision->SetScale({ 50, 50 });
 		BodyCollision->Off();
 	}
@@ -41,13 +41,13 @@ void Monster::Update(float _DeltaTime)
 	Dir.Normalize();
 	SetMove(Dir * 200.0f * _DeltaTime);
 
-	//if (true == BodyCollision->Collision({.TargetGroup = static_cast<int>(BubbleCollisionOrder::Player)}))
+	//if (true == BodyCollision->Collision({.TargetGroup = static_cast<int>(GameCollisionOrder::Player)}))
 	//{
 	//	int a = 0;
 	//}
 
 	//std::vector<GameEngineCollision*> Collision;
-	//if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(BubbleCollisionOrder::Player) }, Collision))
+	//if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Player) }, Collision))
 	//{
 	//	for (size_t i = 0; i < Collision.size(); i++)
 	//	{
@@ -60,7 +60,7 @@ void Monster::Update(float _DeltaTime)
 	//	}
 	//}
 
-	//std::vector<GameEngineActor*> Actors = GetLevel()->GetActors(BubbleRenderOrder::Player);
+	//std::vector<GameEngineActor*> Actors = GetLevel()->GetActors(GameRenderOrder::Player);
 
 	//for (size_t i = 0; i < Actors.size(); i++)
 	//{

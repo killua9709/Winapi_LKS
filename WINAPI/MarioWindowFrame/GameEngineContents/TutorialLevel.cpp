@@ -36,12 +36,9 @@ void TutorialLevel::SoundLoad()
 	Dir.Move("ContentsResources");
 	Dir.Move("Sound");
 
-	{
-		//GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("BGMTest.mp3"));
-	}
-
-	// GameEngineResources::GetInst().SoundPlay("Appear.wav");
-
+	
+	GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("stage1backgroundsound.mp3"));
+	
 }
 void TutorialLevel::ImageLoad()
 {
@@ -89,7 +86,7 @@ void TutorialLevel::Loading()
 	}
 	//플레이어
 	{
-		Player* Actor = CreateActor<Player>(BubbleRenderOrder::Player);
+		Player* Actor = CreateActor<Player>(GameRenderOrder::Player);
 		Actor->SetMove({GameEngineWindow::GetScreenSize().x/2,GameEngineWindow::GetScreenSize().y / 2-190});
 		Actor->SetCollimage( GameEngineResources::GetInst().ImageFind("ColMap.BMP"));	//충돌 이미지 설정
 
@@ -99,7 +96,7 @@ void TutorialLevel::Loading()
 		srand(static_cast<unsigned int>(time(nullptr)));
 		for (size_t i = 0; i < 0; i++)
 		{
-			Monster* Actor = CreateActor<Monster>(BubbleRenderOrder::Monster);
+			Monster* Actor = CreateActor<Monster>(GameRenderOrder::Monster);
 			Actor->SetMove(
 				float4(static_cast<float>(rand() % GameEngineWindow::GetScreenSize().ix()), static_cast<float>(rand() % GameEngineWindow::GetScreenSize().iy()))
 			);
@@ -107,11 +104,11 @@ void TutorialLevel::Loading()
 	}
 	//벽
 	{
-		Wall* Actor = CreateActor<Wall>(BubbleRenderOrder::Map);
+		Wall* Actor = CreateActor<Wall>(GameRenderOrder::Map);
 		Actor->SetMove({ GameEngineWindow::GetScreenSize().x / 2 + 50,GameEngineWindow::GetScreenSize().y / 2 - 192 });
 		Actor->GetBodyCollision()->SetScale({ 1000, 35 });
 
-		Wall* Actor2 = CreateActor<Wall>(BubbleRenderOrder::Map);
+		Wall* Actor2 = CreateActor<Wall>(GameRenderOrder::Map);
 		Actor2->SetMove({ GameEngineWindow::GetScreenSize().x / 2 + 50,GameEngineWindow::GetScreenSize().y / 2 - 192});
 		Actor2->GetBodyCollision()->SetScale({ 40, 70 });
 	}
@@ -157,9 +154,8 @@ void TutorialLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	int screenWidth = GetSystemMetrics(SM_CXSCREEN);
 	int screenHeight = GetSystemMetrics(SM_CYSCREEN);
-	//BGMPlayer = GameEngineResources::GetInst().SoundPlayToControl("BGMTest.mp3");
-	//BGMPlayer.LoopCount(100);
-	//// BGMPlayer.Volume(0.2f);
+	BGMPlayer = GameEngineResources::GetInst().SoundPlayToControl("stage1backgroundsound.mp3");
+	BGMPlayer.Volume(0.1f);
 	GameEngineWindow::SettingWindowSize({ 1280,720 });
-	GameEngineWindow::WindowExpand();
+	//GameEngineWindow::WindowExpand();
 }

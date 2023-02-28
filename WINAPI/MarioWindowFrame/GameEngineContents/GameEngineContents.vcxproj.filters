@@ -21,20 +21,20 @@
     <ClInclude Include="ContentsValue.h">
       <Filter>Global</Filter>
     </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>Play\GlobalActors</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Play\GlobalActors</Filter>
-    </ClInclude>
     <ClInclude Include="TutorialLevel.h">
       <Filter>Play\Tutorial</Filter>
     </ClInclude>
     <ClInclude Include="TutorialMap.h">
       <Filter>Play\Tutorial</Filter>
     </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>GlobalActors\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>GlobalActors\Player</Filter>
+    </ClInclude>
     <ClInclude Include="Wall.h">
-      <Filter>Play\GlobalActors</Filter>
+      <Filter>GlobalActors\Wall</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -57,23 +57,23 @@
     <ClCompile Include="ContentsValue.cpp">
       <Filter>Global</Filter>
     </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>Play\GlobalActors</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Play\GlobalActors</Filter>
-    </ClCompile>
-    <ClCompile Include="Player_State.cpp">
-      <Filter>Play\GlobalActors</Filter>
-    </ClCompile>
     <ClCompile Include="TutorialLevel.cpp">
       <Filter>Play\Tutorial</Filter>
     </ClCompile>
     <ClCompile Include="TutorialMap.cpp">
       <Filter>Play\Tutorial</Filter>
     </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>GlobalActors\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>GlobalActors\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_State.cpp">
+      <Filter>GlobalActors\Player</Filter>
+    </ClCompile>
     <ClCompile Include="Wall.cpp">
-      <Filter>Play\GlobalActors</Filter>
+      <Filter>GlobalActors\Wall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -89,8 +89,17 @@
     <Filter Include="Play\Tutorial">
       <UniqueIdentifier>{1cf26b95-e92b-424f-bebf-4610327018ea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Play\GlobalActors">
+    <Filter Include="GlobalActors">
       <UniqueIdentifier>{73ad97ed-6132-495b-bacc-063174fbcc12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GlobalActors\Monster">
+      <UniqueIdentifier>{455b66e6-6054-415b-a301-3865c22eae2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GlobalActors\Wall">
+      <UniqueIdentifier>{b1f35f6e-da1b-4101-83e5-27d0011e2fb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GlobalActors\Player">
+      <UniqueIdentifier>{29cd20ce-9f50-4682-b89a-724333df81c5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
