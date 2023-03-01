@@ -39,6 +39,12 @@ void Player::ChangeState(PlayerState _State)
 	case PlayerState::RightWallJump:
 		RightWallJumpStart();
 		break;
+	case PlayerState::LeftWallJumping:
+		LeftWallJumpingStart();
+		break;
+	case PlayerState::RightWallJumping:
+		RightWallJumpingStart();
+		break;
 	default:
 		break;
 	}
@@ -63,42 +69,16 @@ void Player::ChangeState(PlayerState _State)
 	case PlayerState::RightWallJump:
 		RightWallJumpEnd();
 		break;
-	default:
+	case PlayerState::LeftWallJumping:
+		LeftWallJumpingEnd();
 		break;
-	}
-
-}
-
-void Player::ChangeUpdateState(PlayerState _State, float _DeltaTime)
-{
-	StateValue = _State;
-
-	switch (StateValue)
-	{
-	case PlayerState::IDLE:
-		IdleUpdate(_DeltaTime);
-		break;
-	case PlayerState::MOVE:
-		MoveUpdate(_DeltaTime);
-		break;
-	case PlayerState::JUMP:
-		JumpUpdate(_DeltaTime);
-		break;
-	case PlayerState::Attack:
-		//AttackUpdate(_DeltaTime);
-		break;
-	case PlayerState::Fall:
-		FallUpdate(_DeltaTime);
-		break;
-	case PlayerState::LeftWallJump:
-		LeftWallJumpUpdate(_DeltaTime);
-		break;
-	case PlayerState::RightWallJump:
-		RightWallJumpUpdate(_DeltaTime);
+	case PlayerState::RightWallJumping:
+		RightWallJumpingEnd();
 		break;
 	default:
 		break;
 	}
+
 }
 
 void Player::UpdateState(float _DeltaTime)
@@ -122,6 +102,12 @@ void Player::UpdateState(float _DeltaTime)
 		break;
 	case PlayerState::RightWallJump:
 		RightWallJumpUpdate(_DeltaTime);
+		break;
+	case PlayerState::LeftWallJumping:
+		LeftWallJumpingUpdate(_DeltaTime);
+		break;
+	case PlayerState::RightWallJumping:
+		RightWallJumpingUpdate(_DeltaTime);
 		break;
 	default:
 		break;
@@ -256,6 +242,12 @@ void Player::JumpStart()
 
 void Player::JumpUpdate(float _DeltaTime)
 {
+	if (true == IsUpWall())
+	{
+		ChangeState(PlayerState::IDLE);
+		return;
+	}
+
 	if (true == IsLeftWall())
 	{
 		DirString = "Left_";
@@ -312,11 +304,6 @@ void Player::JumpUpdate(float _DeltaTime)
 		ChangeState(PlayerState::Fall);
 		
 		return;
-	}
-
-	if (true == IsUpWall())
-	{
-		ChangeState(PlayerState::IDLE);
 	}
 
 	DirCheck("Jump");
@@ -396,7 +383,8 @@ void Player::LeftWallJumpUpdate(float _DeltaTime)
 	//벽을 잡고 있는 중에 다시 윗키를 누르면
 	if (true == GameEngineInput::IsDown("UpMove"))
 	{
-
+		ChangeState(PlayerState::LeftWallJumping);
+		return;
 	}
 
 	//오른쪽키 누르면 이동
@@ -440,7 +428,7 @@ void Player::LeftWallJumpUpdate(float _DeltaTime)
 			UpdateState(_DeltaTime);
 			return;
 		}
-		if (true == GameEngineInput::IsDown("LeftMove"))
+		if (true == GameEngineInput::IsPress("LeftMove"))
 		{
 			SoftGravity(_DeltaTime);
 		}
@@ -480,7 +468,8 @@ void Player::RightWallJumpUpdate(float _DeltaTime)
 	//벽을 잡고 있는 중에 다시 윗키를 누르면
 	if (true == GameEngineInput::IsDown("UpMove"))
 	{
-
+		ChangeState(PlayerState::RightWallJumping);
+		return;
 	}
 
 	//왼쪽키 누르면 이동
@@ -523,7 +512,7 @@ void Player::RightWallJumpUpdate(float _DeltaTime)
 			UpdateState(_DeltaTime);
 			return;
 		}
-		if (true == GameEngineInput::IsDown("RightMove"))
+		if (true == GameEngineInput::IsPress("RightMove"))
 		{
 			SoftGravity(_DeltaTime);
 		}
@@ -550,6 +539,152 @@ void Player::RightWallJumpUpdate(float _DeltaTime)
 void Player::RightWallJumpEnd()
 {
 	
+}
+
+void Player::LeftWallJumpingStart()
+{
+	jumppowercount = 0;
+	JumpPowerMax = 50.0f;
+	jumptime = 0;
+	jumpsoundchange = !jumpsoundchange;
+
+	if (false == jumpsoundchange)
+	{
+		JumpSoundPlayer = GameEngineResources::GetInst().SoundPlayToControl("jump1.wav");
+		JumpSoundPlayer.LoopCount(1);
+		JumpSoundPlayer.Volume(0.2f);
+	}
+	else
+	{
+		JumpSoundPlayer = GameEngineResources::GetInst().SoundPlayToControl("jump2.wav");
+		JumpSoundPlayer.LoopCount(1);
+		JumpSoundPlayer.Volume(0.2f);
+	}
+
+	DirCheck("Jump");
+}
+
+void Player::LeftWallJumpingUpdate(float _DeltaTime)
+{
+	if (true == IsUpWall())
+	{
+		ChangeState(PlayerState::IDLE);
+		return;
+	}
+
+	if (true == IsGround())
+	{
+		ChangeState(PlayerState::IDLE);
+		return;
+	}
+
+	if (true == IsRightWall())
+	{
+		ChangeState(PlayerState::RightWallJump);
+		return;
+	}
+
+	if (jumppowercount < JumpPowerMax)
+	{
+		DirString = "Right_";
+		SetMove({ float4::Right * MoveSpeed*2 * _DeltaTime });
+		SetMove({ float4::Up * JumpPower * _DeltaTime });
+
+		jumppowercount += JumpPower * _DeltaTime;
+	}
+	else
+	{
+		if (jumptime < 0.1f)
+		{
+			jumptime += _DeltaTime;
+			Gravity(_DeltaTime);
+		}
+		else
+		{
+			ChangeState(PlayerState::Fall);
+			return;
+		}
+	}
+	
+	DirCheck("Jump");
+}
+
+void Player::LeftWallJumpingEnd()
+{
+
+}
+
+void Player::RightWallJumpingStart()
+{
+	jumppowercount = 0;
+	JumpPowerMax = 50.0f;
+	jumptime = 0;
+	jumpsoundchange = !jumpsoundchange;
+
+	if (false == jumpsoundchange)
+	{
+		JumpSoundPlayer = GameEngineResources::GetInst().SoundPlayToControl("jump1.wav");
+		JumpSoundPlayer.LoopCount(1);
+		JumpSoundPlayer.Volume(0.2f);
+	}
+	else
+	{
+		JumpSoundPlayer = GameEngineResources::GetInst().SoundPlayToControl("jump2.wav");
+		JumpSoundPlayer.LoopCount(1);
+		JumpSoundPlayer.Volume(0.2f);
+	}
+
+	DirCheck("Jump");
+}
+
+void Player::RightWallJumpingUpdate(float _DeltaTime)
+{
+	if (true == IsUpWall())
+	{
+		ChangeState(PlayerState::IDLE);
+		return;
+	}
+
+	if (true == IsGround())
+	{
+		ChangeState(PlayerState::IDLE);
+		return;
+	}
+
+	if (true == IsLeftWall())
+	{
+		ChangeState(PlayerState::LeftWallJump);
+		return;
+	}
+
+	if (jumppowercount < JumpPowerMax)
+	{
+		DirString = "Left_";
+		SetMove({ float4::Left * MoveSpeed * 2 * _DeltaTime });
+		SetMove({ float4::Up * JumpPower * _DeltaTime });
+
+		jumppowercount += JumpPower * _DeltaTime;
+	}
+	else
+	{
+		if (jumptime < 0.1f)
+		{
+			jumptime += _DeltaTime;
+			Gravity(_DeltaTime);
+		}
+		else
+		{
+			ChangeState(PlayerState::Fall);
+			return;
+		}
+	}
+
+	DirCheck("Jump");
+}
+
+void Player::RightWallJumpingEnd()
+{
+
 }
 
 

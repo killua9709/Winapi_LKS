@@ -12,7 +12,9 @@ enum class PlayerState
 	Attack,
 	Fall,
 	LeftWallJump,
-	RightWallJump,
+	RightWallJump, 
+	LeftWallJumping,
+	RightWallJumping,
 };
 
 // 설명 :
@@ -60,6 +62,7 @@ private:
 	float jumptime = 0;
 	bool jumpsoundchange = false;
 
+
 	std::string DirString = "Right_";
 	PlayerState StateValue = PlayerState::IDLE;
 	float4 MoveDir = float4::Zero;
@@ -85,7 +88,6 @@ private:
 	bool FreeMoveState(float _DeltaTime);
 
 	void ChangeState(PlayerState _State);
-	void ChangeUpdateState(PlayerState _State, float _DeltaTime);
 	void UpdateState(float _DeltaTime);
 	void Gravity(float _DeltaTime);
 	void SoftGravity(float _DeltaTime);
@@ -121,6 +123,14 @@ private:
 	void RightWallJumpStart();
 	void RightWallJumpUpdate(float _DeltaTime);
 	void RightWallJumpEnd();
+
+	void LeftWallJumpingStart();
+	void LeftWallJumpingUpdate(float _DeltaTime);
+	void LeftWallJumpingEnd();
+
+	void RightWallJumpingStart();
+	void RightWallJumpingUpdate(float _DeltaTime);
+	void RightWallJumpingEnd();
 
 	
 	//상태체크 이전 내 위치조정

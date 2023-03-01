@@ -233,7 +233,7 @@ void Player::Gravity(float _DeltaTime)
 
 void Player::SoftGravity(float _DeltaTime)
 {
-	SetMove({ 0, GravityPower/2 * _DeltaTime });
+	SetMove({ 0, GravityPower/3 * _DeltaTime });
 }
 
 bool Player::IsLeftWall()
@@ -262,6 +262,18 @@ void Player::CheckPos()
 			for (size_t i = 0; i < Collision.size(); i++)
 			{
 				SetPos({ GetPos().x,Collision[i]->GetCollisionData().Top() });
+			}
+		}
+	}
+
+	if (true == IsUpWall())
+	{
+		std::vector<GameEngineCollision*> Collision;
+		if (true == UpCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision))
+		{
+			for (size_t i = 0; i < Collision.size(); i++)
+			{
+				SetPos({ GetPos().x,Collision[i]->GetCollisionData().Bot() + 36});
 			}
 		}
 	}

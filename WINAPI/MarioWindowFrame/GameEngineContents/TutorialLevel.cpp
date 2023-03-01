@@ -101,29 +101,59 @@ void TutorialLevel::Loading()
 	}
 	//벽
 	{
-		Wall* Actor = CreateActor<Wall>(GameRenderOrder::Map);
-		Actor->SetMove({ GameEngineWindow::GetScreenSize().x / 2 + 12,119 });
-		Actor->GetBodyCollision()->SetScale({ 612, 34 });
+		//가로벽
+		Wall* Wight = CreateActor<Wall>(GameRenderOrder::Map);
+		Wight->SetMove({ 646,119 });
+		Wight->GetBodyCollision()->SetScale({ 612, 34 });
 
-		Wall* Actor2 = CreateActor<Wall>(GameRenderOrder::Map);
-		Actor2->SetMove({ GameEngineWindow::GetScreenSize().x / 2 -45,GameEngineWindow::GetScreenSize().y / 2 - 224});
-		Actor2->GetBodyCollision()->SetScale({ 34, 34 });
+		Wall* Wight2 = CreateActor<Wall>(GameRenderOrder::Map);
+		Wight2->SetMove({ 578,289 });
+		Wight2->GetBodyCollision()->SetScale({ 612, 34 });
 
-		Wall* Actor3 = CreateActor<Wall>(GameRenderOrder::Map);
-		Actor3->SetMove({ GameEngineWindow::GetScreenSize().x / 2 - 181,GameEngineWindow::GetScreenSize().y / 2 - 240 });
-		Actor3->GetBodyCollision()->SetScale({ 34, 70 });
+		Wall* Wight3 = CreateActor<Wall>(GameRenderOrder::Map);
+		Wight3->SetMove({ 646,527 });
+		Wight3->GetBodyCollision()->SetScale({ 612, 34 });
 
-		Wall* Actor4 = CreateActor<Wall>(GameRenderOrder::Map);
-		Actor4->SetMove({ GameEngineWindow::GetScreenSize().x / 2 + 50,GameEngineWindow::GetScreenSize().y / 2 - 192 });
-		Actor4->GetBodyCollision()->SetScale({ 1000, 35 });
+		Wall* Wight4 = CreateActor<Wall>(GameRenderOrder::Map);
+		Wight4->SetMove({ 612,697 });
+		Wight4->GetBodyCollision()->SetScale({ 680, 34 });
 
-		Wall* Actor5 = CreateActor<Wall>(GameRenderOrder::Map);
-		Actor5->SetMove({ 255, 350 });
-		Actor5->GetBodyCollision()->SetScale({ 34, 714 });
 
-		Wall* Actor6 = CreateActor<Wall>(GameRenderOrder::Map);
-		Actor6->SetMove({ 969, 350 });
-		Actor6->GetBodyCollision()->SetScale({ 34, 714 });
+		//장애물
+		Wall* Obstacle = CreateActor<Wall>(GameRenderOrder::Map);
+		Obstacle->SetMove({ GameEngineWindow::GetScreenSize().x / 2 -45,GameEngineWindow::GetScreenSize().y / 2 - 224});
+		Obstacle->GetBodyCollision()->SetScale({ 34, 34 });
+
+		Wall* Obstacle2 = CreateActor<Wall>(GameRenderOrder::Map);
+		Obstacle2->SetMove({ GameEngineWindow::GetScreenSize().x / 2 - 181,GameEngineWindow::GetScreenSize().y / 2 - 240 });
+		Obstacle2->GetBodyCollision()->SetScale({ 34, 70 });
+
+		Wall* Obstacle3 = CreateActor<Wall>(GameRenderOrder::Map);
+		Obstacle3->SetMove({ 731,238 });
+		Obstacle3->GetBodyCollision()->SetScale({ 34, 68 });
+
+		Wall* Obstacle4 = CreateActor<Wall>(GameRenderOrder::Map);
+		Obstacle4->SetMove({ 867,442});
+		Obstacle4->GetBodyCollision()->SetScale({ 34, 136 });
+
+		
+		//세로벽
+		Wall* length = CreateActor<Wall>(GameRenderOrder::Map);
+		length->SetMove({ 255, 350 });
+		length->GetBodyCollision()->SetScale({ 34, 714 });
+
+		Wall* length2 = CreateActor<Wall>(GameRenderOrder::Map);
+		length2->SetMove({ 969, 350 });
+		length2->GetBodyCollision()->SetScale({ 34, 714 });
+
+		//양쪽 벽 타기 실험
+		/*Wall* Actor7 = CreateActor<Wall>(GameRenderOrder::Map);
+		Actor7->SetMove({ 600, 350 });
+		Actor7->GetBodyCollision()->SetScale({ 34, 714 });
+
+		Wall* Actor8 = CreateActor<Wall>(GameRenderOrder::Map);
+		Actor8->SetMove({ 700, 350 });
+		Actor8->GetBodyCollision()->SetScale({ 34, 714 });*/
 
 	}
 
