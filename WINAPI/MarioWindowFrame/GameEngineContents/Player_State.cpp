@@ -256,6 +256,20 @@ void Player::JumpStart()
 
 void Player::JumpUpdate(float _DeltaTime)
 {
+	if (true == IsLeftWall())
+	{
+		DirString = "Left_";
+		ChangeState(PlayerState::LeftWallJump);
+		return;
+	}
+
+	if (true == IsRightWall())
+	{
+		DirString = "Right_";
+		ChangeState(PlayerState::RightWallJump);
+		return;
+	}
+
 	//점프파워카운트가 지정해둔 점프파워맥스보다 작다면 위로 이동시킨다.
 	if (jumppowercount < JumpPowerMax)
 	{
@@ -282,11 +296,6 @@ void Player::JumpUpdate(float _DeltaTime)
 			{
 				SetMove(float4::Left * MoveSpeed * _DeltaTime);
 			}
-			else
-			{
-				ChangeState(PlayerState::LeftWallJump);
-				return;
-			}
 		}
 		//오른쪽버튼 눌릴시
 		else if (true == GameEngineInput::IsPress("RightMove"))
@@ -295,11 +304,6 @@ void Player::JumpUpdate(float _DeltaTime)
 			if (false == IsRightWall())
 			{
 				SetMove(float4::Right * MoveSpeed * _DeltaTime);
-			}
-			else
-			{
-				ChangeState(PlayerState::RightWallJump);
-				return;
 			}
 		}
 	}
@@ -395,6 +399,7 @@ void Player::LeftWallJumpUpdate(float _DeltaTime)
 
 	}
 
+	//오른쪽키 누르면 이동
 	if (true == GameEngineInput::IsPress("RightMove"))
 	{
 		SetMove(float4::Right * MoveSpeed * _DeltaTime);
@@ -452,7 +457,6 @@ void Player::LeftWallJumpUpdate(float _DeltaTime)
 		jumppowercount = 0;
 		JumpPowerMax = 50.0f;
 		jumptime = 0;
-		jumpsoundchange = !jumpsoundchange;
 		ChangeState(PlayerState::IDLE);
 		return;
 	}
@@ -479,6 +483,7 @@ void Player::RightWallJumpUpdate(float _DeltaTime)
 
 	}
 
+	//왼쪽키 누르면 이동
 	if (true == GameEngineInput::IsPress("LeftMove"))
 	{
 		SetMove(float4::Left * MoveSpeed * _DeltaTime);
@@ -535,7 +540,6 @@ void Player::RightWallJumpUpdate(float _DeltaTime)
 		jumppowercount = 0;
 		JumpPowerMax = 50.0f;
 		jumptime = 0;
-		jumpsoundchange = !jumpsoundchange;
 		ChangeState(PlayerState::IDLE);
 		return;
 	}
