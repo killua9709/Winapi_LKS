@@ -10,7 +10,9 @@ enum class PlayerState
 	MOVE,
 	JUMP,
 	Attack,
-	Fall
+	Fall,
+	LeftWallJump,
+	RightWallJump,
 };
 
 // 설명 :
@@ -86,6 +88,7 @@ private:
 	void ChangeUpdateState(PlayerState _State, float _DeltaTime);
 	void UpdateState(float _DeltaTime);
 	void Gravity(float _DeltaTime);
+	void SoftGravity(float _DeltaTime);
 
 	//벽과의 충돌
 	bool IsLeftWall();
@@ -111,6 +114,15 @@ private:
 	void FallUpdate(float _DeltaTime);
 	void FallEnd();
 
+	void LeftWallJumpStart();
+	void LeftWallJumpUpdate(float _DeltaTime);
+	void LeftWallJumpEnd();
+
+	void RightWallJumpStart();
+	void RightWallJumpUpdate(float _DeltaTime);
+	void RightWallJumpEnd();
+
+	
 	//상태체크 이전 내 위치조정
 	void CheckPos();
 	int Value = 0;

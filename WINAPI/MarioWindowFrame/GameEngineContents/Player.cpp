@@ -48,11 +48,13 @@ void Player::Start()
 		AnimationRender->CreateAnimation({ .AnimationName = "Right_Idle",  .ImageName = "Right_Mario.bmp", .Start = 0, .End = 0});
 		AnimationRender->CreateAnimation({ .AnimationName = "Right_Move",  .ImageName = "Right_Mario.bmp", .Start = 1, .End = 3, .InterTime = 0.06f });
 		AnimationRender->CreateAnimation({ .AnimationName = "Right_Jump",  .ImageName = "Right_Mario.bmp", .Start = 4, .End = 4 });
+		AnimationRender->CreateAnimation({ .AnimationName = "Right_WallJump",  .ImageName = "Right_Mario.bmp", .Start = 17, .End = 17 });
 
 		
 		AnimationRender->CreateAnimation({ .AnimationName = "Left_Idle",  .ImageName = "Left_Mario.bmp", .Start = 0, .End = 0});
 		AnimationRender->CreateAnimation({ .AnimationName = "Left_Move",  .ImageName = "Left_Mario.bmp", .Start = 1, .End = 3 , .InterTime = 0.06f });
 		AnimationRender->CreateAnimation({ .AnimationName = "Left_Jump",  .ImageName = "Left_Mario.bmp", .Start = 4, .End = 4 });
+		AnimationRender->CreateAnimation({ .AnimationName = "Left_WallJump",  .ImageName = "Left_Mario.bmp", .Start = 17, .End = 17 });
 	}
 
 	//플레이어 충돌체 생성
@@ -62,11 +64,11 @@ void Player::Start()
 		BodyCollision->SetPosition({ 0,-17 });
 
 		LeftCollision = CreateCollision(GameCollisionOrder::Player);
-		LeftCollision->SetScale({ 3, 30 });
+		LeftCollision->SetScale({ 2, 30 });
 		LeftCollision->SetPosition({ -12,-17});
 
 		RightCollision = CreateCollision(GameCollisionOrder::Player);
-		RightCollision->SetScale({ 3, 30 });
+		RightCollision->SetScale({ 2, 30 });
 		RightCollision->SetPosition({ 12,-17});
 
 		UpCollision = CreateCollision(GameCollisionOrder::Player);
@@ -233,6 +235,16 @@ void Player::Render(float _DeltaTime)
 	// 디버깅용.
 }
 
+void Player::Gravity(float _DeltaTime)
+{
+	SetMove({ 0, GravityPower * _DeltaTime });
+}
+
+void Player::SoftGravity(float _DeltaTime)
+{
+	SetMove({ 0, GravityPower/2 * _DeltaTime });
+}
+
 bool Player::IsLeftWall()
 {
 	return LeftCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect });
@@ -270,7 +282,7 @@ void Player::CheckPos()
 		{
 			for (size_t i = 0; i < Collision.size(); i++)
 			{
-				SetPos({ Collision[i]->GetCollisionData().Right()+13,GetPos().y});
+				SetPos({ Collision[i]->GetCollisionData().Right()+12,GetPos().y});
 			}
 		}
 	}
@@ -282,7 +294,7 @@ void Player::CheckPos()
 		{
 			for (size_t i = 0; i < Collision.size(); i++)
 			{
-				SetPos({ Collision[i]->GetCollisionData().Left()-13,GetPos().y});
+				SetPos({ Collision[i]->GetCollisionData().Left()-12,GetPos().y});
 			}
 		}
 	}

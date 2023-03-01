@@ -33,6 +33,12 @@ void Player::ChangeState(PlayerState _State)
 	case PlayerState::Fall:
 		FallStart();
 		break;
+	case PlayerState::LeftWallJump:
+		LeftWallJumpStart();
+		break;
+	case PlayerState::RightWallJump:
+		RightWallJumpStart();
+		break;
 	default:
 		break;
 	}
@@ -50,6 +56,13 @@ void Player::ChangeState(PlayerState _State)
 		break;
 	case PlayerState::Fall:
 		FallEnd();
+		break;
+	case PlayerState::LeftWallJump:
+		LeftWallJumpEnd();
+		break;
+	case PlayerState::RightWallJump:
+		RightWallJumpEnd();
+		break;
 	default:
 		break;
 	}
@@ -76,6 +89,13 @@ void Player::ChangeUpdateState(PlayerState _State, float _DeltaTime)
 		break;
 	case PlayerState::Fall:
 		FallUpdate(_DeltaTime);
+		break;
+	case PlayerState::LeftWallJump:
+		LeftWallJumpUpdate(_DeltaTime);
+		break;
+	case PlayerState::RightWallJump:
+		RightWallJumpUpdate(_DeltaTime);
+		break;
 	default:
 		break;
 	}
@@ -96,15 +116,17 @@ void Player::UpdateState(float _DeltaTime)
 		break;
 	case PlayerState::Fall:
 		FallUpdate(_DeltaTime);
+		break;
+	case PlayerState::LeftWallJump:
+		LeftWallJumpUpdate(_DeltaTime);
+		break;
+	case PlayerState::RightWallJump:
+		RightWallJumpUpdate(_DeltaTime);
+		break;
 	default:
 		break;
 	}
 
-}
-
-void Player::Gravity(float _DeltaTime)
-{
-	SetMove({ 0, GravityPower * _DeltaTime });
 }
 
 // FSM 내가 어떤일을 할때 이동하면서 가만히 있을수 없다.
@@ -208,6 +230,12 @@ void Player::MoveEnd()
 
 void Player::JumpStart()
 {
+	//점프관련 변수 초기화
+	jumppowercount = 0;
+	JumpPowerMax = 50.0f;
+	jumptime = 0;
+	jumpsoundchange = !jumpsoundchange;
+
 	DirCheck("Jump");
 	if (false == jumpsoundchange)
 	{
@@ -226,7 +254,6 @@ void Player::JumpStart()
 
 void Player::JumpUpdate(float _DeltaTime)
 {
-	
 	//점프파워카운트가 지정해둔 점프파워맥스보다 작다면 위로 이동시킨다.
 	if (jumppowercount < JumpPowerMax)
 	{
@@ -252,6 +279,11 @@ void Player::JumpUpdate(float _DeltaTime)
 			{
 				SetMove(float4::Left * MoveSpeed * _DeltaTime);
 			}
+			else
+			{
+				ChangeState(PlayerState::LeftWallJump);
+				return;
+			}
 		}
 		//오른쪽버튼 눌릴시
 		else if (true == GameEngineInput::IsPress("RightMove"))
@@ -259,6 +291,11 @@ void Player::JumpUpdate(float _DeltaTime)
 			if (false == IsRightWall())
 			{
 				SetMove(float4::Right * MoveSpeed * _DeltaTime);
+			}
+			else
+			{
+				ChangeState(PlayerState::RightWallJump);
+				return;
 			}
 		}
 	}
@@ -278,10 +315,7 @@ void Player::JumpUpdate(float _DeltaTime)
 }
 void Player::JumpEnd()
 {
-	jumppowercount = 0;
-	JumpPowerMax = 50.0f;
-	jumptime = 0;
-	jumpsoundchange = !jumpsoundchange;
+	
 }
 
 void Player::FallStart()
@@ -324,3 +358,145 @@ void Player::FallEnd()
 {
 
 }
+
+void Player::LeftWallJumpStart()
+{
+	DirCheck("WallJump");
+}
+
+void Player::LeftWallJumpUpdate(float _DeltaTime)
+{
+	//왼쪽 충돌체랑 벽이 닿지 않으면 jump로 변환
+	if (false == IsLeftWall())
+	{
+		StateValue = PlayerState::JUMP;
+		UpdateState(_DeltaTime);
+		return;
+	}
+
+	//벽을 잡고 있는 중에 다시 윗키를 누르면
+	if (true == GameEngineInput::IsDown("UpMove"))
+	{
+
+	}
+
+	//점프력이 남아있으면 
+	if (jumppowercount < JumpPowerMax)
+	{
+		SetMove(float4::Up * JumpPower * _DeltaTime);
+
+		//점프파워를 점프파워 카운트에 더한다 // 어느정도까지 계속 점프가 되야 하기 때문에
+		jumppowercount += JumpPower * _DeltaTime;
+
+		if (true == GameEngineInput::IsPress("UpMove"))
+		{
+			jumptime += _DeltaTime;
+		}
+
+		if (true == GameEngineInput::IsPress("UpMove") && jumptime > 0.12f)
+		{
+			JumpPowerMax = 80.0f;
+		}
+	}
+	else
+	{
+		if (true == GameEngineInput::IsDown("LeftMove"))
+		{
+			SoftGravity(_DeltaTime);
+		}
+		else
+		{
+			Gravity(_DeltaTime);
+		}
+	}
+
+	//땅에 닿았다면
+	if (true == IsGround())
+	{
+		ChangeState(PlayerState::IDLE);
+		return;
+	}
+
+	DirCheck("WallJump");
+}
+
+void Player::LeftWallJumpEnd()
+{
+	//점프관련 초기화
+	jumppowercount = 0;
+	JumpPowerMax = 50.0f;
+	jumptime = 0;
+	jumpsoundchange = !jumpsoundchange;
+}
+
+void Player::RightWallJumpStart()
+{
+	DirCheck("WallJump");
+}
+
+void Player::RightWallJumpUpdate(float _DeltaTime)
+{
+	//왼쪽 충돌체랑 벽이 닿지 않으면 jump로 변환
+	if (false == IsRightWall())
+	{
+		StateValue = PlayerState::JUMP;
+		UpdateState(_DeltaTime);
+		return;
+	}
+
+	//벽을 잡고 있는 중에 다시 윗키를 누르면
+	if (true == GameEngineInput::IsDown("UpMove"))
+	{
+
+	}
+
+	//점프력이 남아있으면 
+	if (jumppowercount < JumpPowerMax)
+	{
+		SetMove(float4::Up * JumpPower * _DeltaTime);
+
+		//점프파워를 점프파워 카운트에 더한다 // 어느정도까지 계속 점프가 되야 하기 때문에
+		jumppowercount += JumpPower * _DeltaTime;
+
+		if (true == GameEngineInput::IsPress("UpMove"))
+		{
+			jumptime += _DeltaTime;
+		}
+
+		if (true == GameEngineInput::IsPress("UpMove") && jumptime > 0.12f)
+		{
+			JumpPowerMax = 80.0f;
+		}
+	}
+	else
+	{
+		if (true == GameEngineInput::IsDown("RightMove"))
+		{
+			SoftGravity(_DeltaTime);
+		}
+		else
+		{
+			Gravity(_DeltaTime);
+		}
+	}
+
+	//땅에 닿았다면
+	if (true == IsGround())
+	{
+		ChangeState(PlayerState::IDLE);
+		return;
+	}
+
+	DirCheck("WallJump");
+}
+
+void Player::RightWallJumpEnd()
+{
+	//점프관련 초기화
+	jumppowercount = 0;
+	JumpPowerMax = 50.0f;
+	jumptime = 0;
+	jumpsoundchange = !jumpsoundchange;
+}
+
+
