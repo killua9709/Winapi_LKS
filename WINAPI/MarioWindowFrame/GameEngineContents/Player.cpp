@@ -62,15 +62,15 @@ void Player::Start()
 		BodyCollision->SetPosition({ 0,-17 });
 
 		LeftCollision = CreateCollision(GameCollisionOrder::Player);
-		LeftCollision->SetScale({ 10, 30 });
-		LeftCollision->SetPosition({ -10,-17});
+		LeftCollision->SetScale({ 3, 30 });
+		LeftCollision->SetPosition({ -12,-17});
 
 		RightCollision = CreateCollision(GameCollisionOrder::Player);
-		RightCollision->SetScale({ 10, 30 });
-		RightCollision->SetPosition({ 10,-17});
+		RightCollision->SetScale({ 3, 30 });
+		RightCollision->SetPosition({ 12,-17});
 
 		UpCollision = CreateCollision(GameCollisionOrder::Player);
-		UpCollision->SetScale({ 25, 1 });
+		UpCollision->SetScale({ 1, 1 });
 		UpCollision->SetPosition({ 0, -36 });
 
 		DownCollision = CreateCollision(GameCollisionOrder::Player);
@@ -93,8 +93,7 @@ void Player::Start()
 //땅에 있는 지 체크
 bool Player::IsGround()
 {
-	std::vector<GameEngineCollision*> Collision;
-	return (DownCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision));
+	return (DownCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }));
 }
 
 //똑같은 하나의 플레이어를 위해
@@ -148,8 +147,8 @@ bool Player::FreeMoveState(float _DeltaTime)
 //플레이어 업데이트
 void Player::Update(float _DeltaTime) 
 {
-
-	if (nullptr != BodyCollision)	//몬스터 오더를 들고 있는 충돌체와 플레이어의 충돌체 처리
+	//몬스터 오더를 들고 있는 충돌체와 플레이어의 충돌체 처리
+	if (nullptr != BodyCollision)	
 	{
 		std::vector<GameEngineCollision*> Collision;
 		if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Monster), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision))
@@ -162,29 +161,21 @@ void Player::Update(float _DeltaTime)
 		}
 	}
 
-	if (nullptr != BodyCollision)	//벽과 부딪히면 처리하기
-	{								//미래 위치에서 어느 방향에서 벽과 박았다면 그 위치를 기반으로 상태를 정의한다?
-		std::vector<GameEngineCollision*> Collision;
-		if (true == DownCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision))
-		{
-			for (size_t i = 0; i < Collision.size(); i++)
-			{
-				//부딪힌 벽이 있다면 그 벽의 top으로 y좌표를 옮김
-				SetPos({GetPos().x,Collision[i]->GetCollisionData().Top()});
-			}
-		}
-	}
-
+	//프리무브
 	if (true == FreeMoveState(_DeltaTime))
 	{
 		return;
 	}
 
+	//스테이지 클리어
 	if (GameEngineInput::IsDown("StageClear"))
 	{
 		TutorialMap::MainMap->StageClearOn();
 	}
 
+	CheckPos();
+
+	//상태변화 및 이동
 	UpdateState(_DeltaTime);
 }
 
@@ -241,3 +232,59 @@ void Player::Render(float _DeltaTime)
 
 	// 디버깅용.
 }
+
+bool Player::IsLeftWall()
+{
+	return LeftCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect });
+}
+
+bool Player::IsRightWall()
+{
+	return RightCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect });
+}
+
+bool Player::IsUpWall()
+{
+	return UpCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect });
+}
+
+void Player::CheckPos()
+{
+	//만약 아래충돌체와 벽이 충돌하고 있으면 끌어올려준다.
+	if (true == IsGround())
+	{
+		std::vector<GameEngineCollision*> Collision;
+		if (true == DownCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision))
+		{
+			for (size_t i = 0; i < Collision.size(); i++)
+			{
+				SetPos({ GetPos().x,Collision[i]->GetCollisionData().Top() });
+			}
+		}
+	}
+
+	if (true == IsLeftWall())
+	{
+		std::vector<GameEngineCollision*> Collision;
+		if (true == LeftCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision))
+		{
+			for (size_t i = 0; i < Collision.size(); i++)
+			{
+				SetPos({ Collision[i]->GetCollisionData().Right()+13,GetPos().y});
+			}
+		}
+	}
+
+	if (true == IsRightWall())
+	{
+		std::vector<GameEngineCollision*> Collision;
+		if (true == RightCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision))
+		{
+			for (size_t i = 0; i < Collision.size(); i++)
+			{
+				SetPos({ Collision[i]->GetCollisionData().Left()-13,GetPos().y});
+			}
+		}
+	}
+}
+

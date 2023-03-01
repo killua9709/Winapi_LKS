@@ -107,7 +107,6 @@ void Player::Gravity(float _DeltaTime)
 	SetMove({ 0, GravityPower * _DeltaTime });
 }
 
-
 // FSM 내가 어떤일을 할때 이동하면서 가만히 있을수 없다.
 void Player::IdleStart()
 {
@@ -175,6 +174,7 @@ void Player::MoveUpdate(float _DeltaTime)
 		return;
 	}
 
+	//움직이는 도중 점프를 할때
 	if (true == IsGround() && (GameEngineInput::IsPress("UpMove")))
 	{
 		ChangeState(PlayerState::JUMP);
@@ -184,15 +184,15 @@ void Player::MoveUpdate(float _DeltaTime)
 	//왼쪽버튼 눌릴시
 	if (true == GameEngineInput::IsPress("LeftMove"))
 	{
-		if (false == LeftCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
+		if (false == IsLeftWall())
 		{
-			 SetMove(float4::Left * MoveSpeed * _DeltaTime);
+			SetMove(float4::Left * MoveSpeed * _DeltaTime);
 		}
 	}
 	//오른쪽버튼 눌릴시
 	else if (true == GameEngineInput::IsPress("RightMove"))
 	{
-		if (false == RightCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
+		if (false == IsRightWall())
 		{
 			SetMove(float4::Right * MoveSpeed * _DeltaTime);
 		}
@@ -226,6 +226,7 @@ void Player::JumpStart()
 
 void Player::JumpUpdate(float _DeltaTime)
 {
+	
 	//점프파워카운트가 지정해둔 점프파워맥스보다 작다면 위로 이동시킨다.
 	if (jumppowercount < JumpPowerMax)
 	{
@@ -247,7 +248,7 @@ void Player::JumpUpdate(float _DeltaTime)
 		//왼쪽버튼 눌릴시
 		if (true == GameEngineInput::IsPress("LeftMove"))
 		{
-			if (false == LeftCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
+			if (false == IsLeftWall())
 			{
 				SetMove(float4::Left * MoveSpeed * _DeltaTime);
 			}
@@ -255,7 +256,7 @@ void Player::JumpUpdate(float _DeltaTime)
 		//오른쪽버튼 눌릴시
 		else if (true == GameEngineInput::IsPress("RightMove"))
 		{
-			if (false == RightCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
+			if (false == IsRightWall())
 			{
 				SetMove(float4::Right * MoveSpeed * _DeltaTime);
 			}
@@ -266,6 +267,11 @@ void Player::JumpUpdate(float _DeltaTime)
 		ChangeState(PlayerState::Fall);
 		
 		return;
+	}
+
+	if (true == IsUpWall())
+	{
+		ChangeState(PlayerState::IDLE);
 	}
 
 	DirCheck("Jump");
@@ -296,12 +302,18 @@ void Player::FallUpdate(float _DeltaTime)
 	//왼쪽버튼 눌릴시
 	if (true == GameEngineInput::IsPress("LeftMove"))
 	{
-		SetMove(float4::Left * MoveSpeed * _DeltaTime);
+		if (false == IsLeftWall())
+		{
+			SetMove(float4::Left * MoveSpeed * _DeltaTime);
+		}
 	}
 	//오른쪽버튼 눌릴시
 	else if (true == GameEngineInput::IsPress("RightMove"))
 	{
-		SetMove(float4::Right * MoveSpeed * _DeltaTime);
+		if (false == IsRightWall())
+		{
+			SetMove(float4::Right * MoveSpeed * _DeltaTime);
+		}
 	}
 
 	DirCheck("Jump");

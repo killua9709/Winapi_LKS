@@ -34,10 +34,6 @@ public:
 		return BodyCollision;
 	}
 
-	void SetCollimage(GameEngineImage* _collImage)
-	{
-		Collimage = _collImage;
-	}
 protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
@@ -62,9 +58,6 @@ private:
 	float jumptime = 0;
 	bool jumpsoundchange = false;
 
-	//미래위치
-	float4 CheckPos = { float4::Zero };
-
 	std::string DirString = "Right_";
 	PlayerState StateValue = PlayerState::IDLE;
 	float4 MoveDir = float4::Zero;
@@ -79,7 +72,6 @@ private:
 	GameEngineCollision* DownCollision = nullptr;
 	//////
 
-	GameEngineImage* Collimage = nullptr;
 	GameEngineSoundPlayer JumpSoundPlayer;
 
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
@@ -94,6 +86,12 @@ private:
 	void ChangeUpdateState(PlayerState _State, float _DeltaTime);
 	void UpdateState(float _DeltaTime);
 	void Gravity(float _DeltaTime);
+
+	//벽과의 충돌
+	bool IsLeftWall();
+	bool IsRightWall();
+	bool IsUpWall();
+	bool IsGround();
 
 
 	// FSM 내가 어떤일을 할때 이동하면서 가만히 있을수 없다.
@@ -113,8 +111,8 @@ private:
 	void FallUpdate(float _DeltaTime);
 	void FallEnd();
 
-	bool IsGround();
-
+	//상태체크 이전 내 위치조정
+	void CheckPos();
 	int Value = 0;
 };
 

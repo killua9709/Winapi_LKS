@@ -65,7 +65,6 @@ void TutorialLevel::ImageLoad()
 	}
 	{
 		GameEngineImage* Image2 = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("배경.BMP"));
-		GameEngineImage* Image3 = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("ColMap.BMP"));
 	}
 }
 
@@ -87,9 +86,7 @@ void TutorialLevel::Loading()
 	//플레이어
 	{
 		Player* Actor = CreateActor<Player>(GameRenderOrder::Player);
-		Actor->SetMove({GameEngineWindow::GetScreenSize().x/2,GameEngineWindow::GetScreenSize().y / 2-190});
-		Actor->SetCollimage( GameEngineResources::GetInst().ImageFind("ColMap.BMP"));	//충돌 이미지 설정
-
+		Actor->SetMove({GameEngineWindow::GetScreenSize().x/2,GameEngineWindow::GetScreenSize().y / 2-400});
 	}
 	//몬스터
 	{
@@ -105,16 +102,21 @@ void TutorialLevel::Loading()
 	//벽
 	{
 		Wall* Actor = CreateActor<Wall>(GameRenderOrder::Map);
-		Actor->SetMove({ GameEngineWindow::GetScreenSize().x / 2 + 50,GameEngineWindow::GetScreenSize().y / 2 - 192 });
-		Actor->GetBodyCollision()->SetScale({ 1000, 35 });
+		Actor->SetMove({ GameEngineWindow::GetScreenSize().x / 2 + 12,119 });
+		Actor->GetBodyCollision()->SetScale({ 612, 34 });
 
 		Wall* Actor2 = CreateActor<Wall>(GameRenderOrder::Map);
-		Actor2->SetMove({ GameEngineWindow::GetScreenSize().x / 2 + 50,GameEngineWindow::GetScreenSize().y / 2 - 192});
-		Actor2->GetBodyCollision()->SetScale({ 40, 70 });
+		Actor2->SetMove({ GameEngineWindow::GetScreenSize().x / 2 -45,GameEngineWindow::GetScreenSize().y / 2 - 224});
+		Actor2->GetBodyCollision()->SetScale({ 34, 34 });
 
 		Wall* Actor3 = CreateActor<Wall>(GameRenderOrder::Map);
-		Actor3->SetMove({ GameEngineWindow::GetScreenSize().x / 2 - 150 + 50,GameEngineWindow::GetScreenSize().y / 2 - 192 });
-		Actor3->GetBodyCollision()->SetScale({ 40, 140 });
+		Actor3->SetMove({ GameEngineWindow::GetScreenSize().x / 2 - 181,GameEngineWindow::GetScreenSize().y / 2 - 240 });
+		Actor3->GetBodyCollision()->SetScale({ 34, 70 });
+
+		Wall* Actor4 = CreateActor<Wall>(GameRenderOrder::Map);
+		Actor4->SetMove({ GameEngineWindow::GetScreenSize().x / 2 + 50,GameEngineWindow::GetScreenSize().y / 2 - 192 });
+		Actor4->GetBodyCollision()->SetScale({ 1000, 35 });
+
 	}
 
 
