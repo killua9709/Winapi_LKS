@@ -191,15 +191,6 @@ void Player::DirCheck(const std::string_view& _AnimationName)
 	{
 		return;
 	}
-		
-	if (GameEngineInput::IsPress("LeftMove"))
-	{
-		DirString = "Left_";
-	}
-	else if(GameEngineInput::IsPress("RightMove"))
-	{
-		DirString = "Right_";
-	}
 
 	if (PrevDirString != DirString)
 	{
