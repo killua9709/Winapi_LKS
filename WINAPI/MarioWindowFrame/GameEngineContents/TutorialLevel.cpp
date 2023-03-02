@@ -104,7 +104,7 @@ void TutorialLevel::Loading()
 		//가로벽
 		Wall* Wight = CreateActor<Wall>(GameRenderOrder::Map);
 		Wight->SetMove({ 646,119 });
-		Wight->GetBodyCollision()->SetScale({ 612, 34 });
+		Wight->GetBodyCollision()->SetScale({ 2000, 34 });
 
 		Wall* Wight2 = CreateActor<Wall>(GameRenderOrder::Map);
 		Wight2->SetMove({ 578,289 });
@@ -117,11 +117,21 @@ void TutorialLevel::Loading()
 		Wall* Wight4 = CreateActor<Wall>(GameRenderOrder::Map);
 		Wight4->SetMove({ 612,697 });
 		Wight4->GetBodyCollision()->SetScale({ 680, 34 });
+		
+
+		/*세로벽
+		Wall* length = CreateActor<Wall>(GameRenderOrder::Map);
+		length->SetMove({ 255, 350 });
+		length->GetBodyCollision()->SetScale({ 34, 714 });
+
+		Wall* length2 = CreateActor<Wall>(GameRenderOrder::Map);
+		length2->SetMove({ 969, 350 });
+		length2->GetBodyCollision()->SetScale({ 34, 714 });*/
 
 
 		//장애물
 		Wall* Obstacle = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle->SetMove({ GameEngineWindow::GetScreenSize().x / 2 -45,GameEngineWindow::GetScreenSize().y / 2 - 224});
+		Obstacle->SetMove({ GameEngineWindow::GetScreenSize().x / 2 - 45,GameEngineWindow::GetScreenSize().y / 2 - 224 });
 		Obstacle->GetBodyCollision()->SetScale({ 34, 34 });
 
 		Wall* Obstacle2 = CreateActor<Wall>(GameRenderOrder::Map);
@@ -133,18 +143,8 @@ void TutorialLevel::Loading()
 		Obstacle3->GetBodyCollision()->SetScale({ 34, 68 });
 
 		Wall* Obstacle4 = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle4->SetMove({ 867,442});
+		Obstacle4->SetMove({ 867,442 });
 		Obstacle4->GetBodyCollision()->SetScale({ 34, 136 });
-
-		
-		//세로벽
-		Wall* length = CreateActor<Wall>(GameRenderOrder::Map);
-		length->SetMove({ 255, 350 });
-		length->GetBodyCollision()->SetScale({ 34, 714 });
-
-		Wall* length2 = CreateActor<Wall>(GameRenderOrder::Map);
-		length2->SetMove({ 969, 350 });
-		length2->GetBodyCollision()->SetScale({ 34, 714 });
 
 		//양쪽 벽 타기 실험
 		/*Wall* Actor7 = CreateActor<Wall>(GameRenderOrder::Map);
@@ -195,6 +195,13 @@ void TutorialLevel::Update(float _DeltaTime)
 
 	SetCameraPos({ Mario->GetPos().x,Mario->GetPos().y });
 	SetCameraMove(-GetCameraScale());
+	IsScreenOut();
+
+	std::string dir2 = "camerapos : ";
+	dir2 += std::to_string(GetCameraPos().x);
+	dir2 += std::to_string(GetCameraPos().y);
+	GameEngineLevel::DebugTextPush(dir2);
+
 }
 
 void TutorialLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
@@ -203,7 +210,7 @@ void TutorialLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	int screenHeight = GetSystemMetrics(SM_CYSCREEN);
 	/*BGMPlayer = GameEngineResources::GetInst().SoundPlayToControl("stage1backgroundsound.mp3");
 	BGMPlayer.Volume(0.1f);*/
-	GameEngineWindow::SettingWindowSize({ 260,260 });
+	GameEngineWindow::SettingWindowSize({ 1280,720 });
 	SetCameraPos({ Mario->GetPos().x,Mario->GetPos().y });
 	SetCameraScale({ 130, 130 });
 	SetCameraMove(-GetCameraScale());

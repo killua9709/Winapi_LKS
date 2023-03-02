@@ -26,10 +26,11 @@ public:
 		CameraScale = _Scale;
 	}
 
+	void IsScreenOut();
+
 protected:
 
 private:
-	float4 CameraScale;
-
+	float4 CameraScale = float4::Zero;
 };
 

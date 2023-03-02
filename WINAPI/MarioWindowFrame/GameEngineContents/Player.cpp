@@ -220,6 +220,7 @@ void Player::Render(float _DeltaTime)
 	std::string dir2 = "playerstate : ";
 	dir2 += std::to_string( (int)StateValue);
 
+
 	GameEngineLevel::DebugTextPush(dir);
 	GameEngineLevel::DebugTextPush(dir2);
 
