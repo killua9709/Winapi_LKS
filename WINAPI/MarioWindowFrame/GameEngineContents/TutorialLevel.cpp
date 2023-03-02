@@ -146,6 +146,23 @@ void TutorialLevel::Loading()
 		Obstacle4->SetMove({ 867,442 });
 		Obstacle4->GetBodyCollision()->SetScale({ 34, 136 });
 
+		//윈도우 틀
+		Wall* Left = CreateActor<Wall>(GameRenderOrder::Map);
+		Left->SetMove({ 0,360 });
+		Left->GetBodyCollision()->SetScale({ 0, 720 });
+
+		Wall* Right = CreateActor<Wall>(GameRenderOrder::Map);
+		Right->SetMove({ 1280,360 });
+		Right->GetBodyCollision()->SetScale({ 0, 720 });
+
+		Wall* Top = CreateActor<Wall>(GameRenderOrder::Map);
+		Top->SetMove({ 640,0 });
+		Top->GetBodyCollision()->SetScale({ 1280, 1 });
+
+		Wall* Bot = CreateActor<Wall>(GameRenderOrder::Map);
+		Bot->SetMove({ 640,720 });
+		Bot->GetBodyCollision()->SetScale({ 1280, 1 });
+
 		//양쪽 벽 타기 실험
 		/*Wall* Actor7 = CreateActor<Wall>(GameRenderOrder::Map);
 		Actor7->SetMove({ 600, 350 });
@@ -210,7 +227,7 @@ void TutorialLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	int screenHeight = GetSystemMetrics(SM_CYSCREEN);
 	/*BGMPlayer = GameEngineResources::GetInst().SoundPlayToControl("stage1backgroundsound.mp3");
 	BGMPlayer.Volume(0.1f);*/
-	GameEngineWindow::SettingWindowSize({ 1280,720 });
+	GameEngineWindow::SettingWindowSize({ 260,260 });
 	SetCameraPos({ Mario->GetPos().x,Mario->GetPos().y });
 	SetCameraScale({ 130, 130 });
 	SetCameraMove(-GetCameraScale());

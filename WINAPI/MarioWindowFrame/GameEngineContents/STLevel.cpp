@@ -21,16 +21,14 @@ void STLevel::IsScreenOut()
 		SetCameraPos({ GetCameraPos().x, 0 });
 	}
 
-	if ((GetCameraPos().x + (GetCameraScale().x * 2)) > 1280.0f);
+	if ((GetCameraPos().x + (GetCameraScale().x * 2)) > 1280)
 	{
-		float a = (GetCameraPos().x + (GetCameraScale().x * 2));
-		int b = 0;
-		/*SetCameraPos({ 1280 - GetCameraScale().x *2, GetCameraPos().y});*/
+		SetCameraPos({ 1280 - GetCameraScale().x *2, GetCameraPos().y});
 	}
 
-	/*if (GetCameraPos().y + GetCameraScale().y * 2 > 720);
+	if (GetCameraPos().y + GetCameraScale().y * 2 > 720)
 	{
-		SetCameraPos({ GetCameraPos().x, 720 });
-	}*/
+		SetCameraPos({ GetCameraPos().x, 720 - GetCameraScale().y * 2 });
+	}
 }
 
