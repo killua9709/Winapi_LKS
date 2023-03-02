@@ -3,6 +3,7 @@
 #include <GameEngineCore/GameEngineResources.h>
 
 // Ό³Έν :
+class Player;
 class TutorialLevel : public STLevel
 {
 public:
@@ -28,6 +29,6 @@ protected:
 private:
 	void SoundLoad();
 	void ImageLoad();
-
+	Player* Mario = nullptr;
 };
 

@@ -85,8 +85,8 @@ void TutorialLevel::Loading()
 	}
 	//플레이어
 	{
-		Player* Actor = CreateActor<Player>(GameRenderOrder::Player);
-		Actor->SetMove({GameEngineWindow::GetScreenSize().x/2,GameEngineWindow::GetScreenSize().y / 2-400});
+		Mario = CreateActor<Player>(GameRenderOrder::Player);
+		Mario->SetMove({GameEngineWindow::GetScreenSize().x/2,GameEngineWindow::GetScreenSize().y / 2-400});
 	}
 	//몬스터
 	{
@@ -180,26 +180,32 @@ void TutorialLevel::Update(float _DeltaTime)
 	{
 		// BGMPlayer.Stop();
 
-		if (false == BGMPlayer.GetPause())
+		/*if (false == BGMPlayer.GetPause())
 		{
 			BGMPlayer.PauseOn();
 		}
 		else 
 		{
 			BGMPlayer.PauseOff();
-		}
+		}*/
 
 		DebugRenderSwitch();
 		// Player::MainPlayer->Death()p;
 	}
+
+	SetCameraPos({ Mario->GetPos().x,Mario->GetPos().y });
+	SetCameraMove(-GetCameraScale());
 }
 
 void TutorialLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	int screenWidth = GetSystemMetrics(SM_CXSCREEN);
 	int screenHeight = GetSystemMetrics(SM_CYSCREEN);
-	BGMPlayer = GameEngineResources::GetInst().SoundPlayToControl("stage1backgroundsound.mp3");
-	BGMPlayer.Volume(0.1f);
-	GameEngineWindow::SettingWindowSize({ 1280,720 });
+	/*BGMPlayer = GameEngineResources::GetInst().SoundPlayToControl("stage1backgroundsound.mp3");
+	BGMPlayer.Volume(0.1f);*/
+	GameEngineWindow::SettingWindowSize({ 260,260 });
+	SetCameraPos({ Mario->GetPos().x,Mario->GetPos().y });
+	SetCameraScale({ 130, 130 });
+	SetCameraMove(-GetCameraScale());
 	//GameEngineWindow::WindowExpand();
 }

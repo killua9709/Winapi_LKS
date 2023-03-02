@@ -217,7 +217,11 @@ void Player::Render(float _DeltaTime)
 	std::string dir = "direction : ";
 	dir += DirString;
 
+	std::string dir2 = "playerstate : ";
+	dir2 += std::to_string( (int)StateValue);
+
 	GameEngineLevel::DebugTextPush(dir);
+	GameEngineLevel::DebugTextPush(dir2);
 
 	//std::string Text = "Ãâ·Â";
 	//SetBkMode(DoubleDC, TRANSPARENT);
@@ -274,30 +278,6 @@ void Player::CheckPos()
 			for (size_t i = 0; i < Collision.size(); i++)
 			{
 				SetPos({ GetPos().x,Collision[i]->GetCollisionData().Bot() + 36});
-			}
-		}
-	}
-
-	if (true == IsLeftWall())
-	{
-		std::vector<GameEngineCollision*> Collision;
-		if (true == LeftCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision))
-		{
-			for (size_t i = 0; i < Collision.size(); i++)
-			{
-				SetPos({ Collision[i]->GetCollisionData().Right()+12,GetPos().y});
-			}
-		}
-	}
-
-	if (true == IsRightWall())
-	{
-		std::vector<GameEngineCollision*> Collision;
-		if (true == RightCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision))
-		{
-			for (size_t i = 0; i < Collision.size(); i++)
-			{
-				SetPos({ Collision[i]->GetCollisionData().Left()-12,GetPos().y});
 			}
 		}
 	}

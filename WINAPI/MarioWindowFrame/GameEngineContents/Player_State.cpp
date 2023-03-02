@@ -512,6 +512,7 @@ void Player::RightWallJumpUpdate(float _DeltaTime)
 			UpdateState(_DeltaTime);
 			return;
 		}
+
 		if (true == GameEngineInput::IsPress("RightMove"))
 		{
 			SoftGravity(_DeltaTime);
