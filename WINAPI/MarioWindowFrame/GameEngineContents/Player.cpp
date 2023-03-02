@@ -214,7 +214,7 @@ void Player::Render(float _DeltaTime)
 	//BodyCollision->DebugRender();
 
 
-	std::string dir = "direction : ";
+	/*std::string dir = "direction : ";
 	dir += DirString;
 
 	std::string dir2 = "playerstate : ";
@@ -222,7 +222,7 @@ void Player::Render(float _DeltaTime)
 
 
 	GameEngineLevel::DebugTextPush(dir);
-	GameEngineLevel::DebugTextPush(dir2);
+	GameEngineLevel::DebugTextPush(dir2);*/
 
 	//std::string Text = "Ãâ·Â";
 	//SetBkMode(DoubleDC, TRANSPARENT);

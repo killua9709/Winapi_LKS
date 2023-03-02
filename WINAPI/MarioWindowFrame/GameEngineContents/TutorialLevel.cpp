@@ -214,10 +214,10 @@ void TutorialLevel::Update(float _DeltaTime)
 	SetCameraMove(-GetCameraScale());
 	IsScreenOut();
 
-	std::string dir2 = "camerapos : ";
+	/*std::string dir2 = "camerapos : ";
 	dir2 += std::to_string(GetCameraPos().x);
 	dir2 += std::to_string(GetCameraPos().y);
-	GameEngineLevel::DebugTextPush(dir2);
+	GameEngineLevel::DebugTextPush(dir2);*/
 
 }
 
