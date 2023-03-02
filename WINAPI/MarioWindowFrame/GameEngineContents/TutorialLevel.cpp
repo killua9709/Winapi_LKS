@@ -207,5 +207,5 @@ void TutorialLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	SetCameraPos({ Mario->GetPos().x,Mario->GetPos().y });
 	SetCameraScale({ 130, 130 });
 	SetCameraMove(-GetCameraScale());
-	//GameEngineWindow::WindowExpand();
+	GameEngineWindow::WindowExpand();
 }

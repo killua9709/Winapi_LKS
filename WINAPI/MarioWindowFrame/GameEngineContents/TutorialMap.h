@@ -34,6 +34,5 @@ private:
 	GameEngineRender* BackGroundRender = NULL;
 	GameEngineRender* TutorialMapRender0 = NULL;
 	GameEngineRender* TutorialMapRender1 = NULL;
-
 };
 

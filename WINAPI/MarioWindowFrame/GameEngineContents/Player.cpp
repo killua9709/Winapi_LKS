@@ -277,7 +277,7 @@ void Player::CheckPos()
 		{
 			for (size_t i = 0; i < Collision.size(); i++)
 			{
-				SetPos({ GetPos().x,Collision[i]->GetCollisionData().Bot() + 36});
+				SetPos({ GetPos().x,Collision[i]->GetCollisionData().Bot() + 37});
 			}
 		}
 	}
