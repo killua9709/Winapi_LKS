@@ -104,7 +104,7 @@ void TutorialLevel::Loading()
 		//가로벽
 		Wall* Wight = CreateActor<Wall>(GameRenderOrder::Map);
 		Wight->SetMove({ 646,119 });
-		Wight->GetBodyCollision()->SetScale({ 2000, 34 });
+		Wight->GetBodyCollision()->SetScale({ 612, 34 });
 
 		Wall* Wight2 = CreateActor<Wall>(GameRenderOrder::Map);
 		Wight2->SetMove({ 578,289 });
@@ -119,14 +119,14 @@ void TutorialLevel::Loading()
 		Wight4->GetBodyCollision()->SetScale({ 680, 34 });
 		
 
-		/*세로벽
+		//세로벽
 		Wall* length = CreateActor<Wall>(GameRenderOrder::Map);
 		length->SetMove({ 255, 350 });
 		length->GetBodyCollision()->SetScale({ 34, 714 });
 
 		Wall* length2 = CreateActor<Wall>(GameRenderOrder::Map);
 		length2->SetMove({ 969, 350 });
-		length2->GetBodyCollision()->SetScale({ 34, 714 });*/
+		length2->GetBodyCollision()->SetScale({ 34, 714 });
 
 
 		//장애물
