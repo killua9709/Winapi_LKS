@@ -369,7 +369,7 @@ void Player::FallUpdate(float _DeltaTime)
 
 void Player::FallEnd()
 {
-	jumppowercount = JumpPowerMax+10;
+
 }
 
 void Player::LeftWallJumpStart()

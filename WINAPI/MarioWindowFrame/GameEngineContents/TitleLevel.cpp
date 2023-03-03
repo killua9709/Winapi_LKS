@@ -83,8 +83,8 @@ void TitleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	float screenWidth = GetSystemMetrics(SM_CXSCREEN);
 	float screenHeight = GetSystemMetrics(SM_CYSCREEN);
 	GameEngineWindow::SettingWindowSize({ 205,205 });
-	float screenSizex = GameEngineWindow::GetScreenSize().x; 
-	float screenSizey = GameEngineWindow::GetScreenSize().y;
+	screenSizex = GameEngineWindow::GetScreenSize().x;
+	screenSizey = GameEngineWindow::GetScreenSize().y;
 	GameEngineWindow::SettingWindowPos({ screenWidth/2 - (screenSizex/2) ,screenHeight/2 - (screenSizey /2)});
 	GameEngineWindow::WindowExpand();
 

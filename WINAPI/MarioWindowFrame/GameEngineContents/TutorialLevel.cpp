@@ -213,6 +213,7 @@ void TutorialLevel::Update(float _DeltaTime)
 	SetCameraPos({ Mario->GetPos().x,Mario->GetPos().y });
 	SetCameraMove(-GetCameraScale());
 	IsScreenOut();
+	GameEngineWindow::SettingWindowPos({ screenWidth / 2 - (screenSizex / 2) ,screenHeight / 2 - (screenSizey / 2) });
 
 	/*std::string dir2 = "camerapos : ";
 	dir2 += std::to_string(GetCameraPos().x);
@@ -223,17 +224,16 @@ void TutorialLevel::Update(float _DeltaTime)
 
 void TutorialLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	int screenWidth = GetSystemMetrics(SM_CXSCREEN);
-	int screenHeight = GetSystemMetrics(SM_CYSCREEN);
+	
 	BGMPlayer = GameEngineResources::GetInst().SoundPlayToControl("stage1backgroundsound.mp3");
 	BGMPlayer.Volume(0.1f);
 	GameEngineWindow::SettingWindowSize({ 260,260 });
-	float screenSizex = GameEngineWindow::GetScreenSize().x;
-	float screenSizey = GameEngineWindow::GetScreenSize().y;
+	screenSizex = GameEngineWindow::GetScreenSize().x;
+	screenSizey = GameEngineWindow::GetScreenSize().y;
 	SetCameraPos({ Mario->GetPos().x,Mario->GetPos().y });
 	SetCameraScale({ 130, 130 });
 	SetCameraMove(-GetCameraScale());
 	//모니터 크기 절반에 내 스크린 사이즈 절반 만큼 빼서 크기 조정
-	GameEngineWindow::SettingWindowPos({ (float)screenWidth / 2 - (screenSizex / 2) ,(float)screenHeight / 2 - (screenSizey / 2) });
+	GameEngineWindow::SettingWindowPos({ screenWidth / 2 - (screenSizex / 2) ,screenHeight / 2 - (screenSizey / 2) });
 	GameEngineWindow::WindowExpand();
 }

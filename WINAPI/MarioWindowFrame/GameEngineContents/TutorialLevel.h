@@ -27,6 +27,7 @@ protected:
 	GameEngineSoundPlayer BGMPlayer;
 
 private:
+
 	void SoundLoad();
 	void ImageLoad();
 	Player* Mario = nullptr;

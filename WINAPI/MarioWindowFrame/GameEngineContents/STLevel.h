@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineLevel.h>
+#include <GameEnginePlatform/GameEngineWindow.h>
 
 // Ό³Έν :
 class STLevel : public GameEngineLevel
@@ -29,8 +30,12 @@ public:
 	void IsScreenOut();
 
 protected:
-
+	int screenWidth = GetSystemMetrics(SM_CXSCREEN);
+	int screenHeight = GetSystemMetrics(SM_CYSCREEN);
+	float screenSizex = GameEngineWindow::GetScreenSize().x;
+	float screenSizey = GameEngineWindow::GetScreenSize().y;
 private:
+
 	float4 CameraScale = float4::Zero;
 };
 

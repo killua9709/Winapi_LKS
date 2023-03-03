@@ -1,8 +1,9 @@
 #pragma once
+#include "STLevel.h"
 #include <GameEngineCore/GameEngineLevel.h>
 
 // Ό³Έν :
-class TitleLevel : public GameEngineLevel
+class TitleLevel : public STLevel
 {
 public:
 	// constrcuter destructer

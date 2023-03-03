@@ -24,7 +24,7 @@ void StudyGameCore::Start()
 	// 실수 1.2 원한다면 
 	CreateLevel<TitleLevel>("TitleLevel");
 	CreateLevel<TutorialLevel>("TutorialLevel");
-	ChangeLevel("TitleLevel");
+	ChangeLevel("TutorialLevel");
 }
 
 void StudyGameCore::Update()
