@@ -45,6 +45,11 @@ public:
 		Pos += _MovePos;
 	}
 
+	GameEngineCollision* GetBodyCollision()
+	{
+		return BodyCollision;
+	}
+
 	GameEngineLevel* GetLevel();
 
 #pragma region CreateRenderEnumOverLoadings
@@ -98,6 +103,7 @@ protected:
 
 	virtual void LevelChangeEnd(GameEngineLevel* _PrevLevel);
 	virtual void LevelChangeStart(GameEngineLevel* _PrevLevel);
+	GameEngineCollision* BodyCollision = nullptr;
 
 private:
 	float LiveTime = 0.0;

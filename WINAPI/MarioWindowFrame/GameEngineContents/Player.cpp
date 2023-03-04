@@ -92,11 +92,7 @@ void Player::Start()
 	ChangeState(PlayerState::IDLE);
 }
 
-//땅에 있는 지 체크
-bool Player::IsGround()
-{
-	return (DownCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }));
-}
+
 
 //똑같은 하나의 플레이어를 위해
 void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
@@ -162,6 +158,12 @@ void Player::Update(float _DeltaTime)
 			}
 		}
 	}
+
+	if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Object), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
+	{
+		GameEngineWindow::SettingWindowSize({ 1280,720 });
+	}
+
 
 	//프리무브
 	if (true == FreeMoveState(_DeltaTime))
@@ -253,6 +255,12 @@ bool Player::IsRightWall()
 bool Player::IsUpWall()
 {
 	return UpCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect });
+}
+
+//땅에 있는 지 체크
+bool Player::IsGround()
+{
+	return (DownCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }));
 }
 
 void Player::CheckUp()

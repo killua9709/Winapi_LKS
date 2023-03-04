@@ -95,6 +95,11 @@ public:
 		return Name;
 	}
 
+	bool GetObjectisDeath()
+	{
+		return ObjectDeath;
+	}
+
 protected:
 
 private:

@@ -16,10 +16,7 @@ public:
 	Wall& operator=(const Wall& _Other) = delete;
 	Wall& operator=(Wall&& _Other) noexcept = delete;
 
-	GameEngineCollision* GetBodyCollision()
-	{
-		return BodyCollision;
-	}
+	
 
 
 protected:
@@ -27,8 +24,5 @@ protected:
 	void Render(float _Time) override;	//렌더에 충돌체 크기만큼의 벽모습 생성하자
 
 private:
-
-	GameEngineCollision* BodyCollision = nullptr;	//벽은 충돌체를 무조건 가져야지
-
 };
 

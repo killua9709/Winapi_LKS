@@ -36,6 +36,12 @@
     <ClInclude Include="Wall.h">
       <Filter>GlobalActors\Wall</Filter>
     </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>GlobalActors\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Scroll.h">
+      <Filter>GlobalActors\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StudyGameCore.cpp" />
@@ -75,6 +81,12 @@
     <ClCompile Include="Wall.cpp">
       <Filter>GlobalActors\Wall</Filter>
     </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>GlobalActors\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Scroll.cpp">
+      <Filter>GlobalActors\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Play">
@@ -100,6 +112,9 @@
     </Filter>
     <Filter Include="GlobalActors\Player">
       <UniqueIdentifier>{29cd20ce-9f50-4682-b89a-724333df81c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GlobalActors\Object">
+      <UniqueIdentifier>{ceafecf6-4884-496a-8cec-b3cbecd83189}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

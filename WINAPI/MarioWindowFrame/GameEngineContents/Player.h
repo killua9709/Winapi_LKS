@@ -70,7 +70,6 @@ private:
 	GameEngineRender* AnimationRender = nullptr;
 
 	/////플레이어 충돌체
-	GameEngineCollision* BodyCollision = nullptr;
 	GameEngineCollision* LeftCollision = nullptr;
 	GameEngineCollision* RightCollision = nullptr;
 	GameEngineCollision* UpCollision = nullptr;

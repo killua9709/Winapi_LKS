@@ -4,6 +4,7 @@
 
 // Ό³Έν :
 class Player;
+class Scroll;
 class TutorialLevel : public STLevel
 {
 public:
@@ -31,5 +32,6 @@ private:
 	void SoundLoad();
 	void ImageLoad();
 	Player* Mario = nullptr;
+	Scroll* scroll = nullptr;
 };
 

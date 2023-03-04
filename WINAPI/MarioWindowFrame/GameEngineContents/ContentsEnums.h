@@ -13,6 +13,7 @@ enum class GameCollisionOrder
 {
 	Player,
 	Monster,
-	Wall
+	Wall,
+	Object
 
 };

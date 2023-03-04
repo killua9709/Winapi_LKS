@@ -18,6 +18,7 @@
 #include "ContentsValue.h"
 #include "MouseObject.h"
 #include "Wall.h"
+#include "Scroll.h"
 
 
 TutorialLevel::TutorialLevel()
@@ -64,7 +65,10 @@ void TutorialLevel::ImageLoad()
 		Image->Cut(1, 1);
 	}
 	{
-		GameEngineImage* Image2 = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("배경.BMP"));
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("배경.BMP"));
+	}
+	{
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("scroll.bmp"));
 	}
 }
 
@@ -128,15 +132,17 @@ void TutorialLevel::Loading()
 		length2->SetMove({ 969, 350 });
 		length2->GetBodyCollision()->SetScale({ 34, 714 });
 
+		
+		
 
 		//장애물
 		Wall* Obstacle = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle->SetMove({ GameEngineWindow::GetScreenSize().x / 2 - 45,GameEngineWindow::GetScreenSize().y / 2 - 224 });
-		Obstacle->GetBodyCollision()->SetScale({ 34, 34 });
+		Obstacle->SetMove({ GameEngineWindow::GetScreenSize().x / 2 - 181,GameEngineWindow::GetScreenSize().y / 2 - 240 });
+		Obstacle->GetBodyCollision()->SetScale({ 34, 70 });
 
 		Wall* Obstacle2 = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle2->SetMove({ GameEngineWindow::GetScreenSize().x / 2 - 181,GameEngineWindow::GetScreenSize().y / 2 - 240 });
-		Obstacle2->GetBodyCollision()->SetScale({ 34, 70 });
+		Obstacle2->SetMove({ GameEngineWindow::GetScreenSize().x / 2 - 45,GameEngineWindow::GetScreenSize().y / 2 - 224 });
+		Obstacle2->GetBodyCollision()->SetScale({ 34, 34 });
 
 		Wall* Obstacle3 = CreateActor<Wall>(GameRenderOrder::Map);
 		Obstacle3->SetMove({ 731,238 });
@@ -173,6 +179,11 @@ void TutorialLevel::Loading()
 		Actor8->GetBodyCollision()->SetScale({ 34, 714 });*/
 
 	}
+	//오브젝트
+	{
+		scroll = CreateActor<Scroll>(GameRenderOrder::Cursor);
+		scroll->SetMove({ GameEngineWindow::GetScreenSize().x / 2 - 45,655 });
+	}
 
 
 	if (false == GameEngineInput::IsKey("DebugRenderSwitch"))
@@ -195,34 +206,40 @@ void TutorialLevel::Update(float _DeltaTime)
 {
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))
 	{
-		// BGMPlayer.Stop();
+		 BGMPlayer.Stop();
 
-		/*if (false == BGMPlayer.GetPause())
+		if (false == BGMPlayer.GetPause())
 		{
 			BGMPlayer.PauseOn();
 		}
 		else 
 		{
 			BGMPlayer.PauseOff();
-		}*/
+		}
 
 		DebugRenderSwitch();
 		// Player::MainPlayer->Death()p;
 	}
 
-	SetCameraPos({ Mario->GetPos().x,Mario->GetPos().y });
-	SetCameraMove(-GetCameraScale());
-	IsScreenOut();
-	screenSizex = GameEngineWindow::GetScreenSize().x;
-	screenSizey = GameEngineWindow::GetScreenSize().y;
-	float a = screenWidth / 2 - 640;
-	float b = screenHeight / 2 - 360;
-	GameEngineWindow::SettingWindowPos({ a + GetCameraPos().x, b + GetCameraPos().y});
-
-	/*std::string dir2 = "camerapos : ";
-	dir2 += std::to_string(GetCameraPos().x);
-	dir2 += std::to_string(GetCameraPos().y);
-	GameEngineLevel::DebugTextPush(dir2);*/
+	if (false == scroll->GetObjectisDeath())
+	{
+		
+		SetCameraPos({ Mario->GetPos().x,Mario->GetPos().y });
+		SetCameraMove(-GetCameraScale());
+		IsScreenOut();
+		screenSizex = GameEngineWindow::GetScreenSize().x;
+		screenSizey = GameEngineWindow::GetScreenSize().y;
+		float a = screenWidth / 2 - 640.0f;
+		float b = screenHeight / 2 - 360.0f;
+		GameEngineWindow::SettingWindowPos({ a + GetCameraPos().x, b + GetCameraPos().y });
+	}
+	else
+	{
+		GameEngineWindow::SettingWindowSize({ 1280,720 });
+		GameEngineWindow::SettingWindowPos({(float)screenWidth/2 - 640, (float)screenHeight/2-360 });
+		SetCameraPos({ 0,0 });
+	}
+	
 
 }
 
