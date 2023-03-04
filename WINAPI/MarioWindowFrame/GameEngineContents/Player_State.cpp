@@ -133,7 +133,7 @@ void Player::IdleUpdate(float _DeltaTime)
 	//만약 땅과 닿아 있는 상태에서
 	if (true == IsGround())
 	{
-		if (GameEngineInput::IsPress("UpMove"))
+		if (GameEngineInput::IsDown("UpMove"))
 		{
 			ChangeState(PlayerState::JUMP);
 			return;
@@ -185,7 +185,7 @@ void Player::MoveUpdate(float _DeltaTime)
 	}
 
 	//움직이는 도중 점프를 할때
-	if (true == IsGround() && (GameEngineInput::IsPress("UpMove")))
+	if (true == IsGround() && (GameEngineInput::IsDown("UpMove")))
 	{
 		ChangeState(PlayerState::JUMP);
 		return;

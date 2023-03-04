@@ -58,7 +58,7 @@ private:
 	//점프관련
 	float JumpPower = 300.0f;	//점프력
 	float JumpPowerMax = 50.0f; //최대 누적 점프
-	float jumppowercount = 0;	//현재 누적 점프
+	float jumppowercount = 60;	//현재 누적 점프
 	float jumptime = 0;			//2단 점프 변화 시간
 	bool jumpsoundchange = false;
 
