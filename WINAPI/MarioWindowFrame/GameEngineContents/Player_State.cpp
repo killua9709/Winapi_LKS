@@ -118,6 +118,7 @@ void Player::UpdateState(float _DeltaTime)
 // FSM 내가 어떤일을 할때 이동하면서 가만히 있을수 없다.
 void Player::IdleStart()
 {
+	CheckPos();
 	DirCheck("Idle");
 }
 void Player::IdleUpdate(float _DeltaTime)
@@ -164,6 +165,7 @@ void Player::MoveStart()
 }
 void Player::MoveUpdate(float _DeltaTime)
 {
+
 	if (false == IsGround())
 	{
 		ChangeState(PlayerState::Fall);
@@ -242,6 +244,7 @@ void Player::JumpStart()
 
 void Player::JumpUpdate(float _DeltaTime)
 {
+	CheckUp();
 	if (true == IsUpWall())
 	{
 		ChangeState(PlayerState::IDLE);
@@ -320,6 +323,7 @@ void Player::FallStart()
 
 void Player::FallUpdate(float _DeltaTime)
 {
+	CheckGround();
 	if (true == IsLeftWall())
 	{
 		StateValue = PlayerState::LeftWallJump;
@@ -379,7 +383,7 @@ void Player::LeftWallJumpStart()
 
 void Player::LeftWallJumpUpdate(float _DeltaTime)
 {
-
+	CheckUp();
 	//벽을 잡고 있는 중에 다시 윗키를 누르면
 	if (true == GameEngineInput::IsDown("UpMove"))
 	{
@@ -464,7 +468,7 @@ void Player::RightWallJumpStart()
 
 void Player::RightWallJumpUpdate(float _DeltaTime)
 {
-
+	CheckUp();
 	//벽을 잡고 있는 중에 다시 윗키를 누르면
 	if (true == GameEngineInput::IsDown("UpMove"))
 	{
@@ -567,6 +571,7 @@ void Player::LeftWallJumpingStart()
 
 void Player::LeftWallJumpingUpdate(float _DeltaTime)
 {
+	CheckUp();
 	if (true == IsUpWall())
 	{
 		ChangeState(PlayerState::IDLE);
@@ -640,8 +645,10 @@ void Player::RightWallJumpingStart()
 
 void Player::RightWallJumpingUpdate(float _DeltaTime)
 {
+	CheckUp();
 	if (true == IsUpWall())
 	{
+		CheckPos();
 		ChangeState(PlayerState::IDLE);
 		return;
 	}

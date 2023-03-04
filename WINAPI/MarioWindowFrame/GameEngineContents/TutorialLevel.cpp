@@ -149,19 +149,19 @@ void TutorialLevel::Loading()
 		//윈도우 틀
 		Wall* Left = CreateActor<Wall>(GameRenderOrder::Map);
 		Left->SetMove({ 0,360 });
-		Left->GetBodyCollision()->SetScale({ 0, 720 });
+		Left->GetBodyCollision()->SetScale({ 1, 720 });
 
 		Wall* Right = CreateActor<Wall>(GameRenderOrder::Map);
 		Right->SetMove({ 1280,360 });
-		Right->GetBodyCollision()->SetScale({ 0, 720 });
+		Right->GetBodyCollision()->SetScale({ 1, 720 });
 
 		Wall* Top = CreateActor<Wall>(GameRenderOrder::Map);
 		Top->SetMove({ 640,0 });
-		Top->GetBodyCollision()->SetScale({ 1280, 1 });
+		Top->GetBodyCollision()->SetScale({ 1280, 10 });
 
 		Wall* Bot = CreateActor<Wall>(GameRenderOrder::Map);
 		Bot->SetMove({ 640,720 });
-		Bot->GetBodyCollision()->SetScale({ 1280, 1 });
+		Bot->GetBodyCollision()->SetScale({ 1280, 10 });
 
 		//양쪽 벽 타기 실험
 		/*Wall* Actor7 = CreateActor<Wall>(GameRenderOrder::Map);
@@ -213,7 +213,11 @@ void TutorialLevel::Update(float _DeltaTime)
 	SetCameraPos({ Mario->GetPos().x,Mario->GetPos().y });
 	SetCameraMove(-GetCameraScale());
 	IsScreenOut();
-	GameEngineWindow::SettingWindowPos({ screenWidth / 2 - (screenSizex / 2) ,screenHeight / 2 - (screenSizey / 2) });
+	screenSizex = GameEngineWindow::GetScreenSize().x;
+	screenSizey = GameEngineWindow::GetScreenSize().y;
+	float a = screenWidth / 2 - 640;
+	float b = screenHeight / 2 - 360;
+	GameEngineWindow::SettingWindowPos({ a + GetCameraPos().x, b + GetCameraPos().y});
 
 	/*std::string dir2 = "camerapos : ";
 	dir2 += std::to_string(GetCameraPos().x);
@@ -235,5 +239,5 @@ void TutorialLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	SetCameraMove(-GetCameraScale());
 	//모니터 크기 절반에 내 스크린 사이즈 절반 만큼 빼서 크기 조정
 	GameEngineWindow::SettingWindowPos({ screenWidth / 2 - (screenSizex / 2) ,screenHeight / 2 - (screenSizey / 2) });
-	GameEngineWindow::WindowExpand();
+	//GameEngineWindow::WindowExpand();
 }

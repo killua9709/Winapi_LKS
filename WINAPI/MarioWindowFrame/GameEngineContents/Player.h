@@ -53,13 +53,13 @@ private:
 	float AccTime = 0.0f;
 	int StartFrame = 0;
 	float MoveSpeed = 200.0f;
-	float JumpPower = 300.0f;
-	float JumpPowerMax = 50.0f; //8000 //16000
 	float GravityPower = 200.0f;
 
 	//점프관련
-	float jumppowercount = 0;
-	float jumptime = 0;
+	float JumpPower = 300.0f;	//점프력
+	float JumpPowerMax = 50.0f; //최대 누적 점프
+	float jumppowercount = 0;	//현재 누적 점프
+	float jumptime = 0;			//2단 점프 변화 시간
 	bool jumpsoundchange = false;
 
 
@@ -134,6 +134,8 @@ private:
 
 	
 	//상태체크 이전 내 위치조정
+	void CheckUp();
+	void CheckGround();
 	void CheckPos();
 	int Value = 0;
 };

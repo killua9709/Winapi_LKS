@@ -45,8 +45,6 @@ void TutorialMap::Update(float _DeltaTime)
 		return;
 	}
 
-	TutorialMapRender0->SetMove(float4::Left * 200.0f * _DeltaTime);
-	TutorialMapRender1->SetMove(float4::Left * 200.0f * _DeltaTime);
-
+	
 	// IsStageClear = false;
 }
