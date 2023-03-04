@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
+#include <GameEngineCore/GameEngineResources.h>
 
 // Ό³Έν :
 class Scroll : public GameEngineActor
@@ -21,6 +22,6 @@ protected:
 	void Render(float _DeltaTime) override;
 
 private:
-
+	GameEngineSoundPlayer GetSoundPlayer;
 };
 

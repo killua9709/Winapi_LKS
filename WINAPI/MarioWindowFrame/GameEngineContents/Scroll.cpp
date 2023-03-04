@@ -5,9 +5,6 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineCore/GameEngineRender.h>
 
-
-
-
 Scroll::Scroll() 
 {
 }
@@ -29,6 +26,9 @@ void Scroll::Update(float _DeltaTime)
 {
 	if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Player), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
 	{
+		GetSoundPlayer = GameEngineResources::GetInst().SoundPlayToControl("getkey.wav");
+		GetSoundPlayer.LoopCount(1);
+		GetSoundPlayer.Volume(0.1f);
 		this->Death();
 	}
 }

@@ -33,10 +33,6 @@ public:
 	Player& operator=(const Player& _Other) = delete;
 	Player& operator=(Player&& _Other) noexcept = delete;
 
-	GameEngineCollision* GetBodyCollision()
-	{
-		return BodyCollision;
-	}
 
 protected:
 	void Start() override;

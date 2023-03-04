@@ -37,8 +37,8 @@ void TutorialLevel::SoundLoad()
 	Dir.Move("ContentsResources");
 	Dir.Move("Sound");
 
-	
 	GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("stage1backgroundsound.mp3"));
+	GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("getkey.wav"));
 	
 }
 void TutorialLevel::ImageLoad()
