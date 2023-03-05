@@ -26,7 +26,7 @@ void StudyGameCore::Start()
 	CreateLevel<TitleLevel>("TitleLevel");
 	CreateLevel<TutorialLevel>("TutorialLevel");
 	CreateLevel<Tutorial2Level>("Tutorial2Level");
-	ChangeLevel("TitleLevel");
+	ChangeLevel("TutorialLevel");
 }
 
 void StudyGameCore::Update()

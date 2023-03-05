@@ -10,6 +10,7 @@ STLevel::~STLevel()
 }
 GameEngineSoundPlayer STLevel::BGMPlayer = nullptr;
 bool STLevel::GetScroll = false;
+bool STLevel::GetDoor = false;
 
 void STLevel::IsScreenOut()
 {

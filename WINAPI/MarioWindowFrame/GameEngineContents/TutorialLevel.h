@@ -5,6 +5,7 @@
 // Ό³Έν :
 class Player;
 class Scroll;
+class Door;
 class TutorialLevel : public STLevel
 {
 public:
@@ -34,6 +35,7 @@ private:
 	void ImageLoad();
 	Player* Mario = nullptr;
 	Scroll* scroll = nullptr;
+	Door* door = nullptr;
 	bool Fix = false;
 	
 };

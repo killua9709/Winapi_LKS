@@ -8,6 +8,8 @@
 #include <GameEngineCore/GameEngineResources.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
+#include <GameEngineCore/GameEngineCore.h>
+
 
 
 // 나랑 같은 등급의 헤더들
@@ -19,6 +21,7 @@
 #include "MouseObject.h"
 #include "Wall.h"
 #include "Scroll.h"
+#include "Door.h"
 
 
 TutorialLevel::TutorialLevel()
@@ -41,6 +44,7 @@ void TutorialLevel::SoundLoad()
 	GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("getkey.wav"));
 	GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("jump1.wav"));
 	GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("jump2.wav"));
+	GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("door_open.wav"));
 	
 }
 void TutorialLevel::ImageLoad()
@@ -71,6 +75,9 @@ void TutorialLevel::ImageLoad()
 	}
 	{
 		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("scroll.bmp"));
+	}
+	{
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("문.bmp"));
 	}
 }
 
@@ -181,7 +188,10 @@ void TutorialLevel::Loading()
 	//오브젝트
 	{
 		scroll = CreateActor<Scroll>(GameRenderOrder::Cursor);
-		scroll->SetMove({ GameEngineWindow::GetScreenSize().x / 2 - 45,655 });
+		scroll->SetMove({ 595,655 });
+
+		door = CreateActor<Door>(GameRenderOrder::Cursor);
+		door->SetMove({ 867,662 });
 	}
 
 
@@ -203,10 +213,13 @@ void TutorialLevel::Loading()
 
 void TutorialLevel::Update(float _DeltaTime)
 {
+	if (true == GetDoor)
+	{
+		GameEngineCore::GetInst()->ChangeLevel("Tutorial2Level");
+	}
+
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))
 	{
-		 BGMPlayer.Stop();
-
 		if (false == BGMPlayer.GetPause())
 		{
 			BGMPlayer.PauseOn();
@@ -239,6 +252,8 @@ void TutorialLevel::Update(float _DeltaTime)
 		SetCameraPos({ 0,0 });
 		Fix = true;
 	}
+
+
 	
 
 }

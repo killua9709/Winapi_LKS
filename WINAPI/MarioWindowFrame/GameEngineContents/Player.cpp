@@ -151,11 +151,6 @@ void Player::Update(float _DeltaTime)
 		}
 	}
 
-	if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Object), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
-	{
-		GameEngineWindow::SettingWindowSize({ 1280,720 });
-	}
-
 
 	//프리무브
 	if (true == FreeMoveState(_DeltaTime))

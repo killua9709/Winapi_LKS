@@ -35,6 +35,11 @@ public:
 		GetScroll = _state;
 	}
 
+	static void SetGetDoor(bool _state)
+	{
+		GetDoor = _state;
+	}
+
 	void IsScreenOut();
 
 protected:
@@ -43,6 +48,7 @@ protected:
 	float screenSizex = GameEngineWindow::GetScreenSize().x;
 	float screenSizey = GameEngineWindow::GetScreenSize().y;
 	static bool GetScroll;
+	static bool GetDoor;
 private:
 	
 	float4 CameraScale = float4::Zero;

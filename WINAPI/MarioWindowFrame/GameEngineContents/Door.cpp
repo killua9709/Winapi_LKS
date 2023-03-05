@@ -4,6 +4,8 @@
 #include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineCore/GameEngineRender.h>
+#include "STLevel.h"
+
 
 Door::Door()
 {
@@ -16,10 +18,10 @@ Door::~Door()
 void Door::Start()
 {
 	BodyCollision = CreateCollision(GameCollisionOrder::Object);
-	BodyCollision->SetScale({ 24, 17 });
+	BodyCollision->SetScale({ 28, 40 });
 
 	GameEngineRender* Render = CreateRender("¹®.bmp", GameRenderOrder::Cursor);
-	Render->SetScale({ 34, 34 });
+	Render->SetScale({ 34, 40 });
 }
 
 void Door::Update(float _DeltaTime)
@@ -29,6 +31,8 @@ void Door::Update(float _DeltaTime)
 		GetSoundPlayer = GameEngineResources::GetInst().SoundPlayToControl("door_open.wav");
 		GetSoundPlayer.LoopCount(1);
 		GetSoundPlayer.Volume(0.1f);
+		STLevel::SetGetDoor(true);
+		this->Death();
 	}
 }
 
