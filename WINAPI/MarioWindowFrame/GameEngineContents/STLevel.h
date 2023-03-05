@@ -9,6 +9,7 @@ public:
 	// constrcuter destructer
 	STLevel();
 	~STLevel();
+	
 
 	// delete Function
 	STLevel(const STLevel& _Other) = delete;
@@ -27,6 +28,11 @@ public:
 		CameraScale = _Scale;
 	}
 
+	static void SetGetScroll(bool _state)
+	{
+		GetScroll = _state;
+	}
+
 	void IsScreenOut();
 
 protected:
@@ -34,8 +40,9 @@ protected:
 	int screenHeight = GetSystemMetrics(SM_CYSCREEN);
 	float screenSizex = GameEngineWindow::GetScreenSize().x;
 	float screenSizey = GameEngineWindow::GetScreenSize().y;
+	static bool GetScroll;
 private:
-
+	
 	float4 CameraScale = float4::Zero;
 };
 

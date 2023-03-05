@@ -76,9 +76,6 @@ void TutorialLevel::Loading()
 {
 	SoundLoad();
 	ImageLoad();
-
-	SetCameraScale({1000, 100});
-
 	//¸¶¿ì½º
 	{
 		CreateActor<MouseObject>();
@@ -221,7 +218,7 @@ void TutorialLevel::Update(float _DeltaTime)
 		// Player::MainPlayer->Death()p;
 	}
 
-	if (false == scroll->GetObjectisDeath())
+	if (false == GetScroll)
 	{
 		
 		SetCameraPos({ Mario->GetPos().x,Mario->GetPos().y });
@@ -233,11 +230,12 @@ void TutorialLevel::Update(float _DeltaTime)
 		float b = screenHeight / 2 - 360.0f;
 		GameEngineWindow::SettingWindowPos({ a + GetCameraPos().x, b + GetCameraPos().y });
 	}
-	else
+	else if(false == Fix)
 	{
 		GameEngineWindow::SettingWindowSize({ 1280,720 });
 		GameEngineWindow::SettingWindowPos({(float)screenWidth/2 - 640, (float)screenHeight/2-360 });
 		SetCameraPos({ 0,0 });
+		Fix = true;
 	}
 	
 

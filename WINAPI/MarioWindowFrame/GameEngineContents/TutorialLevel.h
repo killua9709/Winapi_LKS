@@ -18,6 +18,8 @@ public:
 	TutorialLevel& operator=(const TutorialLevel& _Other) = delete;
 	TutorialLevel& operator=(TutorialLevel&& _Other) noexcept = delete;
 
+	
+
 protected:
 	void Loading() override;
 	void Update(float _DeltaTime) override;
@@ -33,5 +35,7 @@ private:
 	void ImageLoad();
 	Player* Mario = nullptr;
 	Scroll* scroll = nullptr;
+	bool Fix = false;
+	
 };
 

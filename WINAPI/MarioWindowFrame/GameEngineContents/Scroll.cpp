@@ -1,5 +1,6 @@
 #include "Scroll.h"
 #include "Player.h"
+#include "STLevel.h"
 #include "ContentsEnums.h"
 #include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEngineCore/GameEngineCollision.h>
@@ -29,6 +30,7 @@ void Scroll::Update(float _DeltaTime)
 		GetSoundPlayer = GameEngineResources::GetInst().SoundPlayToControl("getkey.wav");
 		GetSoundPlayer.LoopCount(1);
 		GetSoundPlayer.Volume(0.1f);
+		STLevel::SetGetScroll(true);
 		this->Death();
 	}
 }

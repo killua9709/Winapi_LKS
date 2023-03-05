@@ -8,6 +8,8 @@ STLevel::~STLevel()
 {
 }
 
+bool STLevel::GetScroll = false;
+
 void STLevel::IsScreenOut()
 {
 	if (GetCameraPos().x < 0)
