@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
+#include <GameEngineCore/GameEngineResources.h>
 
 // Ό³Έν :
 class Door : public GameEngineActor
@@ -16,8 +17,11 @@ public:
 	Door& operator=(Door&& _Other) noexcept = delete;
 
 protected:
+	void Start() override;
+	void Update(float _DeltaTime) override;
+	void Render(float _DeltaTime) override;
 
 private:
-
+	GameEngineSoundPlayer GetSoundPlayer;
 };
 

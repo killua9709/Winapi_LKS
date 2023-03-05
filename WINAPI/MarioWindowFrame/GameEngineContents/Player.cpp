@@ -221,9 +221,17 @@ void Player::Render(float _DeltaTime)
 		std::string dir2 = "playerstate : ";
 		dir2 += std::to_string( (int)StateValue);
 
+		std::string dir3 = "posx : ";
+		dir3 += std::to_string((int)GetPos().x);
+
+		std::string dir4 = "posy : ";
+		dir4 += std::to_string((int)GetPos().y);
+
 
 		GameEngineLevel::DebugTextPush(dir);
 		GameEngineLevel::DebugTextPush(dir2);
+		GameEngineLevel::DebugTextPush(dir3);
+		GameEngineLevel::DebugTextPush(dir4);
 
 		/*std::string Text = "Ãâ·Â";
 		SetBkMode(DoubleDC, TRANSPARENT);
