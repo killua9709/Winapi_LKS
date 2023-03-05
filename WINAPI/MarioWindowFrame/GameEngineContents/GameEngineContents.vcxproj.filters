@@ -42,6 +42,12 @@
     <ClInclude Include="Scroll.h">
       <Filter>GlobalActors\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Tutorial2Level.h">
+      <Filter>Play\Tutorial2</Filter>
+    </ClInclude>
+    <ClInclude Include="Tutorial2Map.h">
+      <Filter>Play\Tutorial2</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StudyGameCore.cpp" />
@@ -87,6 +93,12 @@
     <ClCompile Include="Scroll.cpp">
       <Filter>GlobalActors\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Tutorial2Level.cpp">
+      <Filter>Play\Tutorial2</Filter>
+    </ClCompile>
+    <ClCompile Include="Tutorial2Map.cpp">
+      <Filter>Play\Tutorial2</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Play">
@@ -115,6 +127,9 @@
     </Filter>
     <Filter Include="GlobalActors\Object">
       <UniqueIdentifier>{ceafecf6-4884-496a-8cec-b3cbecd83189}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Tutorial2">
+      <UniqueIdentifier>{fd53037e-17c3-4016-9fc8-c81b2ae91ec6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

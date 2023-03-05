@@ -5,20 +5,18 @@
 // Ό³Έν :
 class Player;
 class Scroll;
-class TutorialLevel : public STLevel
+class Tutorial2Level : public STLevel
 {
 public:
 	// constrcuter destructer
-	TutorialLevel();
-	~TutorialLevel();
+	Tutorial2Level();
+	~Tutorial2Level();
 
 	// delete Function
-	TutorialLevel(const TutorialLevel& _Other) = delete;
-	TutorialLevel(TutorialLevel&& _Other) noexcept = delete;
-	TutorialLevel& operator=(const TutorialLevel& _Other) = delete;
-	TutorialLevel& operator=(TutorialLevel&& _Other) noexcept = delete;
-
-	
+	Tutorial2Level(const Tutorial2Level& _Other) = delete;
+	Tutorial2Level(Tutorial2Level&& _Other) noexcept = delete;
+	Tutorial2Level& operator=(const Tutorial2Level& _Other) = delete;
+	Tutorial2Level& operator=(Tutorial2Level&& _Other) noexcept = delete;
 
 protected:
 	void Loading() override;
@@ -35,6 +33,5 @@ private:
 	Player* Mario = nullptr;
 	Scroll* scroll = nullptr;
 	bool Fix = false;
-	
 };
 

@@ -1,4 +1,4 @@
-#include "TutorialLevel.h"
+#include "Tutorial2Level.h"
 
 #include "Structs.h"
 
@@ -12,8 +12,7 @@
 
 // 나랑 같은 등급의 헤더들
 #include "Player.h"
-#include "Monster.h"
-#include "TutorialMap.h"
+#include "Tutorial2Map.h"
 #include "ContentsEnums.h"
 #include "ContentsValue.h"
 #include "MouseObject.h"
@@ -21,31 +20,28 @@
 #include "Scroll.h"
 
 
-TutorialLevel::TutorialLevel()
+Tutorial2Level::Tutorial2Level()
 {
-	
+
 }
 
-TutorialLevel::~TutorialLevel()
+Tutorial2Level::~Tutorial2Level()
 {
 }
 
-void TutorialLevel::SoundLoad()
+void Tutorial2Level::SoundLoad()
 {
 	GameEngineDirectory Dir;
 	Dir.MoveParentToDirectory("ContentsResources");
 	Dir.Move("ContentsResources");
 	Dir.Move("Sound");
 
-	GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("stage1backgroundsound.mp3"));
-	GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("getkey.wav"));
-	GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("jump1.wav"));
-	GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("jump2.wav"));
-	
+	GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("stage2backgroundsound.mp3"));
 }
-void TutorialLevel::ImageLoad()
+void Tutorial2Level::ImageLoad()
 {
 	GameEngineWindow::SettingWindowSize({ 1280,960 });
+
 	// 상대경로 탐색
 	GameEngineDirectory Dir;
 	Dir.MoveParentToDirectory("ContentsResources");
@@ -53,103 +49,63 @@ void TutorialLevel::ImageLoad()
 	Dir.Move("Image");
 	Dir.Move("Play");
 
-	// 이미지 로드
 	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Right_Mario.BMP"));
-		Image->Cut(5, 4);
-	}
-	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Left_Mario.BMP"));
-		Image->Cut(5, 4);
-	}
-	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("시작맵.BMP"));
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("시작맵2.BMP"));
 		Image->Cut(1, 1);
 	}
 	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("배경.BMP"));
-	}
-	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("scroll.bmp"));
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("시작맵2_1.BMP"));
+		Image->Cut(1, 1);
 	}
 }
 
-void TutorialLevel::Loading()
+void Tutorial2Level::Loading()
 {
 	SoundLoad();
 	ImageLoad();
+
 	//마우스
 	{
 		CreateActor<MouseObject>();
 	}
 	//맵
 	{
-		TutorialMap* Actor = CreateActor<TutorialMap>();
+		Tutorial2Map* Actor = CreateActor<Tutorial2Map>();
 	}
 	//플레이어
 	{
 		Mario = CreateActor<Player>(GameRenderOrder::Player);
-		Mario->SetMove({GameEngineWindow::GetScreenSize().x/2,GameEngineWindow::GetScreenSize().y / 2-400});
-	}
-	//몬스터
-	{
-		srand(static_cast<unsigned int>(time(nullptr)));
-		for (size_t i = 0; i < 0; i++)
-		{
-			Monster* Actor = CreateActor<Monster>(GameRenderOrder::Monster);
-			Actor->SetMove(
-				float4(static_cast<float>(rand() % GameEngineWindow::GetScreenSize().ix()), static_cast<float>(rand() % GameEngineWindow::GetScreenSize().iy()))
-			);
-		}
+		Mario->SetMove({ 206,680 });
 	}
 	//벽
 	{
 		//가로벽
-		Wall* Wight = CreateActor<Wall>(GameRenderOrder::Map);
-		Wight->SetMove({ 646,119 });
-		Wight->GetBodyCollision()->SetScale({ 612, 34 });
-
-		Wall* Wight2 = CreateActor<Wall>(GameRenderOrder::Map);
-		Wight2->SetMove({ 578,289 });
-		Wight2->GetBodyCollision()->SetScale({ 612, 34 });
-
-		Wall* Wight3 = CreateActor<Wall>(GameRenderOrder::Map);
-		Wight3->SetMove({ 646,527 });
-		Wight3->GetBodyCollision()->SetScale({ 612, 34 });
-
 		Wall* Wight4 = CreateActor<Wall>(GameRenderOrder::Map);
 		Wight4->SetMove({ 612,697 });
-		Wight4->GetBodyCollision()->SetScale({ 680, 34 });
-		
+		Wight4->GetBodyCollision()->SetScale({ 1200, 34 });
+
 
 		//세로벽
 		Wall* length = CreateActor<Wall>(GameRenderOrder::Map);
-		length->SetMove({ 255, 350 });
+		length->SetMove({ 119, 350 });
 		length->GetBodyCollision()->SetScale({ 34, 714 });
 
 		Wall* length2 = CreateActor<Wall>(GameRenderOrder::Map);
-		length2->SetMove({ 969, 350 });
+		length2->SetMove({ 1139, 350 });
 		length2->GetBodyCollision()->SetScale({ 34, 714 });
 
-		
-		
+
+
 
 		//장애물
 		Wall* Obstacle = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle->SetMove({ GameEngineWindow::GetScreenSize().x / 2 - 181,GameEngineWindow::GetScreenSize().y / 2 - 240 });
-		Obstacle->GetBodyCollision()->SetScale({ 34, 70 });
+		Obstacle->SetMove({ 629,646 });
+		Obstacle->GetBodyCollision()->SetScale({ 170, 68 });
 
 		Wall* Obstacle2 = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle2->SetMove({ GameEngineWindow::GetScreenSize().x / 2 - 45,GameEngineWindow::GetScreenSize().y / 2 - 224 });
-		Obstacle2->GetBodyCollision()->SetScale({ 34, 34 });
+		Obstacle2->SetMove({ 1037,663 });
+		Obstacle2->GetBodyCollision()->SetScale({ 170,34 });
 
-		Wall* Obstacle3 = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle3->SetMove({ 731,238 });
-		Obstacle3->GetBodyCollision()->SetScale({ 34, 68 });
-
-		Wall* Obstacle4 = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle4->SetMove({ 867,442 });
-		Obstacle4->GetBodyCollision()->SetScale({ 34, 136 });
 
 		//윈도우 틀
 		Wall* Left = CreateActor<Wall>(GameRenderOrder::Map);
@@ -168,20 +124,11 @@ void TutorialLevel::Loading()
 		Bot->SetMove({ 640,720 });
 		Bot->GetBodyCollision()->SetScale({ 1280, 10 });
 
-		//양쪽 벽 타기 실험
-		/*Wall* Actor7 = CreateActor<Wall>(GameRenderOrder::Map);
-		Actor7->SetMove({ 600, 350 });
-		Actor7->GetBodyCollision()->SetScale({ 34, 714 });
-
-		Wall* Actor8 = CreateActor<Wall>(GameRenderOrder::Map);
-		Actor8->SetMove({ 700, 350 });
-		Actor8->GetBodyCollision()->SetScale({ 34, 714 });*/
-
 	}
 	//오브젝트
 	{
 		scroll = CreateActor<Scroll>(GameRenderOrder::Cursor);
-		scroll->SetMove({ GameEngineWindow::GetScreenSize().x / 2 - 45,655 });
+		scroll->SetMove({ 629,600 });
 	}
 
 
@@ -201,17 +148,17 @@ void TutorialLevel::Loading()
 	}
 }
 
-void TutorialLevel::Update(float _DeltaTime)
+void Tutorial2Level::Update(float _DeltaTime)
 {
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))
 	{
-		 BGMPlayer.Stop();
+
 
 		if (false == BGMPlayer.GetPause())
 		{
 			BGMPlayer.PauseOn();
 		}
-		else 
+		else
 		{
 			BGMPlayer.PauseOff();
 		}
@@ -220,9 +167,9 @@ void TutorialLevel::Update(float _DeltaTime)
 		// Player::MainPlayer->Death()p;
 	}
 
-	if (false == GetScroll)
+	if (false == scroll->GetObjectisDeath())
 	{
-		
+
 		SetCameraPos({ Mario->GetPos().x,Mario->GetPos().y });
 		SetCameraMove(-GetCameraScale());
 		IsScreenOut();
@@ -232,22 +179,21 @@ void TutorialLevel::Update(float _DeltaTime)
 		float b = screenHeight / 2 - 360.0f;
 		GameEngineWindow::SettingWindowPos({ a + GetCameraPos().x, b + GetCameraPos().y });
 	}
-	else if(false == Fix)
+	else if (false == Fix)
 	{
 		GameEngineWindow::SettingWindowSize({ 1280,720 });
-		GameEngineWindow::SettingWindowPos({(float)screenWidth/2 - 640, (float)screenHeight/2-360 });
+		GameEngineWindow::SettingWindowPos({ (float)screenWidth / 2 - 640, (float)screenHeight / 2 - 360 });
 		SetCameraPos({ 0,0 });
 		Fix = true;
+		Tutorial2Map::MainMap->SetScroll(true);
+
 	}
-	
+
 
 }
 
-void TutorialLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
+void Tutorial2Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	
-	BGMPlayer = GameEngineResources::GetInst().SoundPlayToControl("stage1backgroundsound.mp3");
-	BGMPlayer.Volume(0.1f);
 	GameEngineWindow::SettingWindowSize({ 260,260 });
 	screenSizex = GameEngineWindow::GetScreenSize().x;
 	screenSizey = GameEngineWindow::GetScreenSize().y;

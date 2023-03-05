@@ -31,6 +31,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Tutorial2Level.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Tutorial2Map.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="TutorialMap.h">
       <SubType>
       </SubType>
@@ -87,6 +95,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Scroll.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Tutorial2Level.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Tutorial2Map.cpp">
       <SubType>
       </SubType>
     </ClCompile>

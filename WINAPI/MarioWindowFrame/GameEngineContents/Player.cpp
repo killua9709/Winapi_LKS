@@ -80,15 +80,7 @@ void Player::Start()
 		DownCollision->SetPosition({ 0, 0 });
 	}
 
-	//플레이어 사운드
-	{
-		GameEngineDirectory Dir;
-		Dir.MoveParentToDirectory("ContentsResources");
-		Dir.Move("ContentsResources");
-		Dir.Move("Sound");
-		GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("jump1.wav"));
-		GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("jump2.wav"));
-	}
+	
 	ChangeState(PlayerState::IDLE);
 }
 

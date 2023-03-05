@@ -1,4 +1,5 @@
 #include "STLevel.h"
+#include <GameEngineCore/GameEngineResources.h>
 
 STLevel::STLevel() 
 {
@@ -7,7 +8,7 @@ STLevel::STLevel()
 STLevel::~STLevel() 
 {
 }
-
+GameEngineSoundPlayer STLevel::BGMPlayer = nullptr;
 bool STLevel::GetScroll = false;
 
 void STLevel::IsScreenOut()

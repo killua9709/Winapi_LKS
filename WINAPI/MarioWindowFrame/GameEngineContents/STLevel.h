@@ -3,9 +3,11 @@
 #include <GameEnginePlatform/GameEngineWindow.h>
 
 // Ό³Έν :
+class GameEngineSoundPlayer;
 class STLevel : public GameEngineLevel
 {
 public:
+	static GameEngineSoundPlayer BGMPlayer;
 	// constrcuter destructer
 	STLevel();
 	~STLevel();

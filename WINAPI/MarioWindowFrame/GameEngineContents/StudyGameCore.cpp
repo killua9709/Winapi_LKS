@@ -3,6 +3,7 @@
 
 #include "TutorialLevel.h"
 #include "TitleLevel.h"
+#include "Tutorial2Level.h"
 
 // StudyGameCore StudyGameCore::Core = new StudyGameCore();
 
@@ -24,7 +25,8 @@ void StudyGameCore::Start()
 	// 실수 1.2 원한다면 
 	CreateLevel<TitleLevel>("TitleLevel");
 	CreateLevel<TutorialLevel>("TutorialLevel");
-	ChangeLevel("TutorialLevel");
+	CreateLevel<Tutorial2Level>("Tutorial2Level");
+	ChangeLevel("TitleLevel");
 }
 
 void StudyGameCore::Update()
