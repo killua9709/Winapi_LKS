@@ -31,6 +31,7 @@ TutorialLevel::TutorialLevel()
 
 TutorialLevel::~TutorialLevel()
 {
+	
 }
 
 void TutorialLevel::SoundLoad()
@@ -216,6 +217,7 @@ void TutorialLevel::Update(float _DeltaTime)
 {
 	if (true == GetDoor)
 	{
+		SetGetDoor(false);
 		GameEngineCore::GetInst()->ChangeLevel("Tutorial2Level");
 	}
 

@@ -29,6 +29,7 @@ Stage1_1Level::Stage1_1Level()
 
 Stage1_1Level::~Stage1_1Level()
 {
+	
 }
 
 void Stage1_1Level::SoundLoad()
@@ -68,7 +69,7 @@ void Stage1_1Level::Loading()
 	//플레이어
 	{
 		Mario = CreateActor<Player>(GameRenderOrder::Player);
-		Mario->SetMove({ 206,680 });
+		Mario->SetMove({ 500,300 });
 	}
 	//벽
 	{
@@ -80,11 +81,11 @@ void Stage1_1Level::Loading()
 
 		//세로벽
 		Wall* length = CreateActor<Wall>(GameRenderOrder::Map);
-		length->SetMove({ 119, 350 });
+		length->SetMove({ 289, 350 });
 		length->GetBodyCollision()->SetScale({ 34, 714 });
 
 		Wall* length2 = CreateActor<Wall>(GameRenderOrder::Map);
-		length2->SetMove({ 1139, 350 });
+		length2->SetMove({ 1173, 350 });
 		length2->GetBodyCollision()->SetScale({ 34, 714 });
 
 
@@ -92,8 +93,8 @@ void Stage1_1Level::Loading()
 
 		//장애물
 		Wall* Obstacle = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle->SetMove({ 629,646 });
-		Obstacle->GetBodyCollision()->SetScale({ 170, 68 });
+		Obstacle->SetMove({ 374,595 });
+		Obstacle->GetBodyCollision()->SetScale({ 136, 136 });
 
 		Wall* Obstacle2 = CreateActor<Wall>(GameRenderOrder::Map);
 		Obstacle2->SetMove({ 1037,663 });
@@ -145,16 +146,6 @@ void Stage1_1Level::Update(float _DeltaTime)
 {
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))
 	{
-
-
-		if (false == BGMPlayer.GetPause())
-		{
-			BGMPlayer.PauseOn();
-		}
-		else
-		{
-			BGMPlayer.PauseOff();
-		}
 
 		DebugRenderSwitch();
 		// Player::MainPlayer->Death()p;

@@ -134,7 +134,7 @@ void Tutorial2Level::Loading()
 		scroll->SetMove({ 629,600 });
 
 		door = CreateActor<Door>(GameRenderOrder::Cursor);
-		door->SetMove({ 635,600 });
+		door->SetMove({ 1037,628 });
 	}
 
 
@@ -158,6 +158,7 @@ void Tutorial2Level::Update(float _DeltaTime)
 {
 	if (true == GetDoor)
 	{
+		SetGetDoor(false);
 		GameEngineCore::GetInst()->ChangeLevel("Stage1_1Level");
 	}
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))

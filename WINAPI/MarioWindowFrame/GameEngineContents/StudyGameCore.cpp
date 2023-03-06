@@ -29,7 +29,7 @@ void StudyGameCore::Start()
 	CreateLevel<TutorialLevel>("TutorialLevel");
 	CreateLevel<Tutorial2Level>("Tutorial2Level");
 	CreateLevel<Stage1_1Level>("Stage1_1Level");
-	ChangeLevel("TitleLevel");
+	ChangeLevel("Stage1_1Level");
 }
 
 void StudyGameCore::Update()
