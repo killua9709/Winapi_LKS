@@ -48,6 +48,12 @@
     <ClInclude Include="Tutorial2Map.h">
       <Filter>Play\Tutorial2</Filter>
     </ClInclude>
+    <ClInclude Include="Stage1_1Level.h">
+      <Filter>Play\Stage1\Stage1_1</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage1_1Map.h">
+      <Filter>Play\Stage1\Stage1_1</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StudyGameCore.cpp" />
@@ -99,6 +105,12 @@
     <ClCompile Include="Tutorial2Map.cpp">
       <Filter>Play\Tutorial2</Filter>
     </ClCompile>
+    <ClCompile Include="Stage1_1Level.cpp">
+      <Filter>Play\Stage1\Stage1_1</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage1_1Map.cpp">
+      <Filter>Play\Stage1\Stage1_1</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Play">
@@ -130,6 +142,12 @@
     </Filter>
     <Filter Include="Play\Tutorial2">
       <UniqueIdentifier>{fd53037e-17c3-4016-9fc8-c81b2ae91ec6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Stage1">
+      <UniqueIdentifier>{424c8746-eb2d-4bf2-919c-6caa4007fdc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Stage1\Stage1_1">
+      <UniqueIdentifier>{6feb8f2d-6703-4bee-b437-21abb0b3b730}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,5 +1,6 @@
 #include "TitleBack.h"
 #include "ContentsEnums.h"
+#include <Windows.h>
 #include <GameEngineCore/GameEngineRender.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEnginePlatform/GameEngineInput.h>
@@ -26,6 +27,7 @@ void TitleBack::Start()
 
 	{
 		GameEngineWindow::SettingWindowSize({ 205,205 });
+		GameEngineWindow::SettingWindowPos({ (float)GetSystemMetrics(SM_CXSCREEN)/2 -103, (float)GetSystemMetrics(SM_CYSCREEN)/2 -103});
 		GameEngineRender* Render = CreateRender("·Î°í.bmp", GameRenderOrder::BackGround);
 		Render->SetPosition(GameEngineWindow::GetScreenSize().half());
 		Render->SetScale(GameEngineWindow::GetScreenSize());
@@ -56,6 +58,7 @@ void TitleBack::Update(float _DeltaTime)
 		BGMPlayer.Volume(0.2f);
 		GameEngineWindow::WindowContract();
 		GameEngineWindow::SettingWindowSize({ 262,70 });
+		GameEngineWindow::SettingWindowPos({ (float)GetSystemMetrics(SM_CXSCREEN) / 2 - 131, (float)GetSystemMetrics(SM_CYSCREEN) / 2 - 35 });
 		GameEngineWindow::WindowExpand();
 		GameEngineRender* Render = CreateRender("title.bmp", GameRenderOrder::BackGround);
 		Render->SetPosition(GameEngineWindow::GetScreenSize().half());
@@ -71,6 +74,7 @@ void TitleBack::Update(float _DeltaTime)
 		BGMPlayer.Volume(0.2f);
 		GameEngineWindow::WindowContract();
 		GameEngineWindow::SettingWindowSize({ 391,391 });
+		GameEngineWindow::SettingWindowPos({ (float)GetSystemMetrics(SM_CXSCREEN) / 2 - 195, (float)GetSystemMetrics(SM_CYSCREEN) / 2 - 195 });
 		GameEngineWindow::WindowExpand();
 		GameEngineRender* Render = CreateRender("Å°ÁÂÆÇ.bmp", GameRenderOrder::BackGround);
 		Render->SetPosition(GameEngineWindow::GetScreenSize().half());

@@ -50,6 +50,7 @@ void TutorialLevel::SoundLoad()
 void TutorialLevel::ImageLoad()
 {
 	GameEngineWindow::SettingWindowSize({ 1280,960 });
+	GameEngineWindow::SettingWindowPos({ (float)screenWidth / 2 - 640,(float)screenHeight / 2 - 480 });
 	// 상대경로 탐색
 	GameEngineDirectory Dir;
 	Dir.MoveParentToDirectory("ContentsResources");
@@ -96,7 +97,7 @@ void TutorialLevel::Loading()
 	//플레이어
 	{
 		Mario = CreateActor<Player>(GameRenderOrder::Player);
-		Mario->SetMove({GameEngineWindow::GetScreenSize().x/2,GameEngineWindow::GetScreenSize().y / 2-400});
+		Mario->SetMove({646,90});
 	}
 	//몬스터
 	{

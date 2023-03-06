@@ -1,4 +1,4 @@
-#include "Tutorial2Level.h"
+#include "Stage1_1Level.h"
 
 #include "Structs.h"
 
@@ -14,34 +14,28 @@
 
 // 나랑 같은 등급의 헤더들
 #include "Player.h"
-#include "Tutorial2Map.h"
+#include "Stage1_1Map.h"
 #include "ContentsEnums.h"
 #include "ContentsValue.h"
 #include "MouseObject.h"
 #include "Wall.h"
 #include "Scroll.h"
-#include "Door.h"
 
 
-Tutorial2Level::Tutorial2Level()
+Stage1_1Level::Stage1_1Level()
 {
 
 }
 
-Tutorial2Level::~Tutorial2Level()
+Stage1_1Level::~Stage1_1Level()
 {
 }
 
-void Tutorial2Level::SoundLoad()
+void Stage1_1Level::SoundLoad()
 {
-	GameEngineDirectory Dir;
-	Dir.MoveParentToDirectory("ContentsResources");
-	Dir.Move("ContentsResources");
-	Dir.Move("Sound");
 
-	GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("stage2backgroundsound.mp3"));
 }
-void Tutorial2Level::ImageLoad()
+void Stage1_1Level::ImageLoad()
 {
 	GameEngineWindow::SettingWindowSize({ 1280,960 });
 
@@ -53,18 +47,14 @@ void Tutorial2Level::ImageLoad()
 	Dir.Move("Play");
 
 	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("시작맵2.BMP"));
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("stage1_1Map.bmp"));
 		Image->Cut(1, 1);
 	}
-	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("시작맵2_1.BMP"));
-		Image->Cut(1, 1);
-	}
+
 }
 
-void Tutorial2Level::Loading()
+void Stage1_1Level::Loading()
 {
-	SoundLoad();
 	ImageLoad();
 
 	//마우스
@@ -73,7 +63,7 @@ void Tutorial2Level::Loading()
 	}
 	//맵
 	{
-		Tutorial2Map* Actor = CreateActor<Tutorial2Map>();
+		Stage1_1Map* Actor = CreateActor<Stage1_1Map>();
 	}
 	//플레이어
 	{
@@ -132,9 +122,6 @@ void Tutorial2Level::Loading()
 	{
 		scroll = CreateActor<Scroll>(GameRenderOrder::Cursor);
 		scroll->SetMove({ 629,600 });
-
-		door = CreateActor<Door>(GameRenderOrder::Cursor);
-		door->SetMove({ 635,600 });
 	}
 
 
@@ -154,12 +141,8 @@ void Tutorial2Level::Loading()
 	}
 }
 
-void Tutorial2Level::Update(float _DeltaTime)
+void Stage1_1Level::Update(float _DeltaTime)
 {
-	if (true == GetDoor)
-	{
-		GameEngineCore::GetInst()->ChangeLevel("Stage1_1Level");
-	}
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))
 	{
 
@@ -195,14 +178,14 @@ void Tutorial2Level::Update(float _DeltaTime)
 		GameEngineWindow::SettingWindowPos({ (float)screenWidth / 2 - 640, (float)screenHeight / 2 - 360 });
 		SetCameraPos({ 0,0 });
 		Fix = true;
-		Tutorial2Map::MainMap->SetScroll(true);
+		Stage1_1Map::MainMap->SetScroll(true);
 
 	}
 
 
 }
 
-void Tutorial2Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
+void Stage1_1Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	GameEngineWindow::SettingWindowSize({ 260,260 });
 	screenSizex = GameEngineWindow::GetScreenSize().x;
