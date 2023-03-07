@@ -3,14 +3,16 @@
 #include "ContentsEnums.h"
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineCore/GameEngineRender.h>
+#include <GameEngineCore/GameEngineLevel.h>
 
 
-Bullet::Bullet() 
+
+Bullet::Bullet()
 {
 
 }
 
-Bullet::~Bullet() 
+Bullet::~Bullet()
 {
 
 }
@@ -25,7 +27,7 @@ void Bullet::Start()
 	AnimationRender->SetScale({ 51, 51 });
 
 	AnimationRender->CreateAnimation({ .AnimationName = "Running",  .ImageName = "fireball.bmp", .Start = 0, .End = 3, .InterTime = 0.1f });
-	AnimationRender->CreateAnimation({ .AnimationName = "Fix",  .ImageName = "fireball.bmp", .Start = 4, .End = 6 ,.Loop=false});
+	AnimationRender->CreateAnimation({ .AnimationName = "Fix",  .ImageName = "fireball.bmp", .Start = 4, .End = 6 ,.Loop = false });
 
 	AnimationRender->ChangeAnimation("Running");
 }
@@ -36,6 +38,15 @@ void Bullet::Update(float _DeltaTime)
 	{
 		AnimationRender->ChangeAnimation("Fix");
 	}
+
+	if (false == first)
+	{
+		targetpos = GetLevel()->GetMousePosToCamera();
+		Move = (targetpos - GetPos()).NormalizeReturn();
+		first = true;
+	}
+
+	SetMove(Move * _DeltaTime * 10);
 }
 
 void Bullet::Render(float _DeltaTime)

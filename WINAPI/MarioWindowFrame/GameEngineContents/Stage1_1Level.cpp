@@ -171,6 +171,16 @@ void Stage1_1Level::Loading()
 
 void Stage1_1Level::Update(float _DeltaTime)
 {
+	//총알 클릭하면 나가게하기
+	if ((GameEngineInput::IsPress("EnginemouseLeft")) &&
+		(0 < GetMousePosToCamera().x) &&
+		(GameEngineWindow::GetMousePosition().x < GameEngineWindow::GetScreenSize().x) &&
+		(0 < GetMousePosToCamera().y) &&
+		GameEngineWindow::GetMousePosition().y < GameEngineWindow::GetScreenSize().y)
+	{
+		Bullets[1]->On();
+	}
+
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))
 	{
 		/*if (false == BGMPlayer.GetPause())

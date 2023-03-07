@@ -22,5 +22,8 @@ protected:
 	void Render(float _DeltaTime) override;
 private:
 	GameEngineRender* AnimationRender = nullptr;
+	bool first = false;
+	float4 targetpos = float4::Zero;
+	float4 Move = float4::Zero;
 };
 
