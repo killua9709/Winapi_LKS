@@ -7,6 +7,7 @@
 
 
 
+
 Bullet::Bullet()
 {
 
@@ -15,6 +16,13 @@ Bullet::Bullet()
 Bullet::~Bullet()
 {
 
+}
+
+void Bullet::Fire()
+{
+	GetSoundPlayer = GameEngineResources::GetInst().SoundPlayToControl("Fireball.mp3");
+	GetSoundPlayer.LoopCount(1);
+	GetSoundPlayer.Volume(0.1f);
 }
 
 void Bullet::Start()
@@ -27,26 +35,31 @@ void Bullet::Start()
 	AnimationRender->SetScale({ 51, 51 });
 
 	AnimationRender->CreateAnimation({ .AnimationName = "Running",  .ImageName = "fireball.bmp", .Start = 0, .End = 3, .InterTime = 0.1f });
-	AnimationRender->CreateAnimation({ .AnimationName = "Fix",  .ImageName = "fireball.bmp", .Start = 4, .End = 6 ,.Loop = false });
+	AnimationRender->CreateAnimation({ .AnimationName = "Fix",  .ImageName = "fireball.bmp", .Start = 3, .End = 4 ,.Loop = false });
 
 	AnimationRender->ChangeAnimation("Running");
 }
 
 void Bullet::Update(float _DeltaTime)
 {
-	if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Player), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
-	{
-		AnimationRender->ChangeAnimation("Fix");
-	}
-
+	
 	if (false == first)
 	{
 		targetpos = GetLevel()->GetMousePosToCamera();
 		Move = (targetpos - GetPos()).NormalizeReturn();
+		Fire();
 		first = true;
 	}
 
-	SetMove(Move * _DeltaTime * 400);
+	if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
+	{
+		AnimationRender->ChangeAnimation("Fix");
+
+	}
+	else
+	{
+		SetMove(Move * _DeltaTime * 600);
+	}
 }
 
 void Bullet::Render(float _DeltaTime)

@@ -1,5 +1,7 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
+#include <GameEngineCore/GameEngineResources.h>
+
 
 
 // Ό³Έν :
@@ -20,11 +22,20 @@ public:
 	{
 		first = _first;
 	}
+
+	GameEngineRender* GetAnimationRender()
+	{
+		return AnimationRender;
+	}
+
+	void Fire();
+
 protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 	void Render(float _DeltaTime) override;
 private:
+	GameEngineSoundPlayer GetSoundPlayer;
 	GameEngineRender* AnimationRender = nullptr;
 	bool first = false;
 	float4 targetpos = float4::Zero;

@@ -36,7 +36,12 @@ Stage1_1Level::~Stage1_1Level()
 
 void Stage1_1Level::SoundLoad()
 {
+	GameEngineDirectory Dir;
+	Dir.MoveParentToDirectory("ContentsResources");
+	Dir.Move("ContentsResources");
+	Dir.Move("Sound");
 
+	GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("Fireball.mp3"));
 }
 void Stage1_1Level::ImageLoad()
 {
@@ -69,6 +74,7 @@ void Stage1_1Level::ImageLoad()
 void Stage1_1Level::Loading()
 {
 	ImageLoad();
+	SoundLoad();
 
 	//마우스
 	{
@@ -172,12 +178,13 @@ void Stage1_1Level::Loading()
 void Stage1_1Level::Update(float _DeltaTime)
 {
 	//총알 클릭하면 나가게하기
-	if ((GameEngineInput::IsPress("EnginemouseLeft")) &&
+	if ((GameEngineInput::IsDown("EnginemouseLeft")) &&
 		(0 < GetMousePosToCamera().x) &&
 		(GameEngineWindow::GetMousePosition().x < GameEngineWindow::GetScreenSize().x) &&
 		(0 < GetMousePosToCamera().y) &&
 		GameEngineWindow::GetMousePosition().y < GameEngineWindow::GetScreenSize().y)
 	{
+		Bullets[1]->SetPos({ Mario->GetPos().x,Mario->GetPos().y - 16 });
 		Bullets[1]->On();
 	}
 
@@ -188,8 +195,8 @@ void Stage1_1Level::Update(float _DeltaTime)
 		GameEngineWindow::GetMousePosition().y < GameEngineWindow::GetScreenSize().y)
 	{
 		Bullets[1]->Off();
-		Bullets[1]->SetPos({ Mario->GetPos().x,Mario->GetPos().y - 16 });
 		Bullets[1]->SetFisrt(false);
+		Bullets[1]->GetAnimationRender()->ChangeAnimation("Running");
 	}
 
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))
