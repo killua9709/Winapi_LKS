@@ -79,7 +79,6 @@ void Player::Start()
 		DownCollision->SetScale({ 1, 1 });
 		DownCollision->SetPosition({ 0, 0 });
 	}
-
 	
 	ChangeState(PlayerState::IDLE);
 }

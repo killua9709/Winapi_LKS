@@ -19,7 +19,9 @@
 #include "ContentsValue.h"
 #include "MouseObject.h"
 #include "Wall.h"
+#include "Bullet.h"
 #include "Scroll.h"
+#include "Bullet.h"
 
 
 Stage1_1Level::Stage1_1Level()
@@ -52,6 +54,16 @@ void Stage1_1Level::ImageLoad()
 		Image->Cut(1, 1);
 	}
 
+	{
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("fireball.bmp"));
+		Image->Cut(5, 2);
+	}
+	
+	{
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Bullets.bmp"));
+		Image->Cut(6, 1);
+	}
+
 }
 
 void Stage1_1Level::Loading()
@@ -69,7 +81,7 @@ void Stage1_1Level::Loading()
 	//플레이어
 	{
 		Mario = CreateActor<Player>(GameRenderOrder::Player);
-		Mario->SetMove({ 500,300 });
+		Mario->SetMove({ 372,544 });
 	}
 	//벽
 	{
@@ -85,7 +97,7 @@ void Stage1_1Level::Loading()
 		length->GetBodyCollision()->SetScale({ 34, 714 });
 
 		Wall* length2 = CreateActor<Wall>(GameRenderOrder::Map);
-		length2->SetMove({ 1173, 350 });
+		length2->SetMove({ 1003, 350 });
 		length2->GetBodyCollision()->SetScale({ 34, 714 });
 
 
@@ -93,12 +105,16 @@ void Stage1_1Level::Loading()
 
 		//장애물
 		Wall* Obstacle = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle->SetMove({ 374,595 });
+		Obstacle->SetMove({ 374,612 });
 		Obstacle->GetBodyCollision()->SetScale({ 136, 136 });
 
 		Wall* Obstacle2 = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle2->SetMove({ 1037,663 });
-		Obstacle2->GetBodyCollision()->SetScale({ 170,34 });
+		Obstacle2->SetMove({ 510,646 });
+		Obstacle2->GetBodyCollision()->SetScale({ 136,68 });
+
+		Wall* Obstacle3 = CreateActor<Wall>(GameRenderOrder::Map);
+		Obstacle3->SetMove({ 918,612 });
+		Obstacle3->GetBodyCollision()->SetScale({ 136,136 });
 
 
 		//윈도우 틀
@@ -121,8 +137,19 @@ void Stage1_1Level::Loading()
 	}
 	//오브젝트
 	{
-		scroll = CreateActor<Scroll>(GameRenderOrder::Cursor);
-		scroll->SetMove({ 629,600 });
+		/*scroll = CreateActor<Scroll>(GameRenderOrder::Cursor);
+		scroll->SetMove({ 629,600 });*/
+
+		Bullet* bullet1 = CreateActor<Bullet>(GameRenderOrder::Cursor);
+		bullet1->SetMove({ 629,600 });
+
+		for (size_t i = 0; i < 6; i++)
+		{
+			Bullet* bullet = CreateActor<Bullet>(GameRenderOrder::Cursor);
+			bullet->SetMove({Mario->GetPos().x,Mario->GetPos().y-15});
+			Bullets.push_back(bullet);
+			Bullets[i]->Off();
+		}
 	}
 
 
@@ -146,14 +173,27 @@ void Stage1_1Level::Update(float _DeltaTime)
 {
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))
 	{
-
+		/*if (false == BGMPlayer.GetPause())
+		{
+			BGMPlayer.PauseOn();
+		}
+		else
+		{
+			BGMPlayer.PauseOff();
+		}*/
 		DebugRenderSwitch();
 		// Player::MainPlayer->Death()p;
 	}
 
-	if (false == scroll->GetObjectisDeath())
+	if (true == Getisdebug())
 	{
-
+		GameEngineWindow::SettingWindowSize({ 1280,720 });
+		GameEngineWindow::SettingWindowPos({ (float)screenWidth / 2 - 640, (float)screenHeight / 2 - 360 });
+		SetCameraPos({ 0,0 });
+	}
+	else
+	{
+		GameEngineWindow::SettingWindowSize({ 260,260 });
 		SetCameraPos({ Mario->GetPos().x,Mario->GetPos().y });
 		SetCameraMove(-GetCameraScale());
 		IsScreenOut();
@@ -163,17 +203,6 @@ void Stage1_1Level::Update(float _DeltaTime)
 		float b = screenHeight / 2 - 360.0f;
 		GameEngineWindow::SettingWindowPos({ a + GetCameraPos().x, b + GetCameraPos().y });
 	}
-	else if (false == Fix)
-	{
-		GameEngineWindow::SettingWindowSize({ 1280,720 });
-		GameEngineWindow::SettingWindowPos({ (float)screenWidth / 2 - 640, (float)screenHeight / 2 - 360 });
-		SetCameraPos({ 0,0 });
-		Fix = true;
-		Stage1_1Map::MainMap->SetScroll(true);
-
-	}
-
-
 }
 
 void Stage1_1Level::LevelChangeStart(GameEngineLevel* _PrevLevel)

@@ -54,6 +54,9 @@
     <ClInclude Include="Stage1_1Map.h">
       <Filter>Play\Stage1\Stage1_1</Filter>
     </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>GlobalActors\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StudyGameCore.cpp" />
@@ -110,6 +113,9 @@
     </ClCompile>
     <ClCompile Include="Stage1_1Map.cpp">
       <Filter>Play\Stage1\Stage1_1</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>GlobalActors\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

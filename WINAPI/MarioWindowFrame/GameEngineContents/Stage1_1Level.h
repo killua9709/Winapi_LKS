@@ -5,6 +5,7 @@
 // Ό³Έν :
 class Player;
 class Scroll;
+class Bullet;
 class Stage1_1Level : public STLevel
 {
 public:
@@ -27,7 +28,7 @@ protected:
 
 
 private:
-
+	std::vector<Bullet*> Bullets;
 	void SoundLoad();
 	void ImageLoad();
 	Player* Mario = nullptr;

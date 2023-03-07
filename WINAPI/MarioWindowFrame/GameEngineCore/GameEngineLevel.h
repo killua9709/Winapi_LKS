@@ -132,6 +132,11 @@ public:
 		DebugTexts.push_back(_DebugText);
 	}
 
+	static bool Getisdebug()
+	{
+		return IsDebugRender;
+	}
+
 protected:
 	virtual void Loading() = 0;
 	virtual void Update(float _DeltaTime) = 0;

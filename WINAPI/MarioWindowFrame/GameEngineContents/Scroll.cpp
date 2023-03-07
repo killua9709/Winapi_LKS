@@ -2,7 +2,6 @@
 #include "Player.h"
 #include "STLevel.h"
 #include "ContentsEnums.h"
-#include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineCore/GameEngineRender.h>
 

@@ -43,7 +43,6 @@ protected:
 private:
 
 	// std::vector<WeaponInfo> MyWeapon;
-
 	NumberRenderObject TestNumber;
 
 	float AccTime = 0.0f;
