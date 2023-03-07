@@ -66,6 +66,8 @@ void Stage1_1Level::ImageLoad()
 
 }
 
+
+
 void Stage1_1Level::Loading()
 {
 	ImageLoad();
@@ -179,17 +181,7 @@ void Stage1_1Level::Update(float _DeltaTime)
 	}
 	
 	//{{카메라 렉트
-	Left->SetPos({ GetCameraPos().x,GetCameraPos().y + GetCameraScale().y});
-	Left->GetBodyCollision()->SetScale({ 10, GetCameraScale().y * 2 });
-
-	Right->SetPos({ GetCameraPos().x + GetCameraScale().x*2,GetCameraPos().y + GetCameraScale().y});
-	Right->GetBodyCollision()->SetScale({ 10, GetCameraScale().y * 2 });
-
-	Top->SetPos({ GetCameraPos().x + GetCameraScale().x,GetCameraPos().y });
-	Top->GetBodyCollision()->SetScale({ GetCameraScale().x * 2, 10 });
-
-	Bot->SetPos({ GetCameraPos().x + GetCameraScale().x,GetCameraPos().y + GetCameraScale().y * 2 });
-	Bot->GetBodyCollision()->SetScale({ GetCameraScale().x * 2, 10 });
+	CameraRectUpdate();
 	//}}
 
 	if (true == Getisdebug())
@@ -225,4 +217,31 @@ void Stage1_1Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	//모니터 크기 절반에 내 스크린 사이즈 절반 만큼 빼서 크기 조정
 	GameEngineWindow::SettingWindowPos({ screenWidth / 2 - (screenSizex / 2) ,screenHeight / 2 - (screenSizey / 2) });
 	//GameEngineWindow::WindowExpand();
+}
+
+void Stage1_1Level::CameraRectUpdate()
+{
+	if (false == Left->GetBodyCollision()->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
+	{
+		Left->SetPos({ GetCameraPos().x,GetCameraPos().y + GetCameraScale().y });
+		Left->GetBodyCollision()->SetScale({ 10, 2000 });
+	}
+	
+	if (false == Right->GetBodyCollision()->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
+	{
+		Right->SetPos({ GetCameraPos().x + GetCameraScale().x * 2,GetCameraPos().y + GetCameraScale().y });
+		Right->GetBodyCollision()->SetScale({ 10, 2000 });
+	}
+	
+	if (false == Top->GetBodyCollision()->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
+	{
+		Top->SetPos({ GetCameraPos().x + GetCameraScale().x,GetCameraPos().y });
+		Top->GetBodyCollision()->SetScale({ 2000, 10 });
+	}
+	
+	if (false == Bot->GetBodyCollision()->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
+	{
+		Bot->SetPos({ GetCameraPos().x + GetCameraScale().x,GetCameraPos().y + GetCameraScale().y * 2 });
+		Bot->GetBodyCollision()->SetScale({ 2000, 10 });
+	}
 }

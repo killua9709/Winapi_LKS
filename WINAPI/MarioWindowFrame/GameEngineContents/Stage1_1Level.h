@@ -31,6 +31,7 @@ protected:
 private:
 	void SoundLoad();
 	void ImageLoad();
+	void CameraRectUpdate();
 
 	Wall* Left;
 	Wall* Right;

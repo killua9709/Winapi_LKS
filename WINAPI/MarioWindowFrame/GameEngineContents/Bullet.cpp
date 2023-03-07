@@ -27,7 +27,7 @@ void Bullet::Fire()
 
 void Bullet::Start()
 {
-	BodyCollision = CreateCollision(GameCollisionOrder::Object);
+	BodyCollision = CreateCollision(GameCollisionOrder::Bullet);
 	BodyCollision->SetScale({ 16, 16 });
 	BodyCollision->SetPosition({ 0, -8 });
 
