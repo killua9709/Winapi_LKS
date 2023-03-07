@@ -46,7 +46,7 @@ void Bullet::Update(float _DeltaTime)
 		first = true;
 	}
 
-	SetMove(Move * _DeltaTime * 10);
+	SetMove(Move * _DeltaTime * 400);
 }
 
 void Bullet::Render(float _DeltaTime)

@@ -16,6 +16,10 @@ public:
 	Bullet& operator=(const Bullet& _Other) = delete;
 	Bullet& operator=(Bullet&& _Other) noexcept = delete;
 
+	void SetFisrt(bool _first)
+	{
+		first = _first;
+	}
 protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;

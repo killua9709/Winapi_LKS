@@ -181,6 +181,17 @@ void Stage1_1Level::Update(float _DeltaTime)
 		Bullets[1]->On();
 	}
 
+	if ((GameEngineInput::IsPress("EnginemouseRight")) &&
+		(0 < GetMousePosToCamera().x) &&
+		(GameEngineWindow::GetMousePosition().x < GameEngineWindow::GetScreenSize().x) &&
+		(0 < GetMousePosToCamera().y) &&
+		GameEngineWindow::GetMousePosition().y < GameEngineWindow::GetScreenSize().y)
+	{
+		Bullets[1]->Off();
+		Bullets[1]->SetPos({ Mario->GetPos().x,Mario->GetPos().y - 16 });
+		Bullets[1]->SetFisrt(false);
+	}
+
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))
 	{
 		/*if (false == BGMPlayer.GetPause())
