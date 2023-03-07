@@ -8,6 +8,8 @@
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineBase/GameEngineTime.h>
+#include <GameEngineCore/GameEngineLevel.h>
+
 
 
 #include "ContentsEnums.h"
@@ -15,6 +17,7 @@
 
 #include "TutorialMap.h"
 #include "STLevel.h"
+#include "Bullet.h"
 
 Player* Player::MainPlayer;
 
@@ -78,6 +81,14 @@ void Player::Start()
 		DownCollision = CreateCollision(GameCollisionOrder::Player);
 		DownCollision->SetScale({ 1, 1 });
 		DownCollision->SetPosition({ 0, 0 });
+	}
+
+	for (size_t i = 0; i < 6; i++)
+	{
+		Bullet* bullet = GetLevel()->CreateActor<Bullet>(GameRenderOrder::Cursor);
+		bullet->SetMove({ GetPos().x,GetPos().y - 15 });
+		Bullets.push_back(bullet);
+		Bullets[i]->Off();
 	}
 	
 	ChangeState(PlayerState::IDLE);
@@ -161,6 +172,41 @@ void Player::Update(float _DeltaTime)
 	if (GameEngineInput::IsDown("StageClear"))
 	{
 		TutorialMap::MainMap->StageClearOn();
+	}
+
+	//총알 클릭하면 나가게하기
+	if ((GameEngineInput::IsDown("EnginemouseLeft")) &&
+		(0 < GetLevel()->GetMousePosToCamera().x) &&
+		(GameEngineWindow::GetMousePosition().x < GameEngineWindow::GetScreenSize().x) &&
+		(0 < GetLevel()->GetMousePosToCamera().y) &&
+		GameEngineWindow::GetMousePosition().y < GameEngineWindow::GetScreenSize().y)
+	{
+		for (size_t i = 0; i < Bullets.size(); i++)
+		{
+			if (false == Bullets[i]->isOn())
+			{
+				Bullets[i]->SetPos({ GetPos().x,GetPos().y - 16 });
+				Bullets[i]->On();
+				break;
+			}
+		}
+	}
+
+	if ((GameEngineInput::IsDown("EnginemouseRight")) &&
+		(0 < GetLevel()->GetMousePosToCamera().x) &&
+		(GameEngineWindow::GetMousePosition().x < GameEngineWindow::GetScreenSize().x) &&
+		(0 < GetLevel()->GetMousePosToCamera().y) &&
+		GameEngineWindow::GetMousePosition().y < GameEngineWindow::GetScreenSize().y)
+	{
+		for (size_t i = 0; i < Bullets.size(); i++)
+		{
+			if (true == Bullets[i]->isOn())
+			{
+				Bullets[i]->Off();
+				Bullets[i]->SetFisrt(false);
+				Bullets[i]->GetAnimationRender()->ChangeAnimation("Running");
+			}
+		}
 	}
 
 

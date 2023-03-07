@@ -40,6 +40,11 @@ public:
 		ObjectDeath = true;
 	}
 
+	virtual bool isOn()
+	{
+		return ObjectUpdate;
+	}
+
 	virtual void On() 
 	{
 		ObjectUpdate = true;

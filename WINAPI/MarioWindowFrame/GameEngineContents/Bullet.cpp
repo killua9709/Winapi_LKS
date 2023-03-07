@@ -48,6 +48,7 @@ void Bullet::Update(float _DeltaTime)
 		targetpos = GetLevel()->GetMousePosToCamera();
 		Move = (targetpos - GetPos()).NormalizeReturn();
 		Fire();
+		/*SetPos({ Player::MainPlayer->GetPos().x,Player::MainPlayer->GetPos().y - 16 });*/
 		first = true;
 	}
 

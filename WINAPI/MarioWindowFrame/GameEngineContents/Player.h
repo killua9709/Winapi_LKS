@@ -18,6 +18,7 @@ enum class PlayerState
 };
 
 // Ό³Έν :
+class Bullet;
 class Player : public GameEngineActor
 {
 public:
@@ -44,6 +45,7 @@ private:
 
 	// std::vector<WeaponInfo> MyWeapon;
 	NumberRenderObject TestNumber;
+	std::vector<Bullet*> Bullets;
 
 	float AccTime = 0.0f;
 	int StartFrame = 0;

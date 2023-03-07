@@ -58,11 +58,6 @@ void Stage1_1Level::ImageLoad()
 		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("stage1_1Map.bmp"));
 		Image->Cut(1, 1);
 	}
-
-	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("fireball.bmp"));
-		Image->Cut(5, 2);
-	}
 	
 	{
 		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Bullets.bmp"));
@@ -149,13 +144,7 @@ void Stage1_1Level::Loading()
 		Bullet* bullet1 = CreateActor<Bullet>(GameRenderOrder::Cursor);
 		bullet1->SetMove({ 629,600 });
 
-		for (size_t i = 0; i < 6; i++)
-		{
-			Bullet* bullet = CreateActor<Bullet>(GameRenderOrder::Cursor);
-			bullet->SetMove({Mario->GetPos().x,Mario->GetPos().y-15});
-			Bullets.push_back(bullet);
-			Bullets[i]->Off();
-		}
+		
 	}
 
 
@@ -177,27 +166,7 @@ void Stage1_1Level::Loading()
 
 void Stage1_1Level::Update(float _DeltaTime)
 {
-	//총알 클릭하면 나가게하기
-	if ((GameEngineInput::IsDown("EnginemouseLeft")) &&
-		(0 < GetMousePosToCamera().x) &&
-		(GameEngineWindow::GetMousePosition().x < GameEngineWindow::GetScreenSize().x) &&
-		(0 < GetMousePosToCamera().y) &&
-		GameEngineWindow::GetMousePosition().y < GameEngineWindow::GetScreenSize().y)
-	{
-		Bullets[1]->SetPos({ Mario->GetPos().x,Mario->GetPos().y - 16 });
-		Bullets[1]->On();
-	}
-
-	if ((GameEngineInput::IsPress("EnginemouseRight")) &&
-		(0 < GetMousePosToCamera().x) &&
-		(GameEngineWindow::GetMousePosition().x < GameEngineWindow::GetScreenSize().x) &&
-		(0 < GetMousePosToCamera().y) &&
-		GameEngineWindow::GetMousePosition().y < GameEngineWindow::GetScreenSize().y)
-	{
-		Bullets[1]->Off();
-		Bullets[1]->SetFisrt(false);
-		Bullets[1]->GetAnimationRender()->ChangeAnimation("Running");
-	}
+	
 
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))
 	{

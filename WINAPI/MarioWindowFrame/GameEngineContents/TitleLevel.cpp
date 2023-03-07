@@ -35,6 +35,19 @@ void TitleLevel::Loading()
 		GameEngineDirectory Dir;
 		Dir.MoveParentToDirectory("ContentsResources");
 		Dir.Move("ContentsResources");
+		Dir.Move("Image");
+		Dir.Move("Play");
+
+		{
+			GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("fireball.bmp"));
+			Image->Cut(5, 2);
+		}
+
+	}
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToDirectory("ContentsResources");
+		Dir.Move("ContentsResources");
 		Dir.Move("Sound");
 		GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("blockhit.wav"));
 		GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("Coin.wav"));

@@ -28,7 +28,6 @@ protected:
 
 
 private:
-	std::vector<Bullet*> Bullets;
 	void SoundLoad();
 	void ImageLoad();
 	Player* Mario = nullptr;
