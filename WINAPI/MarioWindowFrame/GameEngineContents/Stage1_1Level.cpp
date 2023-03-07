@@ -118,39 +118,35 @@ void Stage1_1Level::Loading()
 		Obstacle3->GetBodyCollision()->SetScale({ 136,136 });
 
 
-		//윈도우 틀
-		Wall* Left = CreateActor<Wall>(GameRenderOrder::Map);
-		Left->SetMove({ 0,360 });
-		Left->GetBodyCollision()->SetScale({ 1, 720 });
+		//{{윈도우 틀
+		Left = CreateActor<Wall>(GameRenderOrder::Map);
+		Left->SetPos({ GetCameraPos().x,GetCameraPos().y + GetCameraScale().y });
+		Left->GetBodyCollision()->SetScale({ 10, GetCameraScale().y*2});
 
-		Wall* Right = CreateActor<Wall>(GameRenderOrder::Map);
-		Right->SetMove({ 1280,360 });
-		Right->GetBodyCollision()->SetScale({ 1, 720 });
+		Right = CreateActor<Wall>(GameRenderOrder::Map);
+		Right->SetPos({ GetCameraPos().x + GetCameraScale().x*2,GetCameraPos().y + GetCameraScale().y });
+		Right->GetBodyCollision()->SetScale({ 10, GetCameraScale().y * 2 });
 
-		Wall* Top = CreateActor<Wall>(GameRenderOrder::Map);
-		Top->SetMove({ 640,0 });
-		Top->GetBodyCollision()->SetScale({ 1280, 10 });
+		Top = CreateActor<Wall>(GameRenderOrder::Map);
+		Top->SetPos({ GetCameraPos().x + GetCameraScale().x,GetCameraPos().y });
+		Top->GetBodyCollision()->SetScale({ GetCameraScale().x * 2, 10 });
 
-		Wall* Bot = CreateActor<Wall>(GameRenderOrder::Map);
-		Bot->SetMove({ 640,720 });
-		Bot->GetBodyCollision()->SetScale({ 1280, 10 });
-
+		Bot = CreateActor<Wall>(GameRenderOrder::Map);
+		Bot->SetPos({ GetCameraPos().x + GetCameraScale().x,GetCameraPos().y + GetCameraScale().y*2});
+		Bot->GetBodyCollision()->SetScale({ GetCameraScale().x * 2, 10 });
+		//}}
 	}
 	//오브젝트
 	{
 		/*scroll = CreateActor<Scroll>(GameRenderOrder::Cursor);
 		scroll->SetMove({ 629,600 });*/
-
-		Bullet* bullet1 = CreateActor<Bullet>(GameRenderOrder::Cursor);
-		bullet1->SetMove({ 629,600 });
-
 		
 	}
 
 
 	if (false == GameEngineInput::IsKey("DebugRenderSwitch"))
 	{
-		GameEngineInput::CreateKey("DebugRenderSwitch", 'R');
+		GameEngineInput::CreateKey("DebugRenderSwitch", 'M');
 	}
 
 
@@ -181,15 +177,31 @@ void Stage1_1Level::Update(float _DeltaTime)
 		DebugRenderSwitch();
 		// Player::MainPlayer->Death()p;
 	}
+	
+	//{{카메라 렉트
+	Left->SetPos({ GetCameraPos().x,GetCameraPos().y + GetCameraScale().y});
+	Left->GetBodyCollision()->SetScale({ 10, GetCameraScale().y * 2 });
+
+	Right->SetPos({ GetCameraPos().x + GetCameraScale().x*2,GetCameraPos().y + GetCameraScale().y});
+	Right->GetBodyCollision()->SetScale({ 10, GetCameraScale().y * 2 });
+
+	Top->SetPos({ GetCameraPos().x + GetCameraScale().x,GetCameraPos().y });
+	Top->GetBodyCollision()->SetScale({ GetCameraScale().x * 2, 10 });
+
+	Bot->SetPos({ GetCameraPos().x + GetCameraScale().x,GetCameraPos().y + GetCameraScale().y * 2 });
+	Bot->GetBodyCollision()->SetScale({ GetCameraScale().x * 2, 10 });
+	//}}
 
 	if (true == Getisdebug())
 	{
+		SetCameraScale({ 640,360 });
 		GameEngineWindow::SettingWindowSize({ 1280,720 });
 		GameEngineWindow::SettingWindowPos({ (float)screenWidth / 2 - 640, (float)screenHeight / 2 - 360 });
 		SetCameraPos({ 0,0 });
 	}
 	else
 	{
+		SetCameraScale({ 130,130 });
 		GameEngineWindow::SettingWindowSize({ 260,260 });
 		SetCameraPos({ Mario->GetPos().x,Mario->GetPos().y });
 		SetCameraMove(-GetCameraScale());

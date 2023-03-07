@@ -199,7 +199,7 @@ void TutorialLevel::Loading()
 
 	if (false == GameEngineInput::IsKey("DebugRenderSwitch"))
 	{
-		GameEngineInput::CreateKey("DebugRenderSwitch", 'R');
+		GameEngineInput::CreateKey("DebugRenderSwitch", 'M');
 	}
 
 
@@ -255,10 +255,6 @@ void TutorialLevel::Update(float _DeltaTime)
 		SetCameraPos({ 0,0 });
 		Fix = true;
 	}
-
-
-	
-
 }
 
 void TutorialLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)

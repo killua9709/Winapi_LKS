@@ -73,6 +73,8 @@ private:
 	GameEngineCollision* DownCollision = nullptr;
 	//////
 
+
+
 	GameEngineSoundPlayer JumpSoundPlayer;
 
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;

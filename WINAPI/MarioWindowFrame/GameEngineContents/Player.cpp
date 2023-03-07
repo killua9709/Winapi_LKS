@@ -38,6 +38,7 @@ void Player::Start()
 		GameEngineInput::CreateKey("RightMove", 'D');
 		GameEngineInput::CreateKey("DownMove", 'S');
 		GameEngineInput::CreateKey("UpMove", 'W');
+		GameEngineInput::CreateKey("Reload", 'R');
 
 		GameEngineInput::CreateKey("FreeMoveSwitch", '1');
 		GameEngineInput::CreateKey("StageClear", '2');
@@ -192,7 +193,7 @@ void Player::Update(float _DeltaTime)
 		}
 	}
 
-	if ((GameEngineInput::IsDown("EnginemouseRight")) &&
+	if ((GameEngineInput::IsDown("Reload")) &&
 		(0 < GetLevel()->GetMousePosToCamera().x) &&
 		(GameEngineWindow::GetMousePosition().x < GameEngineWindow::GetScreenSize().x) &&
 		(0 < GetLevel()->GetMousePosToCamera().y) &&
@@ -247,23 +248,30 @@ void Player::Render(float _DeltaTime)
 		//BodyCollision->DebugRender();
 
 
-		std::string dir = "direction : ";
+		/*std::string dir = "direction : ";
 		dir += DirString;
 
 		std::string dir2 = "playerstate : ";
-		dir2 += std::to_string( (int)StateValue);
+		dir2 += std::to_string( (int)StateValue);*/
 
 		std::string dir3 = "posx : ";
 		dir3 += std::to_string((int)GetPos().x);
 
 		std::string dir4 = "posy : ";
 		dir4 += std::to_string((int)GetPos().y);
+		
+		std::string dir5 = "cameraposx : ";
+		dir5 += std::to_string((int)GetLevel()->GetCameraPos().x);
 
+		std::string dir6 = "cameraposx : ";
+		dir6 += std::to_string((int)GetLevel()->GetCameraPos().y);
 
-		GameEngineLevel::DebugTextPush(dir);
-		GameEngineLevel::DebugTextPush(dir2);
+		/*GameEngineLevel::DebugTextPush(dir);
+		GameEngineLevel::DebugTextPush(dir2);*/
 		GameEngineLevel::DebugTextPush(dir3);
 		GameEngineLevel::DebugTextPush(dir4);
+		GameEngineLevel::DebugTextPush(dir5);
+		GameEngineLevel::DebugTextPush(dir6);
 
 		/*std::string Text = "Ãâ·Â";
 		SetBkMode(DoubleDC, TRANSPARENT);

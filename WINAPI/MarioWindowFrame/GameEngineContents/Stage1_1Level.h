@@ -6,6 +6,7 @@
 class Player;
 class Scroll;
 class Bullet;
+class Wall;
 class Stage1_1Level : public STLevel
 {
 public:
@@ -30,6 +31,12 @@ protected:
 private:
 	void SoundLoad();
 	void ImageLoad();
+
+	Wall* Left;
+	Wall* Right;
+	Wall* Top;
+	Wall* Bot;
+
 	Player* Mario = nullptr;
 	Scroll* scroll = nullptr;
 	bool Fix = false;

@@ -140,7 +140,7 @@ void Tutorial2Level::Loading()
 
 	if (false == GameEngineInput::IsKey("DebugRenderSwitch"))
 	{
-		GameEngineInput::CreateKey("DebugRenderSwitch", 'R');
+		GameEngineInput::CreateKey("DebugRenderSwitch", 'M');
 	}
 
 

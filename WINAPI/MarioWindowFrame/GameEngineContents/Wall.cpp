@@ -23,6 +23,6 @@ void Wall::Start()
 
 void Wall::Render(float _Time)
 {
-	//BodyCollision->DebugRender();
+	BodyCollision->DebugRender();
 }
 
