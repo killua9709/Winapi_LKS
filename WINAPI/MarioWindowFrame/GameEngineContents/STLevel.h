@@ -42,6 +42,7 @@ public:
 
 	void IsScreenOut();
 
+
 protected:
 	int screenWidth = GetSystemMetrics(SM_CXSCREEN);
 	int screenHeight = GetSystemMetrics(SM_CYSCREEN);
@@ -52,5 +53,6 @@ protected:
 private:
 	
 	float4 CameraScale = float4::Zero;
+	
 };
 

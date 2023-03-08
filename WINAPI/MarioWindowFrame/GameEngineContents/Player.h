@@ -53,6 +53,7 @@ private:
 	int StartFrame = 0;
 	float MoveSpeed = 200.0f;
 	float GravityPower = 200.0f;
+	bool shaking = false;
 
 	//점프관련
 	float JumpPower = 300.0f;	//점프력

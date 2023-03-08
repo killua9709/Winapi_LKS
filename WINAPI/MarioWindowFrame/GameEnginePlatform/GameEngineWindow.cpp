@@ -149,6 +149,12 @@ void GameEngineWindow::WindowExpand()
 
 }
 
+void GameEngineWindow::SettingWindowPos(float4 _Pos)
+{
+    WindowPos = _Pos;
+    SetWindowPos(HWnd, nullptr, WindowPos.ix(), WindowPos.iy(), WindowSize.ix(), WindowSize.iy(), SWP_NOZORDER);
+}
+
 void GameEngineWindow::WindowCreate(HINSTANCE _hInstance, const std::string_view& _TitleName, float4 _Size, float4 _Pos)
 {
     // 윈도우를 찍어낼수 있는 class를 만들어내는 것이다.
@@ -333,11 +339,7 @@ void GameEngineWindow::SettingWindowSize(float4 _Size)
 
 
 }
-void GameEngineWindow::SettingWindowPos(float4 _Pos)
-{
-    WindowPos = _Pos;
-    SetWindowPos(HWnd, nullptr, WindowPos.ix(), WindowPos.iy(), WindowSize.ix(), WindowSize.iy(), SWP_NOZORDER);
-}
+
 
 void GameEngineWindow::SettingWindowGamePos(float4 _Pos)
 {

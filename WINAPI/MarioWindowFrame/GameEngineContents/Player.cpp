@@ -193,8 +193,18 @@ void Player::Update(float _DeltaTime)
 		}
 	}
 
-	if (true == (GameEngineInput::IsPress("Reload")))
+	if (true == (GameEngineInput::IsPress("Reload")) && PlayerState::IDLE == StateValue)
 	{
+		if (false == shaking)
+		{
+			GetLevel()->SetCameraMove({ 1,1 });
+
+		}
+		else
+		{
+			GetLevel()->SetCameraMove({ -1,-1 });
+		}
+
 		BulletTime += _DeltaTime;
 		if (1 < BulletTime)
 		{
@@ -207,7 +217,11 @@ void Player::Update(float _DeltaTime)
 					Bullets[i]->GetAnimationRender()->ChangeAnimation("Running");
 				}
 			}
+
+			return;
 		}
+
+		shaking = !shaking;
 	}
 
 	if ((GameEngineInput::IsUp("Reload")))
