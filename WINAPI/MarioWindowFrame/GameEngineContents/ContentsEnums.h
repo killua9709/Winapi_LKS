@@ -15,6 +15,7 @@ enum class GameCollisionOrder
 	Monster,
 	Wall,
 	Object,
-	Bullet
+	Bullet,
+	Cursor
 
 };

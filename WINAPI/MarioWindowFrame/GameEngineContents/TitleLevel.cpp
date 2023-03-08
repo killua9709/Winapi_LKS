@@ -29,6 +29,7 @@ void TitleLevel::Loading()
 		Dir.Move("Cursor");
 
 		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Ä¿¼­.BMP"));
+		Image->Cut(2, 1);
 
 	}
 	{

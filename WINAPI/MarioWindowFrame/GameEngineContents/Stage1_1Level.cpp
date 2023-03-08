@@ -22,6 +22,7 @@
 #include "Bullet.h"
 #include "Scroll.h"
 #include "Bullet.h"
+#include "MouseObject.h"
 
 
 Stage1_1Level::Stage1_1Level()
@@ -75,7 +76,7 @@ void Stage1_1Level::Loading()
 
 	//마우스
 	{
-		CreateActor<MouseObject>();
+		Mouse = CreateActor<MouseObject>();
 	}
 	//맵
 	{
@@ -164,8 +165,6 @@ void Stage1_1Level::Loading()
 
 void Stage1_1Level::Update(float _DeltaTime)
 {
-	
-
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))
 	{
 		/*if (false == BGMPlayer.GetPause())
@@ -181,7 +180,7 @@ void Stage1_1Level::Update(float _DeltaTime)
 	}
 	
 	//{{카메라 렉트
-	CameraRectUpdate();
+	CameraRectUpdate(_DeltaTime);
 	//}}
 
 	if (true == Getisdebug())
@@ -220,17 +219,49 @@ void Stage1_1Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	//GameEngineWindow::WindowExpand();
 }
 
-void Stage1_1Level::CameraRectUpdate()
+bool aa = false;
+bool cc = false;
+bool bb = false;
+bool dd = false;
+void Stage1_1Level::CameraRectUpdate(float _DeltaTime)
 {
-	if (false == Left->GetBodyCollision()->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
+	std::vector<GameEngineCollision*> Collision;
+	if (false == Left->GetBodyCollision()->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision))
 	{
+		Left->Settingdcheck(false);
 		Left->SetPos({ Mario->GetPos().x - GetCameraScale().x,Mario->GetPos().y + GetCameraScale().y});
-		Left->GetBodyCollision()->SetScale({ 10, 2000 });
 		LeftElse = 0;
 		
 	}
 	else
 	{
+		
+		for (size_t i = 0; i < Collision.size(); i++)
+		{
+			if (GameEngineCollision::CollisionRectToRect(Collision[i]->GetCollisionData(), Mouse->GetBodyCollision()->GetCollisionData()))
+			{
+				aa = true;
+			}
+		}
+
+		if (aa)
+		{
+			for (size_t i = 0; i < Collision.size(); i++)
+			{
+			
+				Collision[i]->GetActor()->SetMove({ 100 * _DeltaTime });
+				
+			}
+
+			Left->SetMove({ 100 * _DeltaTime });
+			aa = false;
+		}
+		
+		/*if (GameEngineInput::IsDown("CameraRightMove"))
+		{
+			Left->SetMove({ 1 });
+		}*/
+		Left->Settingdcheck(true);
 		float a = Mario->GetPos().x - Left->GetPos().x;
 		if (a > 130)
 		{
@@ -242,14 +273,36 @@ void Stage1_1Level::CameraRectUpdate()
 		}
 	}
 	
-	if (false == Right->GetBodyCollision()->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
+	std::vector<GameEngineCollision*> Collision2;
+	if (false == Right->GetBodyCollision()->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision2))
 	{
+		Right->Settingdcheck(false);
 		Right->SetPos({ Mario->GetPos().x + GetCameraScale().x,Mario->GetPos().y + GetCameraScale().y });
-		Right->GetBodyCollision()->SetScale({ 10, 2000 });
 		RightElse = 0;
 	}
 	else
 	{
+		for (size_t i = 0; i < Collision2.size(); i++)
+		{
+			if (GameEngineCollision::CollisionRectToRect(Collision2[i]->GetCollisionData(), Mouse->GetBodyCollision()->GetCollisionData()))
+			{
+				bb = true;
+			}
+		}
+
+		if (bb)
+		{
+			for (size_t i = 0; i < Collision2.size(); i++)
+			{
+
+				Collision2[i]->GetActor()->SetMove({ -100 * _DeltaTime });
+
+			}
+
+			Right->SetMove({ -100 * _DeltaTime });
+			bb = false;
+		}
+		Right->Settingdcheck(true);
 		float a = Right->GetPos().x -Mario->GetPos().x ;
 		if (a > 130)
 		{
@@ -261,14 +314,36 @@ void Stage1_1Level::CameraRectUpdate()
 		}
 	}
 	
-	if (false == Top->GetBodyCollision()->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
+	std::vector<GameEngineCollision*> Collision3;
+	if (false == Top->GetBodyCollision()->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision3))
 	{
+		Top->Settingdcheck(false);
 		Top->SetPos({ Mario->GetPos().x + GetCameraScale().x,Mario->GetPos().y - GetCameraScale().y});
-		Top->GetBodyCollision()->SetScale({ 2000, 10 });
 		TopElse = 0;
 	}
 	else
 	{
+		for (size_t i = 0; i < Collision3.size(); i++)
+		{
+			if (GameEngineCollision::CollisionRectToRect(Collision3[i]->GetCollisionData(), Mouse->GetBodyCollision()->GetCollisionData()))
+			{
+				cc = true;
+			}
+		}
+
+		if (cc)
+		{
+			for (size_t i = 0; i < Collision3.size(); i++)
+			{
+
+				Collision3[i]->GetActor()->SetMove({ 0,100 * _DeltaTime });
+
+			}
+
+			Top->SetMove({ 0,100*_DeltaTime });
+			cc = false;
+		}
+		Top->Settingdcheck(true);
 		float a = Mario->GetPos().y - Top->GetPos().y ;
 		if (a > 130)
 		{
@@ -280,14 +355,36 @@ void Stage1_1Level::CameraRectUpdate()
 		}
 	}
 	
-	if (false == Bot->GetBodyCollision()->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
+	std::vector<GameEngineCollision*> Collision4;
+	if (false == Bot->GetBodyCollision()->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision4))
 	{
+		Bot->Settingdcheck(false);
 		Bot->SetPos({ Mario->GetPos().x + GetCameraScale().x,Mario->GetPos().y + GetCameraScale().y });
-		Bot->GetBodyCollision()->SetScale({ 2000, 10 });
 		BotElse = 0;
 	}
 	else
 	{
+		for (size_t i = 0; i < Collision4.size(); i++)
+		{
+			if (GameEngineCollision::CollisionRectToRect(Collision4[i]->GetCollisionData(), Mouse->GetBodyCollision()->GetCollisionData()))
+			{
+				dd = true;
+			}
+		}
+
+		if (dd)
+		{
+			for (size_t i = 0; i < Collision4.size(); i++)
+			{
+
+				Collision4[i]->GetActor()->SetMove({ 0,-100 * _DeltaTime });
+
+			}
+
+			Bot->SetMove({ 0,-100 * _DeltaTime });
+			dd = false;
+		}
+		Bot->Settingdcheck(true);
 		float a = Bot->GetPos().y - Mario->GetPos().y;
 		if (a > 130)
 		{

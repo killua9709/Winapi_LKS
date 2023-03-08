@@ -17,12 +17,27 @@ public:
 	Wall& operator=(Wall&& _Other) noexcept = delete;
 
 	
+	void Settingdcheck(bool _check)
+	{
+		dcheck = _check;
+	}
 
+	bool GetStateFix()
+	{
+		return StateFix;
+	}
+
+	void SettingStateFix(bool _check)
+	{
+		StateFix = _check;
+	}
 
 protected:
 	void Start() override;
 	void Render(float _Time) override;	//렌더에 충돌체 크기만큼의 벽모습 생성하자
 
 private:
+	bool dcheck = false;
+	bool StateFix = false;
 };
 

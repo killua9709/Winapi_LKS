@@ -290,11 +290,11 @@ void Player::Render(float _DeltaTime)
 
 		/*GameEngineLevel::DebugTextPush(dir);
 		GameEngineLevel::DebugTextPush(dir2);*/
-		GameEngineLevel::DebugTextPush(dir3);
-		GameEngineLevel::DebugTextPush(dir4);
+		/*GameEngineLevel::DebugTextPush(dir3);
+		GameEngineLevel::DebugTextPush(dir4);*/
 		/*GameEngineLevel::DebugTextPush(dir5);
 		GameEngineLevel::DebugTextPush(dir6);*/
-		GameEngineLevel::DebugTextPush(dir7);
+		/*GameEngineLevel::DebugTextPush(dir7);*/
 
 		/*std::string Text = "Ãâ·Â";
 		SetBkMode(DoubleDC, TRANSPARENT);

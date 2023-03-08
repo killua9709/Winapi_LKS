@@ -7,6 +7,7 @@ class Player;
 class Scroll;
 class Bullet;
 class Wall;
+class MouseObject;
 class Stage1_1Level : public STLevel
 {
 public:
@@ -31,7 +32,7 @@ protected:
 private:
 	void SoundLoad();
 	void ImageLoad();
-	void CameraRectUpdate();
+	void CameraRectUpdate(float _DeltaTime);
 
 	Wall* Left = nullptr;
 	Wall* Right = nullptr;
@@ -43,6 +44,7 @@ private:
 	float TopElse=0;
 	float BotElse=0;
 
+	MouseObject* Mouse = nullptr;
 	Player* Mario = nullptr;
 	Scroll* scroll = nullptr;
 	bool Fix = false;

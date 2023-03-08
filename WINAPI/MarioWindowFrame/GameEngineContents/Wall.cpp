@@ -6,11 +6,11 @@
 
 
 
-Wall::Wall() 
+Wall::Wall()
 {
 }
 
-Wall::~Wall() 
+Wall::~Wall()
 {
 
 }
@@ -23,6 +23,9 @@ void Wall::Start()
 
 void Wall::Render(float _Time)
 {
-	BodyCollision->DebugRender();
+	if (true == dcheck)
+	{
+		BodyCollision->DebugRender();
+	}
 }
 
