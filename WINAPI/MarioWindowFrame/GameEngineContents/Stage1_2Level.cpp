@@ -1,4 +1,4 @@
-#include "Stage1_1Level.h"
+#include "Stage1_2Level.h"
 
 #include "Structs.h"
 
@@ -14,7 +14,7 @@
 
 // 나랑 같은 등급의 헤더들
 #include "Player.h"
-#include "Stage1_1Map.h"
+#include "Stage1_2Map.h"
 #include "ContentsEnums.h"
 #include "ContentsValue.h"
 #include "MouseObject.h"
@@ -26,26 +26,25 @@
 #include "Door.h"
 
 
-Stage1_1Level::Stage1_1Level()
+Stage1_2Level::Stage1_2Level()
 {
 
 }
 
-Stage1_1Level::~Stage1_1Level()
+Stage1_2Level::~Stage1_2Level()
 {
-	
+
 }
 
-void Stage1_1Level::SoundLoad()
+void Stage1_2Level::SoundLoad()
 {
 	GameEngineDirectory Dir;
 	Dir.MoveParentToDirectory("ContentsResources");
 	Dir.Move("ContentsResources");
 	Dir.Move("Sound");
 
-	GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("Fireball.mp3"));
 }
-void Stage1_1Level::ImageLoad()
+void Stage1_2Level::ImageLoad()
 {
 	GameEngineWindow::SettingWindowSize({ 1280,960 });
 
@@ -57,23 +56,17 @@ void Stage1_1Level::ImageLoad()
 	Dir.Move("Play");
 
 	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("stage1_1Map.bmp"));
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Stage1_2Map.bmp"));
 		Image->Cut(1, 1);
-	}
-	
-	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Bullets.bmp"));
-		Image->Cut(6, 1);
 	}
 
 }
 
 
 
-void Stage1_1Level::Loading()
+void Stage1_2Level::Loading()
 {
 	ImageLoad();
-	SoundLoad();
 
 	//마우스
 	{
@@ -81,7 +74,7 @@ void Stage1_1Level::Loading()
 	}
 	//맵
 	{
-		Stage1_1Map* Actor = CreateActor<Stage1_1Map>();
+		Stage1_2Map* Actor = CreateActor<Stage1_2Map>();
 	}
 	//플레이어
 	{
@@ -144,7 +137,7 @@ void Stage1_1Level::Loading()
 	{
 		door = CreateActor<Door>(GameRenderOrder::Cursor);
 		door->SetMove({ 941,528 }); //544 //16
-		
+
 	}
 
 
@@ -164,7 +157,7 @@ void Stage1_1Level::Loading()
 	}
 }
 
-void Stage1_1Level::Update(float _DeltaTime)
+void Stage1_2Level::Update(float _DeltaTime)
 {
 	if (true == GetDoor)
 	{
@@ -185,7 +178,7 @@ void Stage1_1Level::Update(float _DeltaTime)
 		DebugRenderSwitch();
 		// Player::MainPlayer->Death()p;
 	}
-	
+
 	//{{카메라 렉트
 	CameraRectUpdate(_DeltaTime);
 	//}}
@@ -202,7 +195,7 @@ void Stage1_1Level::Update(float _DeltaTime)
 		SetCameraScale({ 130,130 });
 		float4 c = { Right->GetPos().x - Left->GetPos().x,  Bot->GetPos().y - Top->GetPos().y };
 		GameEngineWindow::SettingWindowSize(c);
-		SetCameraPos({ Left->GetPos().x + c.x/2 -LeftElse/2 -RightElse/2, Top->GetPos().y + c.y/2 -TopElse/2 -BotElse/2});
+		SetCameraPos({ Left->GetPos().x + c.x / 2 - LeftElse / 2 - RightElse / 2, Top->GetPos().y + c.y / 2 - TopElse / 2 - BotElse / 2 });
 		float ddd = BotElse;
 		SetCameraMove(-GetCameraScale());
 		screenSizex = GameEngineWindow::GetScreenSize().x;
@@ -213,7 +206,7 @@ void Stage1_1Level::Update(float _DeltaTime)
 	}
 }
 
-void Stage1_1Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
+void Stage1_2Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	GameEngineWindow::SettingWindowSize({ 260,260 });
 	screenSizex = GameEngineWindow::GetScreenSize().x;
@@ -226,20 +219,19 @@ void Stage1_1Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	//GameEngineWindow::WindowExpand();
 }
 
-
-void Stage1_1Level::CameraRectUpdate(float _DeltaTime)
+void Stage1_2Level::CameraRectUpdate(float _DeltaTime)
 {
 	std::vector<GameEngineCollision*> Collision;
 	if (false == Left->GetBodyCollision()->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision))
 	{
 		Left->Settingdcheck(false);
-		Left->SetPos({ Mario->GetPos().x - GetCameraScale().x,Mario->GetPos().y + GetCameraScale().y});
+		Left->SetPos({ Mario->GetPos().x - GetCameraScale().x,Mario->GetPos().y + GetCameraScale().y });
 		LeftElse = 0;
-		
+
 	}
 	else
 	{
-		
+
 		for (size_t i = 0; i < Collision.size(); i++)
 		{
 			if (GameEngineCollision::CollisionRectToRect(Collision[i]->GetCollisionData(), Mouse->GetBodyCollision()->GetCollisionData()))
@@ -252,15 +244,15 @@ void Stage1_1Level::CameraRectUpdate(float _DeltaTime)
 		{
 			for (size_t i = 0; i < Collision.size(); i++)
 			{
-			
+
 				Collision[i]->GetActor()->SetMove({ 100 * _DeltaTime });
-				
+
 			}
 
 			Left->SetMove({ 100 * _DeltaTime });
 			aa = false;
 		}
-		
+
 		/*if (GameEngineInput::IsDown("CameraRightMove"))
 		{
 			Left->SetMove({ 1 });
@@ -276,7 +268,7 @@ void Stage1_1Level::CameraRectUpdate(float _DeltaTime)
 			LeftElse = -(130 - a);
 		}
 	}
-	
+
 	std::vector<GameEngineCollision*> Collision2;
 	if (false == Right->GetBodyCollision()->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision2))
 	{
@@ -307,7 +299,7 @@ void Stage1_1Level::CameraRectUpdate(float _DeltaTime)
 			bb = false;
 		}
 		Right->Settingdcheck(true);
-		float a = Right->GetPos().x -Mario->GetPos().x ;
+		float a = Right->GetPos().x - Mario->GetPos().x;
 		if (a > 130)
 		{
 			RightElse = a - 130;
@@ -317,12 +309,12 @@ void Stage1_1Level::CameraRectUpdate(float _DeltaTime)
 			RightElse = -(130 - a);
 		}
 	}
-	
+
 	std::vector<GameEngineCollision*> Collision3;
 	if (false == Top->GetBodyCollision()->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision3))
 	{
 		Top->Settingdcheck(false);
-		Top->SetPos({ Mario->GetPos().x + GetCameraScale().x,Mario->GetPos().y - GetCameraScale().y});
+		Top->SetPos({ Mario->GetPos().x + GetCameraScale().x,Mario->GetPos().y - GetCameraScale().y });
 		TopElse = 0;
 	}
 	else
@@ -344,11 +336,11 @@ void Stage1_1Level::CameraRectUpdate(float _DeltaTime)
 
 			}
 
-			Top->SetMove({ 0,100*_DeltaTime });
+			Top->SetMove({ 0,100 * _DeltaTime });
 			cc = false;
 		}
 		Top->Settingdcheck(true);
-		float a = Mario->GetPos().y - Top->GetPos().y ;
+		float a = Mario->GetPos().y - Top->GetPos().y;
 		if (a > 130)
 		{
 			TopElse = a - 130;
@@ -358,7 +350,7 @@ void Stage1_1Level::CameraRectUpdate(float _DeltaTime)
 			TopElse = -(130 - a);
 		}
 	}
-	
+
 	std::vector<GameEngineCollision*> Collision4;
 	if (false == Bot->GetBodyCollision()->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision4))
 	{

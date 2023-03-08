@@ -9,18 +9,18 @@ class Bullet;
 class Wall;
 class MouseObject;
 class Door;
-class Stage1_1Level : public STLevel
+class Stage1_2Level : public STLevel
 {
 public:
 	// constrcuter destructer
-	Stage1_1Level();
-	~Stage1_1Level();
+	Stage1_2Level();
+	~Stage1_2Level();
 
 	// delete Function
-	Stage1_1Level(const Stage1_1Level& _Other) = delete;
-	Stage1_1Level(Stage1_1Level&& _Other) noexcept = delete;
-	Stage1_1Level& operator=(const Stage1_1Level& _Other) = delete;
-	Stage1_1Level& operator=(Stage1_1Level&& _Other) noexcept = delete;
+	Stage1_2Level(const Stage1_2Level& _Other) = delete;
+	Stage1_2Level(Stage1_2Level&& _Other) noexcept = delete;
+	Stage1_2Level& operator=(const Stage1_2Level& _Other) = delete;
+	Stage1_2Level& operator=(Stage1_2Level&& _Other) noexcept = delete;
 
 protected:
 	void Loading() override;
@@ -40,10 +40,10 @@ private:
 	Wall* Top = nullptr;
 	Wall* Bot = nullptr;
 
-	float LeftElse =0 ;
-	float RightElse=0;
-	float TopElse=0;
-	float BotElse=0;
+	float LeftElse = 0;
+	float RightElse = 0;
+	float TopElse = 0;
+	float BotElse = 0;
 
 	MouseObject* Mouse = nullptr;
 	Player* Mario = nullptr;
@@ -55,5 +55,6 @@ private:
 	bool bb = false;
 	bool cc = false;
 	bool dd = false;
+
 };
 

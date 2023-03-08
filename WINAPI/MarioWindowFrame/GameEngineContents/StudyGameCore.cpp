@@ -5,6 +5,7 @@
 #include "TitleLevel.h"
 #include "Tutorial2Level.h"
 #include "Stage1_1Level.h"
+#include "Stage1_2Level.h"
 
 
 // StudyGameCore StudyGameCore::Core = new StudyGameCore();
@@ -29,6 +30,7 @@ void StudyGameCore::Start()
 	CreateLevel<TutorialLevel>("TutorialLevel");
 	CreateLevel<Tutorial2Level>("Tutorial2Level");
 	CreateLevel<Stage1_1Level>("Stage1_1Level");
+	CreateLevel<Stage1_2Level>("Stage1_2Level");
 	ChangeLevel("Stage1_1Level");
 }
 

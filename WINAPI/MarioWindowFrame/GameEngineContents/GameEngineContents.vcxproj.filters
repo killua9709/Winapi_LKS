@@ -57,6 +57,18 @@
     <ClInclude Include="Bullet.h">
       <Filter>GlobalActors\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Cannon.h">
+      <Filter>GlobalActors\Cannon</Filter>
+    </ClInclude>
+    <ClInclude Include="CannonBullet.h">
+      <Filter>GlobalActors\Cannon</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage1_2Level.h">
+      <Filter>Play\Stage1\Stage1_2</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage1_2Map.h">
+      <Filter>Play\Stage1\Stage1_2</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StudyGameCore.cpp" />
@@ -83,9 +95,6 @@
     </ClCompile>
     <ClCompile Include="TutorialMap.cpp">
       <Filter>Play\Tutorial</Filter>
-    </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>GlobalActors\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>GlobalActors\Player</Filter>
@@ -117,6 +126,21 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>GlobalActors\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>GlobalActors\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Cannon.cpp">
+      <Filter>GlobalActors\Cannon</Filter>
+    </ClCompile>
+    <ClCompile Include="CannonBullet.cpp">
+      <Filter>GlobalActors\Cannon</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage1_2Level.cpp">
+      <Filter>Play\Stage1\Stage1_2</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage1_2Map.cpp">
+      <Filter>Play\Stage1\Stage1_2</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Play">
@@ -137,9 +161,6 @@
     <Filter Include="GlobalActors\Monster">
       <UniqueIdentifier>{455b66e6-6054-415b-a301-3865c22eae2d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GlobalActors\Wall">
-      <UniqueIdentifier>{b1f35f6e-da1b-4101-83e5-27d0011e2fb8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GlobalActors\Player">
       <UniqueIdentifier>{29cd20ce-9f50-4682-b89a-724333df81c5}</UniqueIdentifier>
     </Filter>
@@ -154,6 +175,15 @@
     </Filter>
     <Filter Include="Play\Stage1\Stage1_1">
       <UniqueIdentifier>{6feb8f2d-6703-4bee-b437-21abb0b3b730}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GlobalActors\Cannon">
+      <UniqueIdentifier>{3a0b3d1e-dc21-4a85-92ee-8ebd5ede1732}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GlobalActors\Wall">
+      <UniqueIdentifier>{b1f35f6e-da1b-4101-83e5-27d0011e2fb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Stage1\Stage1_2">
+      <UniqueIdentifier>{217cfa76-fb1d-494a-8c56-27e68a3f4536}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
