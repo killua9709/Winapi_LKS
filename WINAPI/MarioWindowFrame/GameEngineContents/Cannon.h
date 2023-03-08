@@ -1,7 +1,11 @@
 #pragma once
+#include <GameEngineCore/GameEngineActor.h>
+#include <GameEngineCore/GameEngineResources.h>
+#include "CannonBullet.h"
+
 
 // Ό³Έν :
-class Cannon
+class Cannon : public GameEngineActor
 {
 public:
 	// constrcuter destructer
@@ -15,8 +19,13 @@ public:
 	Cannon& operator=(Cannon&& _Other) noexcept = delete;
 
 protected:
-
+	void Start() override;
+	void Update(float _DeltaTime) override;
+	void Render(float _DeltaTime) override;
 private:
+	GameEngineSoundPlayer GetSoundPlayer;
+	std::vector<CannonBullet*> Bullets;
 
+	float firetime = 0;
 };
 

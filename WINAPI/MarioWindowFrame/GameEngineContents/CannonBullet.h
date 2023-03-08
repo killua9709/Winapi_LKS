@@ -1,7 +1,9 @@
 #pragma once
+#include <GameEngineCore/GameEngineActor.h>
+
 
 // Ό³Έν :
-class CannonBullet
+class CannonBullet : public GameEngineActor
 {
 public:
 	// constrcuter destructer

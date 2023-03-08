@@ -24,6 +24,7 @@
 #include "Bullet.h"
 #include "MouseObject.h"
 #include "Door.h"
+#include "Cannon.h"
 
 
 Stage1_2Level::Stage1_2Level()
@@ -43,6 +44,7 @@ void Stage1_2Level::SoundLoad()
 	Dir.Move("ContentsResources");
 	Dir.Move("Sound");
 
+	GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("cannon.wav"));
 }
 void Stage1_2Level::ImageLoad()
 {
@@ -59,7 +61,10 @@ void Stage1_2Level::ImageLoad()
 		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Stage1_2Map.bmp"));
 		Image->Cut(1, 1);
 	}
-
+	{
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Cannon.bmp"));
+		Image->Cut(5, 2);
+	}
 }
 
 
@@ -67,7 +72,7 @@ void Stage1_2Level::ImageLoad()
 void Stage1_2Level::Loading()
 {
 	ImageLoad();
-
+	SoundLoad();
 	//마우스
 	{
 		Mouse = CreateActor<MouseObject>();
@@ -103,16 +108,8 @@ void Stage1_2Level::Loading()
 
 		//장애물
 		Wall* Obstacle = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle->SetMove({ 374,612 });
-		Obstacle->GetBodyCollision()->SetScale({ 136, 136 });
-
-		Wall* Obstacle2 = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle2->SetMove({ 510,646 });
-		Obstacle2->GetBodyCollision()->SetScale({ 136,68 });
-
-		Wall* Obstacle3 = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle3->SetMove({ 918,612 });
-		Obstacle3->GetBodyCollision()->SetScale({ 136,136 });
+		Obstacle->SetMove({ 782,561 });
+		Obstacle->GetBodyCollision()->SetScale({ 408, 34 });
 
 
 		//{{윈도우 틀
@@ -136,8 +133,27 @@ void Stage1_2Level::Loading()
 	//오브젝트
 	{
 		door = CreateActor<Door>(GameRenderOrder::Cursor);
-		door->SetMove({ 941,528 }); //544 //16
+		door->SetMove({ 959,662 }); //544 //16
+	}
+	//몬스터
+	{
+		Cannon* cannon1 = CreateActor<Cannon>(GameRenderOrder::Monster);
+		cannon1->SetMove({ 646,581 });
 
+		Cannon* cannon2 = CreateActor<Cannon>(GameRenderOrder::Monster);
+		cannon2->SetMove({ 680,581 });
+
+		Cannon* cannon3 = CreateActor<Cannon>(GameRenderOrder::Monster);
+		cannon3->SetMove({ 714,581 });
+
+		Cannon* cannon4 = CreateActor<Cannon>(GameRenderOrder::Monster);
+		cannon4->SetMove({ 748,581 });
+
+		Cannon* cannon5 = CreateActor<Cannon>(GameRenderOrder::Monster);
+		cannon5->SetMove({ 782,581 });
+
+		Cannon* cannon6 = CreateActor<Cannon>(GameRenderOrder::Monster);
+		cannon6->SetMove({ 816,581 });
 	}
 
 
