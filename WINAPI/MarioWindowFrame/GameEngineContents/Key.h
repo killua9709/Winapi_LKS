@@ -3,23 +3,19 @@
 #include <GameEngineCore/GameEngineResources.h>
 
 // Ό³Έν :
-class Door : public GameEngineActor
+class Key : public GameEngineActor
 {
 public:
 	// constrcuter destructer
-	Door();
-	~Door();
+	Key();
+	~Key();
 
 	// delete Function
-	Door(const Door& _Other) = delete;
-	Door(Door&& _Other) noexcept = delete;
-	Door& operator=(const Door& _Other) = delete;
-	Door& operator=(Door&& _Other) noexcept = delete;
+	Key(const Key& _Other) = delete;
+	Key(Key&& _Other) noexcept = delete;
+	Key& operator=(const Key& _Other) = delete;
+	Key& operator=(Key&& _Other) noexcept = delete;
 
-	void SetLock(bool _lock)
-	{
-		Lock = _lock;
-	}
 protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
@@ -27,7 +23,5 @@ protected:
 
 private:
 	GameEngineSoundPlayer GetSoundPlayer;
-	bool Lock = false;
-	GameEngineRender* render = nullptr;
 };
 

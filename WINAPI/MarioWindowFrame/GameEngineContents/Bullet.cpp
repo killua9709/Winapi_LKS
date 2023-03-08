@@ -61,6 +61,12 @@ void Bullet::Update(float _DeltaTime)
 	{
 		SetMove(Move * _DeltaTime * 600);
 	}
+
+	if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Monster), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
+	{
+		AnimationRender->ChangeAnimation("Fix");
+		this->Off();
+	}
 }
 
 void Bullet::Render(float _DeltaTime)

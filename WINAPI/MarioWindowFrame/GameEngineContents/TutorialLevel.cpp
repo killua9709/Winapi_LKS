@@ -80,6 +80,7 @@ void TutorialLevel::ImageLoad()
 	}
 	{
 		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("¹®.bmp"));
+		Image->Cut(2, 1);
 	}
 }
 

@@ -69,6 +69,15 @@
     <ClInclude Include="Stage1_2Map.h">
       <Filter>Play\Stage1\Stage1_2</Filter>
     </ClInclude>
+    <ClInclude Include="Stage1_3Level.h">
+      <Filter>Play\Stage1\Stage1_3</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage1_3Map.h">
+      <Filter>Play\Stage1\Stage1_3</Filter>
+    </ClInclude>
+    <ClInclude Include="Key.h">
+      <Filter>GlobalActors\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StudyGameCore.cpp" />
@@ -141,6 +150,15 @@
     <ClCompile Include="Stage1_2Map.cpp">
       <Filter>Play\Stage1\Stage1_2</Filter>
     </ClCompile>
+    <ClCompile Include="Stage1_3Level.cpp">
+      <Filter>Play\Stage1\Stage1_3</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage1_3Map.cpp">
+      <Filter>Play\Stage1\Stage1_3</Filter>
+    </ClCompile>
+    <ClCompile Include="Key.cpp">
+      <Filter>GlobalActors\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Play">
@@ -184,6 +202,9 @@
     </Filter>
     <Filter Include="Play\Stage1\Stage1_2">
       <UniqueIdentifier>{217cfa76-fb1d-494a-8c56-27e68a3f4536}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Stage1\Stage1_3">
+      <UniqueIdentifier>{e5f2aaea-13f3-4d6e-8a8b-87440537936d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

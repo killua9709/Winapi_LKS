@@ -39,6 +39,16 @@ public:
 	{
 		GetDoor = _state;
 	}
+	
+	static void SetGetKey(bool _state)
+	{
+		GetKey = _state;
+	}
+
+	static bool GetGetKey()
+	{
+		return GetKey;
+	}
 
 	void IsScreenOut();
 
@@ -50,6 +60,7 @@ protected:
 	float screenSizey = GameEngineWindow::GetScreenSize().y;
 	static bool GetScroll;
 	static bool GetDoor;
+	static bool GetKey;
 private:
 	
 	float4 CameraScale = float4::Zero;

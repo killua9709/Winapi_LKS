@@ -11,6 +11,7 @@ STLevel::~STLevel()
 GameEngineSoundPlayer STLevel::BGMPlayer = nullptr;
 bool STLevel::GetScroll = false;
 bool STLevel::GetDoor = false;
+bool STLevel::GetKey = false;
 
 void STLevel::IsScreenOut()
 {
