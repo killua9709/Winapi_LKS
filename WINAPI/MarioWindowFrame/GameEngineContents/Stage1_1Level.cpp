@@ -196,10 +196,9 @@ void Stage1_1Level::Update(float _DeltaTime)
 		SetCameraScale({ 130,130 });
 		float4 c = { Right->GetPos().x - Left->GetPos().x,  Bot->GetPos().y - Top->GetPos().y };
 		GameEngineWindow::SettingWindowSize(c);
-		SetCameraPos({ Left->GetPos().x + c.x/2 -LeftElse/2 -RightElse/2, Top->GetPos().y + c.y/2 -TopElse/2, -BotElse/2});
+		SetCameraPos({ Left->GetPos().x + c.x/2 -LeftElse/2 -RightElse/2, Top->GetPos().y + c.y/2 -TopElse/2 -BotElse/2});
 		float ddd = BotElse;
 		SetCameraMove(-GetCameraScale());
-		//IsScreenOut();
 		screenSizex = GameEngineWindow::GetScreenSize().x;
 		screenSizey = GameEngineWindow::GetScreenSize().y;
 		float a = screenWidth / 2 - 640.0f;
@@ -296,7 +295,7 @@ void Stage1_1Level::CameraRectUpdate()
 		}
 		else
 		{
-			BotElse = -(a- 130);
+			BotElse = -(130 - a);
 		}
 	}
 }

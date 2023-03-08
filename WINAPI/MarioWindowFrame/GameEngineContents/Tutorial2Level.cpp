@@ -183,7 +183,7 @@ void Tutorial2Level::Update(float _DeltaTime)
 
 		SetCameraPos({ Mario->GetPos().x,Mario->GetPos().y });
 		SetCameraMove(-GetCameraScale());
-		IsScreenOut();
+		/*IsScreenOut();*/
 		screenSizex = GameEngineWindow::GetScreenSize().x;
 		screenSizey = GameEngineWindow::GetScreenSize().y;
 		float a = screenWidth / 2 - 640.0f;
