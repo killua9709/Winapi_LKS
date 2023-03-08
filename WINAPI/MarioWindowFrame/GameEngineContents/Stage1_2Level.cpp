@@ -65,6 +65,10 @@ void Stage1_2Level::ImageLoad()
 		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Cannon.bmp"));
 		Image->Cut(5, 2);
 	}
+	{
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("CannonBullet.bmp"));
+		Image->Cut(5, 3);
+	}
 }
 
 
@@ -175,6 +179,7 @@ void Stage1_2Level::Loading()
 
 void Stage1_2Level::Update(float _DeltaTime)
 {
+
 	if (true == GetDoor)
 	{
 		SetGetDoor(false);

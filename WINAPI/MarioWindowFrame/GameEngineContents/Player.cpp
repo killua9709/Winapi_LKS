@@ -149,7 +149,7 @@ bool Player::FreeMoveState(float _DeltaTime)
 void Player::Update(float _DeltaTime)
 {
 	//몬스터 오더를 들고 있는 충돌체와 플레이어의 충돌체 처리
-	if (nullptr != BodyCollision)
+	/*if (nullptr != BodyCollision)
 	{
 		std::vector<GameEngineCollision*> Collision;
 		if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Monster), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision))
@@ -160,7 +160,7 @@ void Player::Update(float _DeltaTime)
 				ColActor->Death();
 			}
 		}
-	}
+	}*/
 
 
 	//프리무브

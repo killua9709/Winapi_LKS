@@ -17,8 +17,11 @@ public:
 	CannonBullet& operator=(CannonBullet&& _Other) noexcept = delete;
 
 protected:
-
+	void Start() override;
+	void Update(float _DeltaTime) override;
+	void Render(float _DeltaTime) override;
 private:
+	GameEngineRender* AnimationRender = nullptr;
 
 };
 

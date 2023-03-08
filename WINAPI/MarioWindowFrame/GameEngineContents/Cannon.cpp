@@ -53,7 +53,7 @@ void Cannon::Update(float _DeltaTime)
 		{
 			if (false == Bullets[i]->isOn())
 			{
-				Bullets[i]->SetPos({ GetPos().x,GetPos().y - 16 });
+				Bullets[i]->SetPos({ GetPos().x+10,GetPos().y +16 });
 				Bullets[i]->On();
 				break;
 			}
