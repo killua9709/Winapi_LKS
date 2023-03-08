@@ -2,7 +2,7 @@
 
 GameEngineTime GameEngineTime::GlobalTime;
 
-GameEngineTime::GameEngineTime() 
+GameEngineTime::GameEngineTime()
 {
 	// 1초를 기준으로한 정수 단위입니다. 
 	// 시작할때 1번만 정하면 된다.
@@ -10,7 +10,7 @@ GameEngineTime::GameEngineTime()
 	QueryPerformanceCounter(&Prev);
 }
 
-GameEngineTime::~GameEngineTime() 
+GameEngineTime::~GameEngineTime()
 {
 }
 //

@@ -31,13 +31,13 @@ public:
 
 	float TimeCheck();
 
-	float GetFloatDeltaTime() 
+	float GetFloatDeltaTime()
 	{
 		return floatDeltaTime;
 	}
 
 protected:
-	
+
 
 private:
 	__int64 Tick = 0;

@@ -48,6 +48,8 @@ private:
 	std::vector<Bullet*> Bullets;
 
 	float AccTime = 0.0f;
+	float BulletTime = 0;
+	bool isReload = false;
 	int StartFrame = 0;
 	float MoveSpeed = 200.0f;
 	float GravityPower = 200.0f;

@@ -193,21 +193,26 @@ void Player::Update(float _DeltaTime)
 		}
 	}
 
-	if ((GameEngineInput::IsDown("Reload")) &&
-		(0 < GetLevel()->GetMousePosToCamera().x) &&
-		(GameEngineWindow::GetMousePosition().x < GameEngineWindow::GetScreenSize().x) &&
-		(0 < GetLevel()->GetMousePosToCamera().y) &&
-		GameEngineWindow::GetMousePosition().y < GameEngineWindow::GetScreenSize().y)
+	if (true == (GameEngineInput::IsPress("Reload")))
 	{
-		for (size_t i = 0; i < Bullets.size(); i++)
+		BulletTime += _DeltaTime;
+		if (1 < BulletTime)
 		{
-			if (true == Bullets[i]->isOn())
+			for (size_t i = 0; i < Bullets.size(); i++)
 			{
-				Bullets[i]->Off();
-				Bullets[i]->SetFisrt(false);
-				Bullets[i]->GetAnimationRender()->ChangeAnimation("Running");
+				if (true == Bullets[i]->isOn())
+				{
+					Bullets[i]->Off();
+					Bullets[i]->SetFisrt(false);
+					Bullets[i]->GetAnimationRender()->ChangeAnimation("Running");
+				}
 			}
 		}
+	}
+
+	if ((GameEngineInput::IsUp("Reload")))
+	{
+		BulletTime = 0;
 	}
 
 
@@ -260,18 +265,22 @@ void Player::Render(float _DeltaTime)
 		std::string dir4 = "posy : ";
 		dir4 += std::to_string((int)GetPos().y);
 		
-		std::string dir5 = "cameraposx : ";
+		/*std::string dir5 = "cameraposx : ";
 		dir5 += std::to_string((int)GetLevel()->GetCameraPos().x);
 
 		std::string dir6 = "cameraposx : ";
-		dir6 += std::to_string((int)GetLevel()->GetCameraPos().y);
+		dir6 += std::to_string((int)GetLevel()->GetCameraPos().y);*/
+
+		std::string dir7 = "bullettime : ";
+		dir7 += std::to_string((int)BulletTime); 
 
 		/*GameEngineLevel::DebugTextPush(dir);
 		GameEngineLevel::DebugTextPush(dir2);*/
 		GameEngineLevel::DebugTextPush(dir3);
 		GameEngineLevel::DebugTextPush(dir4);
-		GameEngineLevel::DebugTextPush(dir5);
-		GameEngineLevel::DebugTextPush(dir6);
+		/*GameEngineLevel::DebugTextPush(dir5);
+		GameEngineLevel::DebugTextPush(dir6);*/
+		GameEngineLevel::DebugTextPush(dir7);
 
 		/*std::string Text = "Ãâ·Â";
 		SetBkMode(DoubleDC, TRANSPARENT);
