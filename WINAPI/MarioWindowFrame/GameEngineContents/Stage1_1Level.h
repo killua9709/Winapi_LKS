@@ -33,10 +33,15 @@ private:
 	void ImageLoad();
 	void CameraRectUpdate();
 
-	Wall* Left;
-	Wall* Right;
-	Wall* Top;
-	Wall* Bot;
+	Wall* Left = nullptr;
+	Wall* Right = nullptr;
+	Wall* Top = nullptr;
+	Wall* Bot = nullptr;
+
+	float LeftElse =0 ;
+	float RightElse=0;
+	float TopElse=0;
+	float BotElse=0;
 
 	Player* Mario = nullptr;
 	Scroll* scroll = nullptr;

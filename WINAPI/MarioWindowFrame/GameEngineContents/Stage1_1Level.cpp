@@ -122,20 +122,20 @@ void Stage1_1Level::Loading()
 
 		//{{윈도우 틀
 		Left = CreateActor<Wall>(GameRenderOrder::Map);
-		Left->SetPos({ GetCameraPos().x,GetCameraPos().y + GetCameraScale().y });
-		Left->GetBodyCollision()->SetScale({ 10, GetCameraScale().y*2});
+		Left->SetPos({ Mario->GetPos().x - GetCameraScale().x,Mario->GetPos().y + GetCameraScale().y });
+		Left->GetBodyCollision()->SetScale({ 10, 2000 });
 
 		Right = CreateActor<Wall>(GameRenderOrder::Map);
-		Right->SetPos({ GetCameraPos().x + GetCameraScale().x*2,GetCameraPos().y + GetCameraScale().y });
-		Right->GetBodyCollision()->SetScale({ 10, GetCameraScale().y * 2 });
+		Right->SetPos({ Mario->GetPos().x + GetCameraScale().x,Mario->GetPos().y + GetCameraScale().y });
+		Right->GetBodyCollision()->SetScale({ 10, 2000 });
 
 		Top = CreateActor<Wall>(GameRenderOrder::Map);
-		Top->SetPos({ GetCameraPos().x + GetCameraScale().x,GetCameraPos().y });
-		Top->GetBodyCollision()->SetScale({ GetCameraScale().x * 2, 10 });
+		Top->SetPos({ Mario->GetPos().x + GetCameraScale().x,Mario->GetPos().y - GetCameraScale().y });
+		Top->GetBodyCollision()->SetScale({ 2000, 10 });
 
 		Bot = CreateActor<Wall>(GameRenderOrder::Map);
-		Bot->SetPos({ GetCameraPos().x + GetCameraScale().x,GetCameraPos().y + GetCameraScale().y*2});
-		Bot->GetBodyCollision()->SetScale({ GetCameraScale().x * 2, 10 });
+		Bot->SetPos({ Mario->GetPos().x + GetCameraScale().x,Mario->GetPos().y + GetCameraScale().y });
+		Bot->GetBodyCollision()->SetScale({ 2000, 10 });
 		//}}
 	}
 	//오브젝트
@@ -194,10 +194,12 @@ void Stage1_1Level::Update(float _DeltaTime)
 	else
 	{
 		SetCameraScale({ 130,130 });
-		GameEngineWindow::SettingWindowSize({ 260,260 });
-		SetCameraPos({ Mario->GetPos().x,Mario->GetPos().y });
+		float4 c = { Right->GetPos().x - Left->GetPos().x,  Bot->GetPos().y - Top->GetPos().y };
+		GameEngineWindow::SettingWindowSize(c);
+		SetCameraPos({ Left->GetPos().x + c.x/2 -LeftElse/2 -RightElse/2, Top->GetPos().y + c.y/2 -TopElse/2, -BotElse/2});
+		float ddd = BotElse;
 		SetCameraMove(-GetCameraScale());
-		IsScreenOut();
+		//IsScreenOut();
 		screenSizex = GameEngineWindow::GetScreenSize().x;
 		screenSizey = GameEngineWindow::GetScreenSize().y;
 		float a = screenWidth / 2 - 640.0f;
@@ -223,25 +225,78 @@ void Stage1_1Level::CameraRectUpdate()
 {
 	if (false == Left->GetBodyCollision()->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
 	{
-		Left->SetPos({ GetCameraPos().x,GetCameraPos().y + GetCameraScale().y });
+		Left->SetPos({ Mario->GetPos().x - GetCameraScale().x,Mario->GetPos().y + GetCameraScale().y});
 		Left->GetBodyCollision()->SetScale({ 10, 2000 });
+		LeftElse = 0;
+		
+	}
+	else
+	{
+		float a = Mario->GetPos().x - Left->GetPos().x;
+		if (a > 130)
+		{
+			LeftElse = a - 130;
+		}
+		else
+		{
+			LeftElse = -(130 - a);
+		}
 	}
 	
 	if (false == Right->GetBodyCollision()->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
 	{
-		Right->SetPos({ GetCameraPos().x + GetCameraScale().x * 2,GetCameraPos().y + GetCameraScale().y });
+		Right->SetPos({ Mario->GetPos().x + GetCameraScale().x,Mario->GetPos().y + GetCameraScale().y });
 		Right->GetBodyCollision()->SetScale({ 10, 2000 });
+		RightElse = 0;
+	}
+	else
+	{
+		float a = Right->GetPos().x -Mario->GetPos().x ;
+		if (a > 130)
+		{
+			RightElse = a - 130;
+		}
+		else
+		{
+			RightElse = -(130 - a);
+		}
 	}
 	
 	if (false == Top->GetBodyCollision()->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
 	{
-		Top->SetPos({ GetCameraPos().x + GetCameraScale().x,GetCameraPos().y });
+		Top->SetPos({ Mario->GetPos().x + GetCameraScale().x,Mario->GetPos().y - GetCameraScale().y});
 		Top->GetBodyCollision()->SetScale({ 2000, 10 });
+		TopElse = 0;
+	}
+	else
+	{
+		float a = Mario->GetPos().y - Top->GetPos().y ;
+		if (a > 130)
+		{
+			TopElse = a - 130;
+		}
+		else
+		{
+			TopElse = -(130 - a);
+		}
 	}
 	
 	if (false == Bot->GetBodyCollision()->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
 	{
-		Bot->SetPos({ GetCameraPos().x + GetCameraScale().x,GetCameraPos().y + GetCameraScale().y * 2 });
+		Bot->SetPos({ Mario->GetPos().x + GetCameraScale().x,Mario->GetPos().y + GetCameraScale().y });
 		Bot->GetBodyCollision()->SetScale({ 2000, 10 });
+		BotElse = 0;
+	}
+	else
+	{
+		float a = Bot->GetPos().y - Mario->GetPos().y;
+		if (a > 130)
+		{
+			BotElse = a - 130;
+		}
+		else
+		{
+			BotElse = -(a- 130);
+		}
 	}
 }
