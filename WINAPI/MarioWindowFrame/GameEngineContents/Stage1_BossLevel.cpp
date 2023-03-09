@@ -1,4 +1,4 @@
-#include "Stage1_3Level.h"
+#include "Stage1_BossLevel.h"
 
 #include "Structs.h"
 
@@ -14,7 +14,7 @@
 
 // 나랑 같은 등급의 헤더들
 #include "Player.h"
-#include "Stage1_3Map.h"
+#include "Stage1_BossMap.h"
 #include "ContentsEnums.h"
 #include "ContentsValue.h"
 #include "MouseObject.h"
@@ -27,19 +27,21 @@
 #include "Cannon.h"
 #include "Key.h"
 #include "Monster.h"
+#include "BossMonster.h"
+#include "Thorn.h"
 
 
-Stage1_3Level::Stage1_3Level()
+Stage1_BossLevel::Stage1_BossLevel()
 {
 
 }
 
-Stage1_3Level::~Stage1_3Level()
+Stage1_BossLevel::~Stage1_BossLevel()
 {
 
 }
 
-void Stage1_3Level::SoundLoad()
+void Stage1_BossLevel::SoundLoad()
 {
 	GameEngineDirectory Dir;
 	Dir.MoveParentToDirectory("ContentsResources");
@@ -48,7 +50,7 @@ void Stage1_3Level::SoundLoad()
 
 
 }
-void Stage1_3Level::ImageLoad()
+void Stage1_BossLevel::ImageLoad()
 {
 	GameEngineWindow::SettingWindowSize({ 1280,960 });
 
@@ -60,25 +62,28 @@ void Stage1_3Level::ImageLoad()
 	Dir.Move("Play");
 
 	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Stage1_3Map.bmp"));
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Stage1_BossMap.bmp"));
 		Image->Cut(1, 1);
 	}
+	
 	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Monster_Left.bmp"));
-		Image->Cut(5, 3);
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Left_Wizard.bmp"));
+		Image->Cut(5, 2);
 	}
+
 	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Monster_Right.bmp"));
-		Image->Cut(5, 3);
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Thorn.bmp"));
 	}
+	
 	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Key.bmp"));
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Death_Effect.bmp"));
+		Image->Cut(5, 2);
 	}
 }
 
 
 
-void Stage1_3Level::Loading()
+void Stage1_BossLevel::Loading()
 {
 	ImageLoad();
 	//마우스
@@ -87,18 +92,18 @@ void Stage1_3Level::Loading()
 	}
 	//맵
 	{
-		Stage1_3Map* Actor = CreateActor<Stage1_3Map>();
+		Stage1_BossMap* Actor = CreateActor<Stage1_BossMap>();
 	}
 	//플레이어
 	{
 		Mario = CreateActor<Player>(GameRenderOrder::Player);
-		Mario->SetMove({ 372,100 });
+		Mario->SetMove({ 391,238 });
 	}
 	//벽
 	{
 		//가로벽
 		Wall* Wight4 = CreateActor<Wall>(GameRenderOrder::Map);
-		Wight4->SetMove({ 612,221 });
+		Wight4->SetMove({ 612,357 });
 		Wight4->GetBodyCollision()->SetScale({ 1200, 34 });
 
 
@@ -116,13 +121,20 @@ void Stage1_3Level::Loading()
 
 		//장애물
 		Wall* Obstacle = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle->SetMove({ 612,187 });
-		Obstacle->GetBodyCollision()->SetScale({ 136, 34 });
+		Obstacle->SetMove({ 442,289 });
+		Obstacle->GetBodyCollision()->SetScale({ 272, 102 });
 
 		Wall* Obstacle2 = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle2->SetMove({ 918,153 });
-		Obstacle2->GetBodyCollision()->SetScale({ 136, 102 });
+		Obstacle2->SetMove({ 663,289 });
+		Obstacle2->GetBodyCollision()->SetScale({ 34, 102 });
 
+		Wall* Obstacle3 = CreateActor<Wall>(GameRenderOrder::Map);
+		Obstacle3->SetMove({ 731,255 });
+		Obstacle3->GetBodyCollision()->SetScale({ 34, 102 });
+
+		Wall* Obstacle4 = CreateActor<Wall>(GameRenderOrder::Map);
+		Obstacle4->SetMove({ 799,221 });
+		Obstacle4->GetBodyCollision()->SetScale({ 34, 102 });
 
 		//{{윈도우 틀
 		Left = CreateActor<Wall>(GameRenderOrder::Map);
@@ -145,16 +157,52 @@ void Stage1_3Level::Loading()
 	//오브젝트
 	{
 		door = CreateActor<Door>(GameRenderOrder::Cursor);
-		door->SetMove({ 614,152 }); //544 //16
+		door->SetMove({ 488,220 }); //544 //16
 		door->SetLock(true);
 
-		Key* key = CreateActor<Key>(GameRenderOrder::Cursor);
-		key->SetMove({ 932,85 });
+		Thorn* thorn = CreateActor<Thorn>(GameRenderOrder::Cursor);
+		thorn->SetMove({ 595,323 });
+		thorn->SetInfloat({ 391,238 });
+
+		Thorn* thorn2 = CreateActor<Thorn>(GameRenderOrder::Cursor);
+		thorn2->SetMove({ 629,323 });
+		thorn2->SetInfloat({ 391,238 });
+
+		Thorn* thorn3 = CreateActor<Thorn>(GameRenderOrder::Cursor);
+		thorn3->SetMove({ 697,323 });
+		thorn3->SetInfloat({ 391,238 });
+
+		Thorn* thorn4 = CreateActor<Thorn>(GameRenderOrder::Cursor);
+		thorn4->SetMove({ 765,323 });
+		thorn4->SetInfloat({ 391,238 });
+
+		Thorn* thorn5 = CreateActor<Thorn>(GameRenderOrder::Cursor);
+		thorn5->SetMove({ 833,323 });
+		thorn5->SetInfloat({ 391,238 });
+
+		Thorn* thorn6 = CreateActor<Thorn>(GameRenderOrder::Cursor);
+		thorn6->SetMove({ 867,323 });
+		thorn6->SetInfloat({ 391,238 });
+
+		Thorn* thorn7 = CreateActor<Thorn>(GameRenderOrder::Cursor);
+		thorn7->SetMove({ 900,323 });
+		thorn7->SetInfloat({ 391,238 });
+
+		Thorn* thorn8 = CreateActor<Thorn>(GameRenderOrder::Cursor);
+		thorn8->SetMove({ 934,323 });
+		thorn8->SetInfloat({ 391,238 });
+
+		Thorn* thorn9 = CreateActor<Thorn>(GameRenderOrder::Cursor);
+		thorn9->SetMove({ 968,323 });
+		thorn9->SetInfloat({ 391,238 });
 	}
 	//몬스터
 	{
-		Monster* monster = CreateActor<Monster>(GameRenderOrder::Monster);
-		monster->SetMove({ 614,130 });
+		BossMonster* boss = CreateActor<BossMonster>(GameRenderOrder::Cursor);
+		boss->SetMove({ 908,260 }); 
+		boss->SetInfloat({ 391,238 });
+		boss->SetInfloat2({ 908,260 });
+
 	}
 
 
@@ -174,14 +222,14 @@ void Stage1_3Level::Loading()
 	}
 }
 
-void Stage1_3Level::Update(float _DeltaTime)
+void Stage1_BossLevel::Update(float _DeltaTime)
 {
 
 	if (true == GetDoor)
 	{
 		SetGetDoor(false);
 		SetGetKey(false);
-		GameEngineCore::GetInst()->ChangeLevel("TitleLevel");
+		//GameEngineCore::GetInst()->ChangeLevel("TitleLevel");
 	}
 
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))
@@ -225,7 +273,7 @@ void Stage1_3Level::Update(float _DeltaTime)
 	}
 }
 
-void Stage1_3Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
+void Stage1_BossLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	GameEngineWindow::SettingWindowSize({ 260,260 });
 	screenSizex = GameEngineWindow::GetScreenSize().x;
@@ -238,7 +286,7 @@ void Stage1_3Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	//GameEngineWindow::WindowExpand();
 }
 
-void Stage1_3Level::CameraRectUpdate(float _DeltaTime)
+void Stage1_BossLevel::CameraRectUpdate(float _DeltaTime)
 {
 	std::vector<GameEngineCollision*> Collision;
 	if (false == Left->GetBodyCollision()->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision))

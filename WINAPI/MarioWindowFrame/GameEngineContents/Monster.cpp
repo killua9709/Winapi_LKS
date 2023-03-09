@@ -12,6 +12,9 @@ Monster::Monster()
 
 Monster::~Monster() 
 {
+	GetSoundPlayer = GameEngineResources::GetInst().SoundPlayToControl("enemydeath.wav");
+	GetSoundPlayer.LoopCount(1);
+	GetSoundPlayer.Volume(0.1f);
 }
 
 

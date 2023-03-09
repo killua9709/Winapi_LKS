@@ -26,7 +26,7 @@ void Scroll::Update(float _DeltaTime)
 {
 	if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Player), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
 	{
-		GetSoundPlayer = GameEngineResources::GetInst().SoundPlayToControl("getkey.wav");
+		GetSoundPlayer = GameEngineResources::GetInst().SoundPlayToControl("Message Block.wav");
 		GetSoundPlayer.LoopCount(1);
 		GetSoundPlayer.Volume(0.1f);
 		STLevel::SetGetScroll(true);

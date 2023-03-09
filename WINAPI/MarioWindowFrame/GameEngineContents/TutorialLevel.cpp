@@ -46,6 +46,8 @@ void TutorialLevel::SoundLoad()
 	GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("jump1.wav"));
 	GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("jump2.wav"));
 	GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("door_open.wav"));
+	GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("Message Block.wav"));
+	GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("enemydeath.wav"));
 	
 }
 void TutorialLevel::ImageLoad()

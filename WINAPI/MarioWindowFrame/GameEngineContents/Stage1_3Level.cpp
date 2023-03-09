@@ -46,7 +46,6 @@ void Stage1_3Level::SoundLoad()
 	Dir.Move("ContentsResources");
 	Dir.Move("Sound");
 
-	
 }
 void Stage1_3Level::ImageLoad()
 {
@@ -181,7 +180,7 @@ void Stage1_3Level::Update(float _DeltaTime)
 	{
 		SetGetDoor(false);
 		SetGetKey(false);
-		GameEngineCore::GetInst()->ChangeLevel("TitleLevel");
+		GameEngineCore::GetInst()->ChangeLevel("Stage1_BossLevel");
 	}
 
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))

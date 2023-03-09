@@ -84,6 +84,12 @@
     <ClInclude Include="Stage1_BossMap.h">
       <Filter>Play\Stage1\Stage1_Boss</Filter>
     </ClInclude>
+    <ClInclude Include="BossMonster.h">
+      <Filter>GlobalActors\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Thorn.h">
+      <Filter>GlobalActors\Thorn</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StudyGameCore.cpp" />
@@ -171,6 +177,12 @@
     <ClCompile Include="Stage1_BossMap.cpp">
       <Filter>Play\Stage1\Stage1_Boss</Filter>
     </ClCompile>
+    <ClCompile Include="BossMonster.cpp">
+      <Filter>GlobalActors\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Thorn.cpp">
+      <Filter>GlobalActors\Thorn</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Play">
@@ -220,6 +232,12 @@
     </Filter>
     <Filter Include="Play\Stage1\Stage1_Boss">
       <UniqueIdentifier>{cae2dcba-0f4e-461a-b125-b21b7f593c6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Stage2">
+      <UniqueIdentifier>{c5ae5a25-4042-4992-80f0-482645b17ce9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GlobalActors\Thorn">
+      <UniqueIdentifier>{0d3efb0f-7511-4b78-9518-5c6e77ece19b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

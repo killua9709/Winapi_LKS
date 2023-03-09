@@ -1,6 +1,8 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
 #include <GameEnginePlatform/GameEngineImage.h>
+#include <GameEngineCore/GameEngineResources.h>
+
 
 // Ό³Έν :
 class Monster : public GameEngineActor
@@ -23,7 +25,7 @@ protected:
 
 private:
 	GameEngineRender* AnimationRender = nullptr;
-	GameEngineCollision* BodyCollision = nullptr;
+	GameEngineSoundPlayer GetSoundPlayer;
 
 };
 
