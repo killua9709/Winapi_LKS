@@ -62,9 +62,15 @@ void Bullet::Update(float _DeltaTime)
 		SetMove(Move * _DeltaTime * 600);
 	}
 
-	if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Monster), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
+	std::vector<GameEngineCollision*> Collision;
+	if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Monster), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision))
 	{
-		AnimationRender->ChangeAnimation("Fix");
+		for (size_t i = 0; i < Collision.size(); i++)
+		{
+			GameEngineActor* ColActor = Collision[i]->GetActor();
+			ColActor->Death();
+		}
+
 		this->Off();
 	}
 }

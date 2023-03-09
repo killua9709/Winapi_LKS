@@ -26,6 +26,7 @@
 #include "Door.h"
 #include "Cannon.h"
 #include "Key.h"
+#include "Monster.h"
 
 
 Stage1_3Level::Stage1_3Level()
@@ -63,7 +64,11 @@ void Stage1_3Level::ImageLoad()
 		Image->Cut(1, 1);
 	}
 	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("헤이호.bmp"));
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Monster_Left.bmp"));
+		Image->Cut(5, 3);
+	}
+	{
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Monster_Right.bmp"));
 		Image->Cut(5, 3);
 	}
 	{
@@ -148,7 +153,8 @@ void Stage1_3Level::Loading()
 	}
 	//몬스터
 	{
-		
+		Monster* monster = CreateActor<Monster>(GameRenderOrder::Monster);
+		monster->SetMove({ 614,130 }); 
 	}
 
 
