@@ -26,15 +26,15 @@ void Cannon::Start()
 	render->SetScale({ 102, 102 });
 	render->CreateAnimation({ .AnimationName = "Cannon_Idle",  .ImageName = "Cannon.bmp", .Start = 0, .End = 0 });
 	render->CreateAnimation({ .AnimationName = "Cannon_Fire",  .ImageName = "Cannon.bmp", .Start = 1, .End = 5 ,.InterTime = 0.12 });
-	render->CreateAnimation({ .AnimationName = "Right_Cannon_Fire",  .ImageName = "Right_Cannon.bmp", .Start = 1, .End = 5 ,.InterTime = 0.12 });
-	render->CreateAnimation({ .AnimationName = "Left_Cannon_Fire",  .ImageName = "Left_Cannon.bmp", .Start = 1, .End = 5 ,.InterTime = 0.12 });
+	render->CreateAnimation({ .AnimationName = "Right_Cannon_Fire",  .ImageName = "Right_Cannon.bmp", .Start = 1, .End = 5 ,.InterTime = 0.15 });
+	render->CreateAnimation({ .AnimationName = "Left_Cannon_Fire",  .ImageName = "Left_Cannon.bmp", .Start = 1, .End = 5 ,.InterTime = 0.15 });
 	render->ChangeAnimation("Cannon_Fire");
+
+	CannonBullet* bullet = GetLevel()->CreateActor<CannonBullet>(GameRenderOrder::Cursor);
+	bullet->SetMove({ GetPos().x,GetPos().y - 15 });
 
 	for (size_t i = 0; i < 6; i++)
 	{
-		
-		CannonBullet* bullet = GetLevel()->CreateActor<CannonBullet>(GameRenderOrder::Cursor);
-		bullet->SetMove({ GetPos().x,GetPos().y - 15 });
 		Bullets.push_back(bullet);
 		Bullets[i]->Off();
 	}
@@ -70,16 +70,16 @@ void Cannon::Update(float _DeltaTime)
 
 	if (1.5 < firetime)
 	{
-		GetSoundPlayer = GameEngineResources::GetInst().SoundPlayToControl("cannon.wav");
-		GetSoundPlayer.LoopCount(1);
-		GetSoundPlayer.Volume(0.005f);
-
+		firetime = 0;
 		for (size_t i = 0; i < 6; i++)
 		{
 			if (false == Bullets[i]->isOn())
 			{
 				Bullets[i]->SetPos({ GetPos().x+10,GetPos().y +16 });
 				Bullets[i]->On();
+				GetSoundPlayer = GameEngineResources::GetInst().SoundPlayToControl("cannon.wav");
+				GetSoundPlayer.LoopCount(1);
+				GetSoundPlayer.Volume(0.1f);
 				break;
 			}
 		}

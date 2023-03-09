@@ -18,10 +18,10 @@ float4 Thorn::Infloat = float4::Zero;
 void Thorn::Start()
 {
 	BodyCollision = CreateCollision(GameCollisionOrder::Object);
-	BodyCollision->SetScale({ 34, 34 });
+	BodyCollision->SetScale({ 34, 30 });
 
 	GameEngineRender* Render = CreateRender("Thorn.bmp", GameRenderOrder::Cursor);
-	Render->SetScale({ 34, 34 });
+	Render->SetScale({ 34, 30 });
 }
 
 void Thorn::Update(float _DeltaTime)

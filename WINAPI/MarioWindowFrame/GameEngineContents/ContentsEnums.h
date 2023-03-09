@@ -14,6 +14,7 @@ enum class GameCollisionOrder
 	Player,
 	Monster,
 	Wall,
+	Wall2,
 	Object,
 	Bullet,
 	MonsterBullet,

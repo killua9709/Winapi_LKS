@@ -37,21 +37,35 @@ void CannonBullet::Update(float _DeltaTime)
 	case Normal:AnimationRender->ChangeAnimation("Fire");
 		break;
 	case Left:AnimationRender->ChangeAnimation("Left_Fire");
-		AnimationRender->SetPosition({ 0, 5 });
+		AnimationRender->SetPosition({ 0, -27 });
+		BodyCollision->SetPosition({ 6, -18 });
 		break;
 	case Right:AnimationRender->ChangeAnimation("Right_Fire");
 		AnimationRender->SetPosition({ 0, -27 });
+		BodyCollision->SetPosition({ -6, -18 });
 		break;
 	default:
 		break;
 	}
+
+
 	if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
 	{
 		this->Off();
 	}
 	else
 	{
-		SetMove(float4::Down * _DeltaTime * 200);
+		switch (CurrentState)
+		{
+		case Normal:SetMove(float4::Down * _DeltaTime * 100);
+			break;
+		case Left:SetMove(float4::Left * _DeltaTime * 100);
+			break;
+		case Right:SetMove(float4::Right * _DeltaTime * 100);
+			break;
+		default:
+			break;
+		}
 	}
 
 	std::vector<GameEngineCollision*> Collision;

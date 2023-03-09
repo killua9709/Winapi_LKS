@@ -83,7 +83,7 @@ void Stage2_1Level::Loading()
 	//플레이어
 	{
 		Mario = CreateActor<Player>(GameRenderOrder::Player);
-		Mario->SetMove({ 341,510 });
+		Mario->SetMove({ 448,572 });
 	}
 	//벽
 	{
@@ -99,7 +99,7 @@ void Stage2_1Level::Loading()
 		length->GetBodyCollision()->SetScale({ 34, 714 });
 
 		Wall* length2 = CreateActor<Wall>(GameRenderOrder::Map);
-		length2->SetMove({ 391, 282 });
+		length2->SetMove({ 391, 214 });
 		length2->GetBodyCollision()->SetScale({ 34, 476 });
 
 		Wall* length3 = CreateActor<Wall>(GameRenderOrder::Map);
@@ -124,9 +124,46 @@ void Stage2_1Level::Loading()
 		Obstacle->SetMove({ 680,595 });
 		Obstacle->GetBodyCollision()->SetScale({ 272, 34 });
 
+		Wall* Obstacle5 = CreateActor<Wall>(GameRenderOrder::Map);
+		Obstacle5->SetMove({ 714,663 });
+		Obstacle5->GetBodyCollision()->SetScale({ 272, 34 });
+
+		Wall* Obstacle6 = CreateActor<Wall>(GameRenderOrder::Cursor);
+		Obstacle6->SetMove({ 833,629 });
+		Obstacle6->GetBodyCollision()->SetScale({ 34, 34 });
+
+		Wall* Obstacle7 = CreateActor<Wall>(GameRenderOrder::Cursor);
+		Obstacle7->SetMove({ 918,612 });
+		Obstacle7->GetBodyCollision()->SetScale({ 136, 68 });
+
+		Wall* Obstacle8 = CreateActor<Wall>(GameRenderOrder::Cursor);
+		Obstacle8->SetMove({ 935,544 });
+		Obstacle8->GetBodyCollision()->SetScale({ 102, 68 });
+
+
 		Wall2* wall = CreateActor<Wall2>(GameRenderOrder::Map);
 		wall->SetMove({ 391,493 });
 
+		Wall2* wall2 = CreateActor<Wall2>(GameRenderOrder::Map);
+		wall2->SetMove({ 595,629 });
+
+		Wall2* wall3 = CreateActor<Wall2>(GameRenderOrder::Map);
+		wall3->SetMove({ 629,629 });
+
+		Wall2* wall4 = CreateActor<Wall2>(GameRenderOrder::Map);
+		wall4->SetMove({ 663,629 });
+
+		Wall2* wall5 = CreateActor<Wall2>(GameRenderOrder::Map);
+		wall5->SetMove({ 697,629 });
+
+		Wall2* wall6 = CreateActor<Wall2>(GameRenderOrder::Map);
+		wall6->SetMove({ 731,629 });
+
+		Wall2* wall7 = CreateActor<Wall2>(GameRenderOrder::Map);
+		wall7->SetMove({ 765,629 });
+
+		Wall2* wall8 = CreateActor<Wall2>(GameRenderOrder::Map);
+		wall8->SetMove({ 799,629 });
 
 
 		//{{윈도우 틀
@@ -150,18 +187,29 @@ void Stage2_1Level::Loading()
 	//오브젝트
 	{
 		door = CreateActor<Door>(GameRenderOrder::Cursor);
-		door->SetMove({ 959,662 }); //544 //16
+		door->SetMove({ 341,494 }); //544 //16
 
-		Thorn::SetInfloat({ 391,238 });
+		Thorn::SetInfloat({ 448,572 });
 
 		Thorn* thorn = CreateActor<Thorn>(GameRenderOrder::Cursor);
 		thorn->SetMove({ 527,595 });
+
+		Thorn* thorn2 = CreateActor<Thorn>(GameRenderOrder::Cursor);
+		thorn2->SetMove({ 833,595 });
 	}
 	//몬스터
 	{
 		Cannon* cannon1 = CreateActor<Cannon>(GameRenderOrder::Monster);
 		cannon1->SetMove({ 561,663 });
 		cannon1->SetState(CannonState::Left2);
+
+		Cannon* cannon2 = CreateActor<Cannon>(GameRenderOrder::Monster);
+		cannon2->SetMove({ 561,629 });
+		cannon2->SetState(CannonState::Left2);
+
+		Cannon* cannon3 = CreateActor<Cannon>(GameRenderOrder::Monster);
+		cannon3->SetMove({ 960,495 });
+		cannon3->SetState(CannonState::Right3);
 	}
 
 

@@ -35,7 +35,6 @@ protected:
 	void Update(float _DeltaTime) override;
 	void Render(float _DeltaTime) override;
 private:
-	GameEngineRender* render = nullptr;
 	GameEngineRender* AnimationRender = nullptr;
 	BulletState CurrentState = BulletState::Normal;
 
