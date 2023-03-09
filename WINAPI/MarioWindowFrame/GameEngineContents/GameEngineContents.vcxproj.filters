@@ -78,6 +78,12 @@
     <ClInclude Include="Key.h">
       <Filter>GlobalActors\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Stage1_BossLevel.h">
+      <Filter>Play\Stage1\Stage1_Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage1_BossMap.h">
+      <Filter>Play\Stage1\Stage1_Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StudyGameCore.cpp" />
@@ -159,6 +165,12 @@
     <ClCompile Include="Key.cpp">
       <Filter>GlobalActors\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Stage1_BossLevel.cpp">
+      <Filter>Play\Stage1\Stage1_Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage1_BossMap.cpp">
+      <Filter>Play\Stage1\Stage1_Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Play">
@@ -205,6 +217,9 @@
     </Filter>
     <Filter Include="Play\Stage1\Stage1_3">
       <UniqueIdentifier>{e5f2aaea-13f3-4d6e-8a8b-87440537936d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Stage1\Stage1_Boss">
+      <UniqueIdentifier>{cae2dcba-0f4e-461a-b125-b21b7f593c6f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
