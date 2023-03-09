@@ -13,6 +13,8 @@ Thorn::~Thorn()
 {
 }
 
+float4 Thorn::Infloat = float4::Zero;
+
 void Thorn::Start()
 {
 	BodyCollision = CreateCollision(GameCollisionOrder::Object);

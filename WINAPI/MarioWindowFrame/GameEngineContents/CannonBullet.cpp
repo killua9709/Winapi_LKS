@@ -16,20 +16,35 @@ float4 CannonBullet::Infloat = float4::Zero;
 
 void CannonBullet::Start()
 {
-	BodyCollision = CreateCollision(GameCollisionOrder::Monster);
+	BodyCollision = CreateCollision(GameCollisionOrder::MonsterBullet);
 	BodyCollision->SetScale({ 16, 16 });
-	BodyCollision->SetPosition({ 0, -8 });
+	BodyCollision->SetPosition({ -8, -8 });
 
 	AnimationRender = CreateRender("CannonBullet.bmp", GameRenderOrder::Cursor);
 	AnimationRender->SetScale({ 102, 102 });
 
 	AnimationRender->CreateAnimation({ .AnimationName = "Fire",  .ImageName = "CannonBullet.bmp", .Start = 0, .End = 10, .InterTime = 0.1f });
+	AnimationRender->CreateAnimation({ .AnimationName = "Left_Fire",  .ImageName = "Left_CannonBullet.bmp", .Start = 0, .End = 10, .InterTime = 0.1f });
+	AnimationRender->CreateAnimation({ .AnimationName = "Right_Fire",  .ImageName = "Right_CannonBullet.bmp", .Start = 0, .End = 10, .InterTime = 0.1f });
 
 	AnimationRender->ChangeAnimation("Fire");
 }
 
 void CannonBullet::Update(float _DeltaTime)
 {
+	switch (CurrentState)
+	{
+	case Normal:AnimationRender->ChangeAnimation("Fire");
+		break;
+	case Left:AnimationRender->ChangeAnimation("Left_Fire");
+		AnimationRender->SetPosition({ 0, 5 });
+		break;
+	case Right:AnimationRender->ChangeAnimation("Right_Fire");
+		AnimationRender->SetPosition({ 0, -27 });
+		break;
+	default:
+		break;
+	}
 	if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
 	{
 		this->Off();

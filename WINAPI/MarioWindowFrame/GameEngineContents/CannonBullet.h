@@ -1,7 +1,12 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
 
-
+enum BulletState
+{
+	Normal,
+	Left,
+	Right
+};
 // Ό³Έν :
 class CannonBullet : public GameEngineActor
 {
@@ -20,12 +25,20 @@ public:
 	{
 		Infloat = _change;
 	}
+
+	void SetState(BulletState _state)
+	{
+		CurrentState = _state;
+	}
 protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 	void Render(float _DeltaTime) override;
 private:
+	GameEngineRender* render = nullptr;
 	GameEngineRender* AnimationRender = nullptr;
+	BulletState CurrentState = BulletState::Normal;
+
 	
 
 };

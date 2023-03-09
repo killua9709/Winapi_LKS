@@ -66,7 +66,23 @@ void Stage1_2Level::ImageLoad()
 		Image->Cut(5, 2);
 	}
 	{
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Left_Cannon.bmp"));
+		Image->Cut(5, 2);
+	}
+	{
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Right_Cannon.bmp"));
+		Image->Cut(5, 2);
+	}
+	{
 		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("CannonBullet.bmp"));
+		Image->Cut(5, 3);
+	}
+	{
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Left_CannonBullet.bmp"));
+		Image->Cut(5, 3);
+	}
+	{
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Right_CannonBullet.bmp"));
 		Image->Cut(5, 3);
 	}
 }

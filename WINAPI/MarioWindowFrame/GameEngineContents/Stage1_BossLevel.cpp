@@ -160,41 +160,35 @@ void Stage1_BossLevel::Loading()
 		door->SetMove({ 488,220 }); //544 //16
 		door->SetLock(true);
 
+		Thorn::SetInfloat({ 391,238 });
+
 		Thorn* thorn = CreateActor<Thorn>(GameRenderOrder::Cursor);
 		thorn->SetMove({ 595,323 });
-		thorn->SetInfloat({ 391,238 });
 
 		Thorn* thorn2 = CreateActor<Thorn>(GameRenderOrder::Cursor);
 		thorn2->SetMove({ 629,323 });
-		thorn2->SetInfloat({ 391,238 });
 
 		Thorn* thorn3 = CreateActor<Thorn>(GameRenderOrder::Cursor);
 		thorn3->SetMove({ 697,323 });
-		thorn3->SetInfloat({ 391,238 });
 
 		Thorn* thorn4 = CreateActor<Thorn>(GameRenderOrder::Cursor);
 		thorn4->SetMove({ 765,323 });
-		thorn4->SetInfloat({ 391,238 });
 
 		Thorn* thorn5 = CreateActor<Thorn>(GameRenderOrder::Cursor);
 		thorn5->SetMove({ 833,323 });
-		thorn5->SetInfloat({ 391,238 });
 
 		Thorn* thorn6 = CreateActor<Thorn>(GameRenderOrder::Cursor);
 		thorn6->SetMove({ 867,323 });
-		thorn6->SetInfloat({ 391,238 });
 
 		Thorn* thorn7 = CreateActor<Thorn>(GameRenderOrder::Cursor);
 		thorn7->SetMove({ 900,323 });
-		thorn7->SetInfloat({ 391,238 });
 
 		Thorn* thorn8 = CreateActor<Thorn>(GameRenderOrder::Cursor);
 		thorn8->SetMove({ 934,323 });
-		thorn8->SetInfloat({ 391,238 });
 
 		Thorn* thorn9 = CreateActor<Thorn>(GameRenderOrder::Cursor);
 		thorn9->SetMove({ 968,323 });
-		thorn9->SetInfloat({ 391,238 });
+		
 	}
 	//∏ÛΩ∫≈Õ
 	{

@@ -22,12 +22,13 @@ void Cannon::Start()
 	BodyCollision = CreateCollision(GameCollisionOrder::Object);
 	BodyCollision->SetScale({ 28, 35 });
 
-	GameEngineRender* Render = CreateRender("Cannon.bmp", GameRenderOrder::Monster);
-	Render->SetScale({ 102, 102 });
-	Render->CreateAnimation({ .AnimationName = "Cannon_Idle",  .ImageName = "Cannon.bmp", .Start = 0, .End = 0 });
-	Render->CreateAnimation({ .AnimationName = "Cannon_Fire",  .ImageName = "Cannon.bmp", .Start = 1, .End = 5 ,.InterTime = 0.12 });
-
-	Render->ChangeAnimation("Cannon_Fire");
+	render = CreateRender("Cannon.bmp", GameRenderOrder::Monster);
+	render->SetScale({ 102, 102 });
+	render->CreateAnimation({ .AnimationName = "Cannon_Idle",  .ImageName = "Cannon.bmp", .Start = 0, .End = 0 });
+	render->CreateAnimation({ .AnimationName = "Cannon_Fire",  .ImageName = "Cannon.bmp", .Start = 1, .End = 5 ,.InterTime = 0.12 });
+	render->CreateAnimation({ .AnimationName = "Right_Cannon_Fire",  .ImageName = "Right_Cannon.bmp", .Start = 1, .End = 5 ,.InterTime = 0.12 });
+	render->CreateAnimation({ .AnimationName = "Left_Cannon_Fire",  .ImageName = "Left_Cannon.bmp", .Start = 1, .End = 5 ,.InterTime = 0.12 });
+	render->ChangeAnimation("Cannon_Fire");
 
 	for (size_t i = 0; i < 6; i++)
 	{
@@ -42,6 +43,30 @@ void Cannon::Start()
 void Cannon::Update(float _DeltaTime)
 {
 	firetime += _DeltaTime;
+
+	switch (CurrentState)
+	{
+	case Normal1:render->ChangeAnimation("Cannon_Fire");
+		for (size_t i = 0; i < Bullets.size(); i++)
+		{
+			Bullets[i]->SetState(BulletState::Normal);
+		}
+		break;
+	case Left2:render->ChangeAnimation("Left_Cannon_Fire");
+		for (size_t i = 0; i < Bullets.size(); i++)
+		{
+			Bullets[i]->SetState(BulletState::Right);
+		}
+		break;
+	case Right3:render->ChangeAnimation("Right_Cannon_Fire");
+		for (size_t i = 0; i < Bullets.size(); i++)
+		{
+			Bullets[i]->SetState(BulletState::Left);
+		}
+		break;
+	default:
+		break;
+	}
 
 	if (1.5 < firetime)
 	{

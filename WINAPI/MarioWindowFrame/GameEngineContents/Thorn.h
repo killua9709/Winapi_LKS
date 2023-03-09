@@ -6,6 +6,8 @@
 class Thorn : public GameEngineActor
 {
 public:
+	static float4 Infloat;
+
 	// constrcuter destructer
 	Thorn();
 	~Thorn();
@@ -16,7 +18,7 @@ public:
 	Thorn& operator=(const Thorn& _Other) = delete;
 	Thorn& operator=(Thorn&& _Other) noexcept = delete;
 
-	void SetInfloat(float4 _change)
+	static void SetInfloat(float4 _change)
 	{
 		Infloat = _change;
 	}
@@ -28,6 +30,5 @@ protected:
 
 private:
 	GameEngineSoundPlayer GetSoundPlayer;
-	float4 Infloat = float4::Zero;
 };
 

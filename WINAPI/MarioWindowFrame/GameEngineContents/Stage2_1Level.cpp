@@ -25,6 +25,8 @@
 #include "MouseObject.h"
 #include "Door.h"
 #include "Cannon.h"
+#include "Thorn.h"
+#include "Wall2.h"
 
 
 Stage2_1Level::Stage2_1Level()
@@ -57,6 +59,11 @@ void Stage2_1Level::ImageLoad()
 		Image->Cut(1, 1);
 	}
 	
+	{
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Wall2.bmp"));
+		Image->Cut(1, 1);
+	}
+	
 }
 
 
@@ -76,7 +83,7 @@ void Stage2_1Level::Loading()
 	//플레이어
 	{
 		Mario = CreateActor<Player>(GameRenderOrder::Player);
-		Mario->SetMove({ 372,544 });
+		Mario->SetMove({ 341,510 });
 	}
 	//벽
 	{
@@ -92,8 +99,8 @@ void Stage2_1Level::Loading()
 		length->GetBodyCollision()->SetScale({ 34, 714 });
 
 		Wall* length2 = CreateActor<Wall>(GameRenderOrder::Map);
-		length2->SetMove({ 391, 350 });
-		length2->GetBodyCollision()->SetScale({ 34, 714 });
+		length2->SetMove({ 391, 282 });
+		length2->GetBodyCollision()->SetScale({ 34, 476 });
 
 		Wall* length3 = CreateActor<Wall>(GameRenderOrder::Map);
 		length3->SetMove({ 1003, 350 });
@@ -101,9 +108,25 @@ void Stage2_1Level::Loading()
 
 
 		//장애물
+		Wall* Obstacle2 = CreateActor<Wall>(GameRenderOrder::Map);
+		Obstacle2->SetMove({ 357,544 });
+		Obstacle2->GetBodyCollision()->SetScale({ 102, 68 });
+
+		Wall* Obstacle3 = CreateActor<Wall>(GameRenderOrder::Map);
+		Obstacle3->SetMove({ 459,612 });
+		Obstacle3->GetBodyCollision()->SetScale({ 102, 68 });
+
+		Wall* Obstacle4 = CreateActor<Wall>(GameRenderOrder::Map);
+		Obstacle4->SetMove({ 527,629 });
+		Obstacle4->GetBodyCollision()->SetScale({ 34, 34 });
+
 		Wall* Obstacle = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle->SetMove({ 782,561 });
-		Obstacle->GetBodyCollision()->SetScale({ 408, 34 });
+		Obstacle->SetMove({ 680,595 });
+		Obstacle->GetBodyCollision()->SetScale({ 272, 34 });
+
+		Wall2* wall = CreateActor<Wall2>(GameRenderOrder::Map);
+		wall->SetMove({ 391,493 });
+
 
 
 		//{{윈도우 틀
@@ -128,12 +151,17 @@ void Stage2_1Level::Loading()
 	{
 		door = CreateActor<Door>(GameRenderOrder::Cursor);
 		door->SetMove({ 959,662 }); //544 //16
+
+		Thorn::SetInfloat({ 391,238 });
+
+		Thorn* thorn = CreateActor<Thorn>(GameRenderOrder::Cursor);
+		thorn->SetMove({ 527,595 });
 	}
 	//몬스터
 	{
 		Cannon* cannon1 = CreateActor<Cannon>(GameRenderOrder::Monster);
-		cannon1->SetMove({ 646,581 });
-
+		cannon1->SetMove({ 561,663 });
+		cannon1->SetState(CannonState::Left2);
 	}
 
 

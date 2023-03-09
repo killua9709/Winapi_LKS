@@ -16,7 +16,7 @@ Wall2::~Wall2()
 void Wall2::Start()
 {
 	BodyCollision = CreateCollision(GameCollisionOrder::Object);
-	BodyCollision->SetScale({ 24, 17 });
+	BodyCollision->SetScale({ 34, 34 });
 
 	GameEngineRender* Render = CreateRender("Wall2.bmp", GameRenderOrder::Cursor);
 	Render->SetScale({ 34, 34 });
@@ -24,9 +24,9 @@ void Wall2::Start()
 
 void Wall2::Update(float _DeltaTime)
 {
-	if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
+	if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::MonsterBullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }))
 	{
-		
+		this->Death();
 	}
 }
 
