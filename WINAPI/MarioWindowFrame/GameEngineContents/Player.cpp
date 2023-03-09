@@ -315,23 +315,27 @@ void Player::SoftGravity(float _DeltaTime)
 
 bool Player::IsLeftWall()
 {
-	return LeftCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect });
+	return LeftCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect })||
+		LeftCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall2), .TargetColType = CT_Rect, .ThisColType = CT_Rect });
 }
 
 bool Player::IsRightWall()
 {
-	return RightCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect });
+	return RightCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }) ||
+		RightCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall2), .TargetColType = CT_Rect, .ThisColType = CT_Rect });
 }
 
 bool Player::IsUpWall()
 {
-	return UpCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect });
+	return UpCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }) ||
+		UpCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall2), .TargetColType = CT_Rect, .ThisColType = CT_Rect });
 }
 
 //땅에 있는 지 체크
 bool Player::IsGround()
 {
-	return (DownCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect }));
+	return (DownCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall), .TargetColType = CT_Rect, .ThisColType = CT_Rect })) ||
+		DownCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall2), .TargetColType = CT_Rect, .ThisColType = CT_Rect });
 }
 
 void Player::CheckUp()
@@ -342,6 +346,15 @@ void Player::CheckUp()
 		for (size_t i = 0; i < Collision.size(); i++)
 		{
 			SetPos({ GetPos().x,Collision[i]->GetCollisionData().Bot() + 37 });
+		}
+	}
+
+	std::vector<GameEngineCollision*> Collision2;
+	if (true == UpCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall2), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision2))
+	{
+		for (size_t i = 0; i < Collision2.size(); i++)
+		{
+			SetPos({ GetPos().x,Collision2[i]->GetCollisionData().Bot() + 37 });
 		}
 	}
 }
@@ -358,6 +371,14 @@ void Player::CheckGround()
 		}
 	}
 	
+	std::vector<GameEngineCollision*> Collision2;
+	if (true == DownCollision->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Wall2), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision2))
+	{
+		for (size_t i = 0; i < Collision2.size(); i++)
+		{
+			SetPos({ GetPos().x,Collision2[i]->GetCollisionData().Top()});
+		}
+	}
 }
 
 void Player::CheckPos()
