@@ -90,6 +90,15 @@
     <ClInclude Include="Thorn.h">
       <Filter>GlobalActors\Thorn</Filter>
     </ClInclude>
+    <ClInclude Include="Stage2_1Level.h">
+      <Filter>Play\Stage2</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage2_1Map.h">
+      <Filter>Play\Stage2</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall2.h">
+      <Filter>GlobalActors\Wall</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StudyGameCore.cpp" />
@@ -182,6 +191,15 @@
     </ClCompile>
     <ClCompile Include="Thorn.cpp">
       <Filter>GlobalActors\Thorn</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage2_1Level.cpp">
+      <Filter>Play\Stage2</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage2_1Map.cpp">
+      <Filter>Play\Stage2</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall2.cpp">
+      <Filter>GlobalActors\Wall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

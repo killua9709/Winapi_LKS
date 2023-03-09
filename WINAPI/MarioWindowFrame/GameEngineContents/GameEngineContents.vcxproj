@@ -83,6 +83,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Stage2_1Level.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Stage2_1Map.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Thorn.h">
       <SubType>
       </SubType>
@@ -137,6 +145,10 @@
     </ClInclude>
     <ClInclude Include="ContentsEnums.h" />
     <ClInclude Include="Wall.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Wall2.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -206,6 +218,14 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Stage2_1Level.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Stage2_1Map.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Thorn.cpp">
       <SubType>
       </SubType>
@@ -260,6 +280,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Wall.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Wall2.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -224,12 +224,11 @@ void Stage1_BossLevel::Loading()
 
 void Stage1_BossLevel::Update(float _DeltaTime)
 {
-
 	if (true == GetDoor)
 	{
 		SetGetDoor(false);
 		SetGetKey(false);
-		//GameEngineCore::GetInst()->ChangeLevel("TitleLevel");
+		GameEngineCore::GetInst()->ChangeLevel("Stage2_1Level");
 	}
 
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))

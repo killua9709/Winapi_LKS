@@ -12,6 +12,8 @@ CannonBullet::CannonBullet()
 CannonBullet::~CannonBullet() 
 {
 }
+float4 CannonBullet::Infloat = float4::Zero;
+
 void CannonBullet::Start()
 {
 	BodyCollision = CreateCollision(GameCollisionOrder::Monster);
@@ -43,7 +45,7 @@ void CannonBullet::Update(float _DeltaTime)
 		for (size_t i = 0; i < Collision.size(); i++)
 		{
 			GameEngineActor* ColActor = Collision[i]->GetActor();
-			ColActor->SetPos({372,544});
+			ColActor->SetPos(Infloat);
 		}
 	}
 }

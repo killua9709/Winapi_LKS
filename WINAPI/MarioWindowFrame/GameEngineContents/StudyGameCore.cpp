@@ -35,7 +35,7 @@ void StudyGameCore::Start()
 	CreateLevel<Stage1_2Level>("Stage1_2Level");
 	CreateLevel<Stage1_3Level>("Stage1_3Level");
 	CreateLevel<Stage1_BossLevel>("Stage1_BossLevel");
-	ChangeLevel("Stage1_3Level");
+	ChangeLevel("Stage1_2Level");
 }
 
 void StudyGameCore::Update()

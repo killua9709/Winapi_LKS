@@ -18,6 +18,11 @@ public:
 	Cannon& operator=(const Cannon& _Other) = delete;
 	Cannon& operator=(Cannon&& _Other) noexcept = delete;
 
+	std::vector<CannonBullet*> GetBullets()
+	{
+		return Bullets;
+	}
+
 protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;

@@ -1,4 +1,4 @@
-#include "Stage1_2Level.h"
+#include "Stage2_1Level.h"
 
 #include "Structs.h"
 
@@ -14,7 +14,7 @@
 
 // 나랑 같은 등급의 헤더들
 #include "Player.h"
-#include "Stage1_2Map.h"
+#include "Stage2_1Map.h"
 #include "ContentsEnums.h"
 #include "ContentsValue.h"
 #include "MouseObject.h"
@@ -27,26 +27,21 @@
 #include "Cannon.h"
 
 
-Stage1_2Level::Stage1_2Level()
+Stage2_1Level::Stage2_1Level()
 {
 
 }
 
-Stage1_2Level::~Stage1_2Level()
+Stage2_1Level::~Stage2_1Level()
 {
 
 }
 
-void Stage1_2Level::SoundLoad()
+void Stage2_1Level::SoundLoad()
 {
-	GameEngineDirectory Dir;
-	Dir.MoveParentToDirectory("ContentsResources");
-	Dir.Move("ContentsResources");
-	Dir.Move("Sound");
-
-	GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("cannon.wav"));
+	
 }
-void Stage1_2Level::ImageLoad()
+void Stage2_1Level::ImageLoad()
 {
 	GameEngineWindow::SettingWindowSize({ 1280,960 });
 
@@ -58,22 +53,15 @@ void Stage1_2Level::ImageLoad()
 	Dir.Move("Play");
 
 	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Stage1_2Map.bmp"));
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Stage2_1Map.bmp"));
 		Image->Cut(1, 1);
 	}
-	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Cannon.bmp"));
-		Image->Cut(5, 2);
-	}
-	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("CannonBullet.bmp"));
-		Image->Cut(5, 3);
-	}
+	
 }
 
 
 
-void Stage1_2Level::Loading()
+void Stage2_1Level::Loading()
 {
 	ImageLoad();
 	SoundLoad();
@@ -83,7 +71,7 @@ void Stage1_2Level::Loading()
 	}
 	//맵
 	{
-		Stage1_2Map* Actor = CreateActor<Stage1_2Map>();
+		Stage2_1Map* Actor = CreateActor<Stage2_1Map>();
 	}
 	//플레이어
 	{
@@ -104,10 +92,12 @@ void Stage1_2Level::Loading()
 		length->GetBodyCollision()->SetScale({ 34, 714 });
 
 		Wall* length2 = CreateActor<Wall>(GameRenderOrder::Map);
-		length2->SetMove({ 1003, 350 });
+		length2->SetMove({ 391, 350 });
 		length2->GetBodyCollision()->SetScale({ 34, 714 });
 
-
+		Wall* length3 = CreateActor<Wall>(GameRenderOrder::Map);
+		length3->SetMove({ 1003, 350 });
+		length3->GetBodyCollision()->SetScale({ 34, 714 });
 
 
 		//장애물
@@ -141,25 +131,9 @@ void Stage1_2Level::Loading()
 	}
 	//몬스터
 	{
-		CannonBullet::SetInfloat({ 372,544 });
-
 		Cannon* cannon1 = CreateActor<Cannon>(GameRenderOrder::Monster);
 		cannon1->SetMove({ 646,581 });
 
-		Cannon* cannon2 = CreateActor<Cannon>(GameRenderOrder::Monster);
-		cannon2->SetMove({ 680,581 });
-
-		Cannon* cannon3 = CreateActor<Cannon>(GameRenderOrder::Monster);
-		cannon3->SetMove({ 714,581 });
-
-		Cannon* cannon4 = CreateActor<Cannon>(GameRenderOrder::Monster);
-		cannon4->SetMove({ 748,581 });
-
-		Cannon* cannon5 = CreateActor<Cannon>(GameRenderOrder::Monster);
-		cannon5->SetMove({ 782,581 });
-
-		Cannon* cannon6 = CreateActor<Cannon>(GameRenderOrder::Monster);
-		cannon6->SetMove({ 816,581 });
 	}
 
 
@@ -179,7 +153,7 @@ void Stage1_2Level::Loading()
 	}
 }
 
-void Stage1_2Level::Update(float _DeltaTime)
+void Stage2_1Level::Update(float _DeltaTime)
 {
 
 	if (true == GetDoor)
@@ -229,7 +203,7 @@ void Stage1_2Level::Update(float _DeltaTime)
 	}
 }
 
-void Stage1_2Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
+void Stage2_1Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	GameEngineWindow::SettingWindowSize({ 260,260 });
 	screenSizex = GameEngineWindow::GetScreenSize().x;
@@ -242,7 +216,7 @@ void Stage1_2Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	//GameEngineWindow::WindowExpand();
 }
 
-void Stage1_2Level::CameraRectUpdate(float _DeltaTime)
+void Stage2_1Level::CameraRectUpdate(float _DeltaTime)
 {
 	std::vector<GameEngineCollision*> Collision;
 	if (false == Left->GetBodyCollision()->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision))

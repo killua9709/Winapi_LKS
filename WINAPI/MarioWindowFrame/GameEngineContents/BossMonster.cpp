@@ -5,6 +5,8 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include <cmath>
 #include "Player.h"
+#include "STLevel.h"
+
 
 BossMonster::BossMonster()
 {
@@ -42,6 +44,7 @@ void BossMonster::Update(float _DeltaTime)
 
 		if (AnimationRender->IsAnimationEnd())
 		{
+			STLevel::SetGetKey(true);
 			this->Death();
 		}
 	}
