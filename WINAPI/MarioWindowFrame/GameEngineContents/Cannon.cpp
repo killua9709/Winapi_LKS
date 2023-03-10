@@ -43,7 +43,6 @@ void Cannon::Start()
 void Cannon::Update(float _DeltaTime)
 {
 	firetime += _DeltaTime;
-
 	switch (CurrentState)
 	{
 	case Normal1:render->ChangeAnimation("Cannon_Fire");
@@ -66,6 +65,14 @@ void Cannon::Update(float _DeltaTime)
 		break;
 	default:
 		break;
+	}
+
+	float d = Delaytime;
+	if (Delaytime > stack)
+	{
+		stack += _DeltaTime;
+		firetime = 0;
+		return;
 	}
 
 	if (1.5 < firetime)

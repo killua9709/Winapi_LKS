@@ -34,6 +34,11 @@ public:
 		CurrentState = _state;
 	}
 
+	void SetDelayTime(float _time)
+	{
+		Delaytime = _time;
+	}
+
 protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
@@ -43,6 +48,8 @@ private:
 	GameEngineSoundPlayer GetSoundPlayer;
 	std::vector<CannonBullet*> Bullets;
 	CannonState CurrentState = CannonState::Normal1;
+	float Delaytime = 0;
+	float stack = 0;
 	float firetime = 0;
 };
 

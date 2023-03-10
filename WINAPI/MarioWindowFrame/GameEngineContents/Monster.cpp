@@ -17,6 +17,8 @@ Monster::~Monster()
 	GetSoundPlayer.Volume(0.1f);
 }
 
+float4 Monster::Infloat = float4::Zero;
+float4 Monster::Infloat2 = float4::Zero;
 
 void Monster::Start() 
 {
@@ -81,10 +83,10 @@ void Monster::Update(float _DeltaTime)
 		for (size_t i = 0; i < Collision.size(); i++)
 		{
 			GameEngineActor* ColActor = Collision[i]->GetActor();
-			ColActor->SetPos({ 372,100 });
+			ColActor->SetPos(Infloat);
 		}
 
-		SetPos({ 614,130 });
+		SetPos(Infloat2 );
 	}
 	
 }

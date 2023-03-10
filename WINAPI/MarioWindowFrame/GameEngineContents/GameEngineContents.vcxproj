@@ -91,6 +91,30 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Stage2_2Level.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Stage2_2Map.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Stage2_3Level.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Stage2_3Map.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Stage2_BossLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Stage2_BossMap.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Thorn.h">
       <SubType>
       </SubType>
@@ -223,6 +247,30 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Stage2_1Map.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Stage2_2Level.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Stage2_2Map.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Stage2_3Level.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Stage2_3Map.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Stage2_BossLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Stage2_BossMap.cpp">
       <SubType>
       </SubType>
     </ClCompile>

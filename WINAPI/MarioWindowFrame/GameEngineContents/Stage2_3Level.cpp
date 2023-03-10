@@ -1,4 +1,4 @@
-#include "Stage2_1Level.h"
+#include "Stage2_3Level.h"
 
 #include "Structs.h"
 
@@ -14,7 +14,7 @@
 
 // 나랑 같은 등급의 헤더들
 #include "Player.h"
-#include "Stage2_1Map.h"
+#include "Stage2_3Map.h"
 #include "ContentsEnums.h"
 #include "ContentsValue.h"
 #include "MouseObject.h"
@@ -25,25 +25,31 @@
 #include "MouseObject.h"
 #include "Door.h"
 #include "Cannon.h"
+#include "Key.h"
+#include "Monster.h"
 #include "Thorn.h"
 #include "Wall2.h"
 
 
-Stage2_1Level::Stage2_1Level()
+Stage2_3Level::Stage2_3Level()
 {
 
 }
 
-Stage2_1Level::~Stage2_1Level()
+Stage2_3Level::~Stage2_3Level()
 {
 
 }
 
-void Stage2_1Level::SoundLoad()
+void Stage2_3Level::SoundLoad()
 {
-	
+	GameEngineDirectory Dir;
+	Dir.MoveParentToDirectory("ContentsResources");
+	Dir.Move("ContentsResources");
+	Dir.Move("Sound");
+
 }
-void Stage2_1Level::ImageLoad()
+void Stage2_3Level::ImageLoad()
 {
 	GameEngineWindow::SettingWindowSize({ 1280,960 });
 
@@ -55,42 +61,34 @@ void Stage2_1Level::ImageLoad()
 	Dir.Move("Play");
 
 	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Stage2_1Map.bmp"));
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Stage2_3Map.bmp"));
 		Image->Cut(1, 1);
 	}
-	
-	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Wall2.bmp"));
-		Image->Cut(1, 1);
-	}
-	
 }
 
 
 
-void Stage2_1Level::Loading()
+void Stage2_3Level::Loading()
 {
 	ImageLoad();
-	SoundLoad();
-
 	//마우스
 	{
 		Mouse = CreateActor<MouseObject>();
 	}
 	//맵
 	{
-		Stage2_1Map* Actor = CreateActor<Stage2_1Map>();
+		Stage2_3Map* Actor = CreateActor<Stage2_3Map>();
 	}
 	//플레이어
 	{
 		Mario = CreateActor<Player>(GameRenderOrder::Player);
-		Mario->SetMove({ 448,572 });
+		Mario->SetMove({ 932,187 });
 	}
 	//벽
 	{
 		//가로벽
 		Wall* Wight4 = CreateActor<Wall>(GameRenderOrder::Map);
-		Wight4->SetMove({ 612,697 });
+		Wight4->SetMove({ 612,595 });
 		Wight4->GetBodyCollision()->SetScale({ 1200, 34 });
 
 
@@ -100,71 +98,110 @@ void Stage2_1Level::Loading()
 		length->GetBodyCollision()->SetScale({ 34, 714 });
 
 		Wall* length2 = CreateActor<Wall>(GameRenderOrder::Map);
-		length2->SetMove({ 391, 214 });
-		length2->GetBodyCollision()->SetScale({ 34, 476 });
+		length2->SetMove({ 1003, 350 });
+		length2->GetBodyCollision()->SetScale({ 34, 714 });
 
-		Wall* length3 = CreateActor<Wall>(GameRenderOrder::Map);
-		length3->SetMove({ 1003, 350 });
-		length3->GetBodyCollision()->SetScale({ 34, 714 });
+
 
 
 		//장애물
+		Wall* Obstacle = CreateActor<Wall>(GameRenderOrder::Map);
+		Obstacle->SetMove({ 714,272 });
+		Obstacle->GetBodyCollision()->SetScale({ 136, 136 });
+
 		Wall* Obstacle2 = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle2->SetMove({ 357,544 });
-		Obstacle2->GetBodyCollision()->SetScale({ 102, 68 });
+		Obstacle2->SetMove({ 714,408 });
+		Obstacle2->GetBodyCollision()->SetScale({ 136, 136 });
 
 		Wall* Obstacle3 = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle3->SetMove({ 459,612 });
-		Obstacle3->GetBodyCollision()->SetScale({ 102, 68 });
+		Obstacle3->SetMove({ 714,544 });
+		Obstacle3->GetBodyCollision()->SetScale({ 136, 136 });
 
 		Wall* Obstacle4 = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle4->SetMove({ 527,629 });
-		Obstacle4->GetBodyCollision()->SetScale({ 34, 34 });
-
-		Wall* Obstacle = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle->SetMove({ 680,595 });
-		Obstacle->GetBodyCollision()->SetScale({ 272, 34 });
+		Obstacle4->SetMove({ 918,272 });
+		Obstacle4->GetBodyCollision()->SetScale({ 136, 136 });
 
 		Wall* Obstacle5 = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle5->SetMove({ 714,663 });
-		Obstacle5->GetBodyCollision()->SetScale({ 272, 34 });
+		Obstacle5->SetMove({ 918,408 });
+		Obstacle5->GetBodyCollision()->SetScale({ 136, 136 });
 
-		Wall* Obstacle6 = CreateActor<Wall>(GameRenderOrder::Cursor);
-		Obstacle6->SetMove({ 833,629 });
-		Obstacle6->GetBodyCollision()->SetScale({ 34, 34 });
+		Wall* Obstacle6 = CreateActor<Wall>(GameRenderOrder::Map);
+		Obstacle6->SetMove({ 918,544 });
+		Obstacle6->GetBodyCollision()->SetScale({ 136, 136 });
 
-		Wall* Obstacle7 = CreateActor<Wall>(GameRenderOrder::Cursor);
-		Obstacle7->SetMove({ 918,612 });
-		Obstacle7->GetBodyCollision()->SetScale({ 136, 68 });
+		{
+			Wall2* wall = CreateActor<Wall2>(GameRenderOrder::Map);
+			wall->SetMove({ 833,238 });
+		}
+		{
+			Wall2* wall = CreateActor<Wall2>(GameRenderOrder::Map);
+			wall->SetMove({ 833,272 });
+		}
+		{
+			Wall2* wall = CreateActor<Wall2>(GameRenderOrder::Map);
+			wall->SetMove({ 833,306 });
+		}
+		{
+			Wall2* wall = CreateActor<Wall2>(GameRenderOrder::Map);
+			wall->SetMove({ 833,340 });
+		}
+		{
+			Wall2* wall = CreateActor<Wall2>(GameRenderOrder::Map);
+			wall->SetMove({ 833,374 });
+		}
+		{
+			Wall2* wall = CreateActor<Wall2>(GameRenderOrder::Map);
+			wall->SetMove({ 833,408 });
+		}
+		{
+			Wall2* wall = CreateActor<Wall2>(GameRenderOrder::Map);
+			wall->SetMove({ 833,442 });
+		}
+		{
+			Wall2* wall = CreateActor<Wall2>(GameRenderOrder::Map);
+			wall->SetMove({ 833,476 });
+		}
+		{
+			Wall2* wall = CreateActor<Wall2>(GameRenderOrder::Map);
+			wall->SetMove({ 833,510 });
+		}
 
-		Wall* Obstacle8 = CreateActor<Wall>(GameRenderOrder::Cursor);
-		Obstacle8->SetMove({ 935,544 });
-		Obstacle8->GetBodyCollision()->SetScale({ 102, 68 });
-
-
-		Wall2* wall = CreateActor<Wall2>(GameRenderOrder::Map);
-		wall->SetMove({ 391,493 });
-
-		Wall2* wall2 = CreateActor<Wall2>(GameRenderOrder::Map);
-		wall2->SetMove({ 595,629 });
-
-		Wall2* wall3 = CreateActor<Wall2>(GameRenderOrder::Map);
-		wall3->SetMove({ 629,629 });
-
-		Wall2* wall4 = CreateActor<Wall2>(GameRenderOrder::Map);
-		wall4->SetMove({ 663,629 });
-
-		Wall2* wall5 = CreateActor<Wall2>(GameRenderOrder::Map);
-		wall5->SetMove({ 697,629 });
-
-		Wall2* wall6 = CreateActor<Wall2>(GameRenderOrder::Map);
-		wall6->SetMove({ 731,629 });
-
-		Wall2* wall7 = CreateActor<Wall2>(GameRenderOrder::Map);
-		wall7->SetMove({ 765,629 });
-
-		Wall2* wall8 = CreateActor<Wall2>(GameRenderOrder::Map);
-		wall8->SetMove({ 799,629 });
+		{
+			Wall2* wall = CreateActor<Wall2>(GameRenderOrder::Map);
+			wall->SetMove({ 799,238 });
+		}
+		{
+			Wall2* wall = CreateActor<Wall2>(GameRenderOrder::Map);
+			wall->SetMove({ 799,272 });
+		}
+		{
+			Wall2* wall = CreateActor<Wall2>(GameRenderOrder::Map);
+			wall->SetMove({ 799,306 });
+		}
+		{
+			Wall2* wall = CreateActor<Wall2>(GameRenderOrder::Map);
+			wall->SetMove({ 799,340 });
+		}
+		{
+			Wall2* wall = CreateActor<Wall2>(GameRenderOrder::Map);
+			wall->SetMove({ 799,374 });
+		}
+		{
+			Wall2* wall = CreateActor<Wall2>(GameRenderOrder::Map);
+			wall->SetMove({ 799,408 });
+		}
+		{
+			Wall2* wall = CreateActor<Wall2>(GameRenderOrder::Map);
+			wall->SetMove({ 799,442 });
+		}
+		{
+			Wall2* wall = CreateActor<Wall2>(GameRenderOrder::Map);
+			wall->SetMove({ 799,476 });
+		}
+		{
+			Wall2* wall = CreateActor<Wall2>(GameRenderOrder::Map);
+			wall->SetMove({ 799,510 });
+		}
 
 
 		//{{윈도우 틀
@@ -188,29 +225,20 @@ void Stage2_1Level::Loading()
 	//오브젝트
 	{
 		door = CreateActor<Door>(GameRenderOrder::Cursor);
-		door->SetMove({ 341,494 }); //544 //16
+		door->SetMove({ 812,577 }); //544 //16
 
-		Thorn::SetInfloat({ 448,572 });
+		CannonBullet::SetInfloat({ 932,187 });
 
-		Thorn* thorn = CreateActor<Thorn>(GameRenderOrder::Cursor);
-		thorn->SetMove({ 527,595 });
-
-		Thorn* thorn2 = CreateActor<Thorn>(GameRenderOrder::Cursor);
-		thorn2->SetMove({ 833,595 });
+		Cannon* cannon1 = CreateActor<Cannon>(GameRenderOrder::Monster);
+		cannon1->SetMove({ 799,125 });
+		cannon1->SetDelayTime(0.8);
+		
+		Cannon* cannon2 = CreateActor<Cannon>(GameRenderOrder::Monster);
+		cannon2->SetMove({ 833,125 });
 	}
 	//몬스터
 	{
-		Cannon* cannon1 = CreateActor<Cannon>(GameRenderOrder::Monster);
-		cannon1->SetMove({ 561,663 });
-		cannon1->SetState(CannonState::Left2);
-
-		Cannon* cannon2 = CreateActor<Cannon>(GameRenderOrder::Monster);
-		cannon2->SetMove({ 561,629 });
-		cannon2->SetState(CannonState::Left2);
-
-		Cannon* cannon3 = CreateActor<Cannon>(GameRenderOrder::Monster);
-		cannon3->SetMove({ 960,495 });
-		cannon3->SetState(CannonState::Right3);
+		
 	}
 
 
@@ -230,13 +258,14 @@ void Stage2_1Level::Loading()
 	}
 }
 
-void Stage2_1Level::Update(float _DeltaTime)
+void Stage2_3Level::Update(float _DeltaTime)
 {
 
 	if (true == GetDoor)
 	{
 		SetGetDoor(false);
-		GameEngineCore::GetInst()->ChangeLevel("Stage2_2Level");
+		SetGetKey(false);
+		GameEngineCore::GetInst()->ChangeLevel("Stage2_BossLevel");
 	}
 
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))
@@ -270,7 +299,6 @@ void Stage2_1Level::Update(float _DeltaTime)
 		float4 c = { Right->GetPos().x - Left->GetPos().x,  Bot->GetPos().y - Top->GetPos().y };
 		GameEngineWindow::SettingWindowSize(c);
 		SetCameraPos({ Left->GetPos().x + c.x / 2 - LeftElse / 2 - RightElse / 2, Top->GetPos().y + c.y / 2 - TopElse / 2 - BotElse / 2 });
-		float ddd = BotElse;
 		SetCameraMove(-GetCameraScale());
 		screenSizex = GameEngineWindow::GetScreenSize().x;
 		screenSizey = GameEngineWindow::GetScreenSize().y;
@@ -280,11 +308,8 @@ void Stage2_1Level::Update(float _DeltaTime)
 	}
 }
 
-void Stage2_1Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
+void Stage2_3Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	BGMPlayer.Stop();
-	BGMPlayer = GameEngineResources::GetInst().SoundPlayToControl("stage2backgroundsound.mp3");
-	BGMPlayer.Volume(0.1f);
 	GameEngineWindow::SettingWindowSize({ 260,260 });
 	screenSizex = GameEngineWindow::GetScreenSize().x;
 	screenSizey = GameEngineWindow::GetScreenSize().y;
@@ -296,7 +321,7 @@ void Stage2_1Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	//GameEngineWindow::WindowExpand();
 }
 
-void Stage2_1Level::CameraRectUpdate(float _DeltaTime)
+void Stage2_3Level::CameraRectUpdate(float _DeltaTime)
 {
 	std::vector<GameEngineCollision*> Collision;
 	if (false == Left->GetBodyCollision()->Collision({ .TargetGroup = static_cast<int>(GameCollisionOrder::Bullet), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision))

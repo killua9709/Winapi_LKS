@@ -90,14 +90,32 @@
     <ClInclude Include="Thorn.h">
       <Filter>GlobalActors\Thorn</Filter>
     </ClInclude>
-    <ClInclude Include="Stage2_1Level.h">
-      <Filter>Play\Stage2</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage2_1Map.h">
-      <Filter>Play\Stage2</Filter>
-    </ClInclude>
     <ClInclude Include="Wall2.h">
       <Filter>GlobalActors\Wall</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage2_1Level.h">
+      <Filter>Play\Stage2\Stage2_1</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage2_1Map.h">
+      <Filter>Play\Stage2\Stage2_1</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage2_2Map.h">
+      <Filter>Play\Stage2\Stage2_2</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage2_2Level.h">
+      <Filter>Play\Stage2\Stage2_2</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage2_3Map.h">
+      <Filter>Play\Stage2\Stage2_3</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage2_3Level.h">
+      <Filter>Play\Stage2\Stage2_3</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage2_BossMap.h">
+      <Filter>Play\Stage2\Stage2_Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage2_BossLevel.h">
+      <Filter>Play\Stage2\Stage2_Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -192,14 +210,32 @@
     <ClCompile Include="Thorn.cpp">
       <Filter>GlobalActors\Thorn</Filter>
     </ClCompile>
-    <ClCompile Include="Stage2_1Level.cpp">
-      <Filter>Play\Stage2</Filter>
-    </ClCompile>
-    <ClCompile Include="Stage2_1Map.cpp">
-      <Filter>Play\Stage2</Filter>
-    </ClCompile>
     <ClCompile Include="Wall2.cpp">
       <Filter>GlobalActors\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage2_1Level.cpp">
+      <Filter>Play\Stage2\Stage2_1</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage2_1Map.cpp">
+      <Filter>Play\Stage2\Stage2_1</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage2_2Map.cpp">
+      <Filter>Play\Stage2\Stage2_2</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage2_2Level.cpp">
+      <Filter>Play\Stage2\Stage2_2</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage2_3Map.cpp">
+      <Filter>Play\Stage2\Stage2_3</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage2_3Level.cpp">
+      <Filter>Play\Stage2\Stage2_3</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage2_BossMap.cpp">
+      <Filter>Play\Stage2\Stage2_Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage2_BossLevel.cpp">
+      <Filter>Play\Stage2\Stage2_Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -256,6 +292,18 @@
     </Filter>
     <Filter Include="GlobalActors\Thorn">
       <UniqueIdentifier>{0d3efb0f-7511-4b78-9518-5c6e77ece19b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Stage2\Stage2_1">
+      <UniqueIdentifier>{d41f68ef-313e-4de7-acbf-dfa3b955532f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Stage2\Stage2_2">
+      <UniqueIdentifier>{f1ad5fee-2ecb-4fe7-9620-57832d519051}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Stage2\Stage2_3">
+      <UniqueIdentifier>{132b6306-1b35-4a31-b77a-4aee3817a23e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Stage2\Stage2_Boss">
+      <UniqueIdentifier>{8be54d26-c17f-44e3-a15e-e9d252e1d02b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

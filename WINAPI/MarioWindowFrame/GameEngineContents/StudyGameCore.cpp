@@ -9,6 +9,9 @@
 #include "Stage1_3Level.h"
 #include "Stage1_BossLevel.h"
 #include "Stage2_1Level.h"
+#include "Stage2_2Level.h"
+#include "Stage2_3Level.h"
+#include "Stage2_BossLevel.h"
 
 
 // StudyGameCore StudyGameCore::Core = new StudyGameCore();
@@ -37,7 +40,10 @@ void StudyGameCore::Start()
 	CreateLevel<Stage1_3Level>("Stage1_3Level");
 	CreateLevel<Stage1_BossLevel>("Stage1_BossLevel");
 	CreateLevel<Stage2_1Level>("Stage2_1Level");
-	ChangeLevel("Stage2_1Level");
+	CreateLevel<Stage2_2Level>("Stage2_2Level");
+	CreateLevel<Stage2_3Level>("Stage2_3Level");
+	CreateLevel<Stage2_BossLevel>("Stage2_BossLevel");
+	ChangeLevel("Stage2_BossLevel");
 }
 
 void StudyGameCore::Update()

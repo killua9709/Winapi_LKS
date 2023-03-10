@@ -48,7 +48,7 @@ void Stage1_BossLevel::SoundLoad()
 	Dir.Move("ContentsResources");
 	Dir.Move("Sound");
 
-
+	GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("Wizard.mp3"));
 }
 void Stage1_BossLevel::ImageLoad()
 {
@@ -268,6 +268,9 @@ void Stage1_BossLevel::Update(float _DeltaTime)
 
 void Stage1_BossLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	BGMPlayer.Stop();
+	BGMPlayer = GameEngineResources::GetInst().SoundPlayToControl("Wizard.mp3");
+	BGMPlayer.Volume(0.1f);
 	GameEngineWindow::SettingWindowSize({ 260,260 });
 	screenSizex = GameEngineWindow::GetScreenSize().x;
 	screenSizey = GameEngineWindow::GetScreenSize().y;

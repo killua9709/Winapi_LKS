@@ -101,7 +101,7 @@ void TutorialLevel::Loading()
 	//플레이어
 	{
 		Mario = CreateActor<Player>(GameRenderOrder::Player);
-		Mario->SetMove({646,90});
+		Mario->SetMove({876,90});
 	}
 	//몬스터
 	{
@@ -221,7 +221,7 @@ void TutorialLevel::Update(float _DeltaTime)
 	if (true == GetDoor)
 	{
 		SetGetDoor(false);
-		GameEngineCore::GetInst()->ChangeLevel("Tutorial2Level");
+		GameEngineCore::GetInst()->ChangeLevel("Stage2_1Level");
 	}
 
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))

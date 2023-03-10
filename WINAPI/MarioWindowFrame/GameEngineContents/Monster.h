@@ -8,6 +8,8 @@
 class Monster : public GameEngineActor
 {
 public:
+	static float4 Infloat;
+	static float4 Infloat2;
 	// constrcuter destructer
 	Monster();
 	~Monster();
@@ -17,6 +19,15 @@ public:
 	Monster(Monster&& _Other) noexcept = delete;
 	Monster& operator=(const Monster& _Other) = delete;
 	Monster& operator=(Monster&& _Other) noexcept = delete;
+
+	static void SetInfloat(float4 _change)
+	{
+		Infloat = _change;
+	}
+	static void SetInfloat2(float4 _change)
+	{
+		Infloat2 = _change;
+	}
 
 protected:
 	void Start() override;

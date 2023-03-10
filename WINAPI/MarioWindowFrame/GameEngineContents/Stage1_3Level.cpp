@@ -91,13 +91,13 @@ void Stage1_3Level::Loading()
 	//플레이어
 	{
 		Mario = CreateActor<Player>(GameRenderOrder::Player);
-		Mario->SetMove({ 372,100 });
+		Mario->SetMove({ 372,300 });
 	}
 	//벽
 	{
 		//가로벽
 		Wall* Wight4 = CreateActor<Wall>(GameRenderOrder::Map);
-		Wight4->SetMove({ 612,221 });
+		Wight4->SetMove({ 612,357 });
 		Wight4->GetBodyCollision()->SetScale({ 1200, 34 });
 
 
@@ -115,11 +115,11 @@ void Stage1_3Level::Loading()
 
 		//장애물
 		Wall* Obstacle = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle->SetMove({ 612,187 });
+		Obstacle->SetMove({ 612,323 });
 		Obstacle->GetBodyCollision()->SetScale({ 136, 34 });
 
 		Wall* Obstacle2 = CreateActor<Wall>(GameRenderOrder::Map);
-		Obstacle2->SetMove({ 918,153 });
+		Obstacle2->SetMove({ 918,289 });
 		Obstacle2->GetBodyCollision()->SetScale({ 136, 102 });
 
 
@@ -144,16 +144,18 @@ void Stage1_3Level::Loading()
 	//오브젝트
 	{
 		door = CreateActor<Door>(GameRenderOrder::Cursor);
-		door->SetMove({ 614,152 }); //544 //16
+		door->SetMove({ 614,288 }); //544 //16
 		door->SetLock(true);
 
 		Key* key = CreateActor<Key>(GameRenderOrder::Cursor);
-		key->SetMove({ 932,85 });
+		key->SetMove({ 932,221 });
 	}
 	//몬스터
 	{
 		Monster* monster = CreateActor<Monster>(GameRenderOrder::Monster);
-		monster->SetMove({ 614,130 }); 
+		monster->SetMove({ 614,266 }); 
+		monster->SetInfloat({ 372,300 });
+		monster->SetInfloat2({ 614,266 });
 	}
 
 
@@ -214,7 +216,6 @@ void Stage1_3Level::Update(float _DeltaTime)
 		float4 c = { Right->GetPos().x - Left->GetPos().x,  Bot->GetPos().y - Top->GetPos().y };
 		GameEngineWindow::SettingWindowSize(c);
 		SetCameraPos({ Left->GetPos().x + c.x / 2 - LeftElse / 2 - RightElse / 2, Top->GetPos().y + c.y / 2 - TopElse / 2 - BotElse / 2 });
-		float ddd = BotElse;
 		SetCameraMove(-GetCameraScale());
 		screenSizex = GameEngineWindow::GetScreenSize().x;
 		screenSizey = GameEngineWindow::GetScreenSize().y;
