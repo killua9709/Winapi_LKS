@@ -216,14 +216,14 @@ void Stage1_1Level::Update(float _DeltaTime)
 void Stage1_1Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	GameEngineWindow::SettingWindowSize({ 260,260 });
+	GameEngineWindow::SettingWindowPos({ 502,674 });
 	screenSizex = GameEngineWindow::GetScreenSize().x;
 	screenSizey = GameEngineWindow::GetScreenSize().y;
 	SetCameraPos({ Mario->GetPos().x,Mario->GetPos().y });
 	SetCameraScale({ 130, 130 });
 	SetCameraMove(-GetCameraScale());
 	//모니터 크기 절반에 내 스크린 사이즈 절반 만큼 빼서 크기 조정
-	GameEngineWindow::SettingWindowPos({ screenWidth / 2 - (screenSizex / 2) ,screenHeight / 2 - (screenSizey / 2) });
-	//GameEngineWindow::WindowExpand();
+	GameEngineWindow::WindowExpand();
 }
 
 

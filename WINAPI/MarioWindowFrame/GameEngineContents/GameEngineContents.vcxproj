@@ -47,6 +47,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Last_danceLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Last_danceMap.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Scroll.h">
       <SubType>
       </SubType>
@@ -203,6 +211,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Key.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Last_danceLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Last_danceMap.cpp">
       <SubType>
       </SubType>
     </ClCompile>

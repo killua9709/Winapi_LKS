@@ -192,7 +192,7 @@ void Stage2_2Level::Update(float _DeltaTime)
 	{
 		SetGetDoor(false);
 		SetGetKey(false);
-		GameEngineCore::GetInst()->ChangeLevel("Stage1_BossLevel");
+		GameEngineCore::GetInst()->ChangeLevel("Stage2_3Level");
 	}
 
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))

@@ -12,6 +12,7 @@
 #include "Stage2_2Level.h"
 #include "Stage2_3Level.h"
 #include "Stage2_BossLevel.h"
+#include "Last_danceLevel.h"
 
 
 // StudyGameCore StudyGameCore::Core = new StudyGameCore();
@@ -43,7 +44,8 @@ void StudyGameCore::Start()
 	CreateLevel<Stage2_2Level>("Stage2_2Level");
 	CreateLevel<Stage2_3Level>("Stage2_3Level");
 	CreateLevel<Stage2_BossLevel>("Stage2_BossLevel");
-	ChangeLevel("Stage2_BossLevel");
+	CreateLevel<Last_danceLevel>("Last_danceLevel");
+	ChangeLevel("TitleLevel");
 }
 
 void StudyGameCore::Update()

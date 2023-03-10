@@ -85,6 +85,7 @@ void Stage1_BossLevel::ImageLoad()
 
 void Stage1_BossLevel::Loading()
 {
+	SoundLoad();
 	ImageLoad();
 	//마우스
 	{
@@ -160,7 +161,7 @@ void Stage1_BossLevel::Loading()
 		door->SetMove({ 488,220 }); //544 //16
 		door->SetLock(true);
 
-		Thorn::SetInfloat({ 391,238 });
+		
 
 		Thorn* thorn = CreateActor<Thorn>(GameRenderOrder::Cursor);
 		thorn->SetMove({ 595,323 });
@@ -218,6 +219,8 @@ void Stage1_BossLevel::Loading()
 
 void Stage1_BossLevel::Update(float _DeltaTime)
 {
+	Thorn::SetInfloat({ 391,238 });
+
 	if (true == GetDoor)
 	{
 		SetGetDoor(false);
@@ -272,14 +275,13 @@ void Stage1_BossLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	BGMPlayer = GameEngineResources::GetInst().SoundPlayToControl("Wizard.mp3");
 	BGMPlayer.Volume(0.1f);
 	GameEngineWindow::SettingWindowSize({ 260,260 });
-	screenSizex = GameEngineWindow::GetScreenSize().x;
+	GameEngineWindow::SettingWindowPos({ 391,238 });
 	screenSizey = GameEngineWindow::GetScreenSize().y;
 	SetCameraPos({ Mario->GetPos().x,Mario->GetPos().y });
 	SetCameraScale({ 130, 130 });
 	SetCameraMove(-GetCameraScale());
 	//모니터 크기 절반에 내 스크린 사이즈 절반 만큼 빼서 크기 조정
-	GameEngineWindow::SettingWindowPos({ screenWidth / 2 - (screenSizex / 2) ,screenHeight / 2 - (screenSizey / 2) });
-	//GameEngineWindow::WindowExpand();
+	GameEngineWindow::WindowExpand();
 }
 
 void Stage1_BossLevel::CameraRectUpdate(float _DeltaTime)

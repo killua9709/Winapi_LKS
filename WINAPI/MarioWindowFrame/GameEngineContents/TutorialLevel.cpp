@@ -221,7 +221,7 @@ void TutorialLevel::Update(float _DeltaTime)
 	if (true == GetDoor)
 	{
 		SetGetDoor(false);
-		GameEngineCore::GetInst()->ChangeLevel("Stage2_1Level");
+		GameEngineCore::GetInst()->ChangeLevel("Tutorial2Level");
 	}
 
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))
@@ -262,9 +262,10 @@ void TutorialLevel::Update(float _DeltaTime)
 
 void TutorialLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	
+
 	BGMPlayer = GameEngineResources::GetInst().SoundPlayToControl("stage1backgroundsound.mp3");
 	BGMPlayer.Volume(0.1f);
+	GameEngineWindow::SettingWindowPos({ 1027,220 });
 	GameEngineWindow::SettingWindowSize({ 260,260 });
 	screenSizex = GameEngineWindow::GetScreenSize().x;
 	screenSizey = GameEngineWindow::GetScreenSize().y;
@@ -272,6 +273,5 @@ void TutorialLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	SetCameraScale({ 130, 130 });
 	SetCameraMove(-GetCameraScale());
 	//모니터 크기 절반에 내 스크린 사이즈 절반 만큼 빼서 크기 조정
-	GameEngineWindow::SettingWindowPos({ screenWidth / 2 - (screenSizex / 2) ,screenHeight / 2 - (screenSizey / 2) });
-	//GameEngineWindow::WindowExpand();
+	GameEngineWindow::WindowExpand();
 }

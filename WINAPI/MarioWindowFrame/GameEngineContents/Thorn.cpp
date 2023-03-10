@@ -20,7 +20,7 @@ void Thorn::Start()
 	BodyCollision = CreateCollision(GameCollisionOrder::Object);
 	BodyCollision->SetScale({ 34, 30 });
 
-	GameEngineRender* Render = CreateRender("Thorn.bmp", GameRenderOrder::Cursor);
+	GameEngineRender* Render = CreateRender("Thorn.bmp", GameRenderOrder::Map);
 	Render->SetScale({ 34, 30 });
 }
 

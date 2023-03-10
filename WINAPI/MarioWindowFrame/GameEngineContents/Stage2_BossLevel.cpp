@@ -29,6 +29,7 @@
 #include "Monster.h"
 #include "Thorn.h"
 #include "Wall2.h"
+#include "BossMonster.h"
 
 
 Stage2_BossLevel::Stage2_BossLevel()
@@ -213,16 +214,51 @@ void Stage2_BossLevel::Loading()
 	//오브젝트
 	{
 
-		CannonBullet::SetInfloat({ 932,187 });
+		CannonBullet::SetInfloat({ 88,86 });
+		Thorn::SetInfloat({ 88,86 });
 
-		/*Cannon* cannon1 = CreateActor<Cannon>(GameRenderOrder::Monster);
-		cannon1->SetMove({ 799,125 });
-		cannon1->SetDelayTime(0.8);*/
+		Thorn* thorn = CreateActor<Thorn>(GameRenderOrder::Map);
+		thorn->SetMove({ 357,119 });
+
+		Thorn* thorn2 = CreateActor<Thorn>(GameRenderOrder::Map);
+		thorn2->SetMove({ 323,119 });
+
+		Thorn* thorn3 = CreateActor<Thorn>(GameRenderOrder::Map);
+		thorn3->SetMove({ 527,119 });
+
+		Thorn* thorn4 = CreateActor<Thorn>(GameRenderOrder::Map);
+		thorn4->SetMove({ 561,119 });
+
+		Thorn* thorn5 = CreateActor<Thorn>(GameRenderOrder::Map);
+		thorn5->SetMove({ 731,119 });
+
+
+		Cannon* cannon1 = CreateActor<Cannon>(GameRenderOrder::Monster);
+		cannon1->SetMove({ 622,465 });
+		cannon1->SetDelayTime(0.8);
+		cannon1->SetState(CannonState::Right3);
+
+
+		Cannon* cannon2 = CreateActor<Cannon>(GameRenderOrder::Monster);
+		cannon2->SetMove({ 49,560 });
+		cannon2->SetDelayTime(0.8);
+		cannon2->SetState(CannonState::Left2);
 
 	}
 	//몬스터
 	{
+		BossMonster* boss = CreateActor<BossMonster>(GameRenderOrder::Monster);
+		boss->SetMove({ 1120, 620 });
+		boss->SetInfloat({ 88,86 });
+		boss->SetInfloat2({ 1120, 620 });
 
+		Monster* monster = CreateActor<Monster>(GameRenderOrder::Monster);
+		monster->SetMove({ 340 ,228 });
+		monster->SetInfloat({ 88,86 });
+
+		Monster* monster2 = CreateActor<Monster>(GameRenderOrder::Monster);
+		monster2->SetMove({ 547, 228 });
+		monster2->SetInfloat({ 88,86 });
 	}
 
 
@@ -245,11 +281,11 @@ void Stage2_BossLevel::Loading()
 void Stage2_BossLevel::Update(float _DeltaTime)
 {
 
-	if (true == GetDoor)
+	if (true == GetKey)
 	{
 		SetGetDoor(false);
 		SetGetKey(false);
-		GameEngineCore::GetInst()->ChangeLevel("Stage2_BossLevel");
+		GameEngineCore::GetInst()->ChangeLevel("Last_danceLevel");
 	}
 
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))
@@ -291,9 +327,9 @@ void Stage2_BossLevel::Update(float _DeltaTime)
 
 void Stage2_BossLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	/*BGMPlayer.Stop();
+	BGMPlayer.Stop();
 	BGMPlayer = GameEngineResources::GetInst().SoundPlayToControl("Wizard.mp3");
-	BGMPlayer.Volume(0.1f);*/
+	BGMPlayer.Volume(0.1f);
 	GameEngineWindow::SettingWindowSize({ 1280,720 });
 	/*screenSizex = GameEngineWindow::GetScreenSize().x;
 	screenSizey = GameEngineWindow::GetScreenSize().y;
