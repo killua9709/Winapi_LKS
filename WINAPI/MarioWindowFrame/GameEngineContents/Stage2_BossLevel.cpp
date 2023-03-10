@@ -214,8 +214,7 @@ void Stage2_BossLevel::Loading()
 	//오브젝트
 	{
 
-		CannonBullet::SetInfloat({ 88,86 });
-		Thorn::SetInfloat({ 88,86 });
+		
 
 		Thorn* thorn = CreateActor<Thorn>(GameRenderOrder::Map);
 		thorn->SetMove({ 357,119 });
@@ -235,13 +234,13 @@ void Stage2_BossLevel::Loading()
 
 		Cannon* cannon1 = CreateActor<Cannon>(GameRenderOrder::Monster);
 		cannon1->SetMove({ 622,465 });
-		cannon1->SetDelayTime(0.8);
+		cannon1->SetDelayTime(0.8f);
 		cannon1->SetState(CannonState::Right3);
 
 
 		Cannon* cannon2 = CreateActor<Cannon>(GameRenderOrder::Monster);
 		cannon2->SetMove({ 49,560 });
-		cannon2->SetDelayTime(0.8);
+		cannon2->SetDelayTime(0.8f);
 		cannon2->SetState(CannonState::Left2);
 
 	}
@@ -327,6 +326,8 @@ void Stage2_BossLevel::Update(float _DeltaTime)
 
 void Stage2_BossLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	CannonBullet::SetInfloat({ 88,86 });
+	Thorn::SetInfloat({ 88,86 });
 	BGMPlayer.Stop();
 	BGMPlayer = GameEngineResources::GetInst().SoundPlayToControl("Wizard.mp3");
 	BGMPlayer.Volume(0.1f);

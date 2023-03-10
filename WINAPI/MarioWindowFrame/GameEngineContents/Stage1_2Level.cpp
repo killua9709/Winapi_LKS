@@ -158,7 +158,6 @@ void Stage1_2Level::Loading()
 	}
 	//∏ÛΩ∫≈Õ
 	{
-		CannonBullet::SetInfloat({ 372,544 });
 
 		Cannon* cannon1 = CreateActor<Cannon>(GameRenderOrder::Monster);
 		cannon1->SetMove({ 646,581 });
@@ -198,6 +197,8 @@ void Stage1_2Level::Loading()
 
 void Stage1_2Level::Update(float _DeltaTime)
 {
+	
+
 
 	if (true == GetDoor)
 	{
@@ -248,6 +249,7 @@ void Stage1_2Level::Update(float _DeltaTime)
 
 void Stage1_2Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	CannonBullet::SetInfloat({ 372,544 });
 	GameEngineWindow::SettingWindowSize({ 260,260 });
 	GameEngineWindow::SettingWindowPos({ 502,674 });
 	screenSizex = GameEngineWindow::GetScreenSize().x;

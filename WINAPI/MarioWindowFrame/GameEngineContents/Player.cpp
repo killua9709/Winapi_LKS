@@ -273,11 +273,11 @@ void Player::Render(float _DeltaTime)
 		std::string dir2 = "playerstate : ";
 		dir2 += std::to_string( (int)StateValue);*/
 
-		std::string dir3 = "posx : ";
+		/*std::string dir3 = "posx : ";
 		dir3 += std::to_string((int)GetPos().x);
 
 		std::string dir4 = "posy : ";
-		dir4 += std::to_string((int)GetPos().y);
+		dir4 += std::to_string((int)GetPos().y);*/
 		
 		/*std::string dir5 = "cameraposx : ";
 		dir5 += std::to_string((int)GetLevel()->GetCameraPos().x);
@@ -285,13 +285,13 @@ void Player::Render(float _DeltaTime)
 		std::string dir6 = "cameraposx : ";
 		dir6 += std::to_string((int)GetLevel()->GetCameraPos().y);*/
 
-		std::string dir7 = "bullettime : ";
-		dir7 += std::to_string((int)BulletTime); 
+		/*std::string dir7 = "bullettime : ";
+		dir7 += std::to_string((int)BulletTime); */
 
 		/*GameEngineLevel::DebugTextPush(dir);
 		GameEngineLevel::DebugTextPush(dir2);*/
-		GameEngineLevel::DebugTextPush(dir3);
-		GameEngineLevel::DebugTextPush(dir4);
+		/*GameEngineLevel::DebugTextPush(dir3);
+		GameEngineLevel::DebugTextPush(dir4);*/
 		/*GameEngineLevel::DebugTextPush(dir5);
 		GameEngineLevel::DebugTextPush(dir6);*/
 		/*GameEngineLevel::DebugTextPush(dir7);*/

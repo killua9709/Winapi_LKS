@@ -209,7 +209,7 @@ void Stage2_1Level::Loading()
 		cannon2->SetState(CannonState::Left2);
 
 		Cannon* cannon3 = CreateActor<Cannon>(GameRenderOrder::Monster);
-		cannon3->SetMove({ 960,495 });
+		cannon3->SetMove({ 950,495 });
 		cannon3->SetState(CannonState::Right3);
 	}
 
@@ -282,6 +282,8 @@ void Stage2_1Level::Update(float _DeltaTime)
 
 void Stage2_1Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	Thorn::SetInfloat({ 448,572 });
+	CannonBullet::SetInfloat({ 372,544 });
 	BGMPlayer.Stop();
 	BGMPlayer = GameEngineResources::GetInst().SoundPlayToControl("stage2backgroundsound.mp3");
 	BGMPlayer.Volume(0.1f);

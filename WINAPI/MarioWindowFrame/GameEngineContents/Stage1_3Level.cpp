@@ -154,8 +154,7 @@ void Stage1_3Level::Loading()
 	{
 		Monster* monster = CreateActor<Monster>(GameRenderOrder::Monster);
 		monster->SetMove({ 614,266 }); 
-		monster->SetInfloat({ 372,300 });
-		monster->SetInfloat2({ 614,266 });
+		
 	}
 
 
@@ -227,6 +226,8 @@ void Stage1_3Level::Update(float _DeltaTime)
 
 void Stage1_3Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	Monster::SetInfloat({ 372,300 });
+	Monster::SetInfloat2({ 614,266 });
 	GameEngineWindow::SettingWindowSize({ 260,260 });
 	GameEngineWindow::SettingWindowPos({ 502,430 });
 	screenSizex = GameEngineWindow::GetScreenSize().x;

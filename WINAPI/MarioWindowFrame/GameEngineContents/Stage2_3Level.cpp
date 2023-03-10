@@ -227,7 +227,6 @@ void Stage2_3Level::Loading()
 		door = CreateActor<Door>(GameRenderOrder::Cursor);
 		door->SetMove({ 812,577 }); //544 //16
 
-		CannonBullet::SetInfloat({ 932,187 });
 
 		Cannon* cannon1 = CreateActor<Cannon>(GameRenderOrder::Monster);
 		cannon1->SetMove({ 799,125 });
@@ -310,6 +309,7 @@ void Stage2_3Level::Update(float _DeltaTime)
 
 void Stage2_3Level::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	CannonBullet::SetInfloat({ 932,187 });
 	GameEngineWindow::SettingWindowSize({ 260,260 });
 	screenSizex = GameEngineWindow::GetScreenSize().x;
 	screenSizey = GameEngineWindow::GetScreenSize().y;
