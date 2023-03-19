@@ -32,7 +32,7 @@ void Wall2::Update(float _DeltaTime)
 			GameEngineActor* ColActor = Collision[i]->GetActor();
 			ColActor->Off();
 
-			this->Death();
+			this->Off();
 		}
 	}
 }

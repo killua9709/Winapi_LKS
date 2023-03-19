@@ -9,6 +9,8 @@ class Bullet;
 class Wall;
 class MouseObject;
 class Door;
+class BossMonster;
+class Monster;
 class Stage2_BossLevel : public STLevel
 {
 public:
@@ -31,18 +33,17 @@ protected:
 
 
 private:
+	void Initialization();
 	void SoundLoad();
 	void ImageLoad();
 
-	Wall* Left = nullptr;
-	Wall* Right = nullptr;
 	Wall* Top = nullptr;
-	Wall* Bot = nullptr;
 
 	float LeftElse = 0;
 	float RightElse = 0;
 	float TopElse = 0;
 	float BotElse = 0;
+	float screeny = 720;
 
 	MouseObject* Mouse = nullptr;
 	Player* Mario = nullptr;
@@ -54,6 +55,10 @@ private:
 	bool bb = false;
 	bool cc = false;
 	bool dd = false;
+
+	BossMonster* boss = nullptr;
+	Monster* monster = nullptr;
+	Monster* monster2 = nullptr;
 
 };
 

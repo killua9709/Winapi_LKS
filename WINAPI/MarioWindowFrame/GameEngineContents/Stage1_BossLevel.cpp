@@ -271,7 +271,7 @@ void Stage1_BossLevel::Update(float _DeltaTime)
 
 void Stage1_BossLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	BGMPlayer.Stop();
+	//BGMPlayer.Stop();
 	BGMPlayer = GameEngineResources::GetInst().SoundPlayToControl("Wizard.mp3");
 	BGMPlayer.Volume(0.1f);
 	GameEngineWindow::SettingWindowSize({ 260,260 });
